@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
+#    By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/03 19:48:09 by jmabel           ###   ########.fr        #
+#    Updated: 2022/10/03 22:54:42 by bpoetess         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY		:	all clean fclean re libft
 
-NAME		=	minirt
+NAME		=	miniRT
 
 HEADER		=	$(addprefix include/,\
 					minirt.h\
