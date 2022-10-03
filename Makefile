@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/29 18:10:01 by jmabel           ###   ########.fr        #
+#    Updated: 2022/10/03 17:04:26 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,11 @@ LIBMLX		=	./libmlx/libmlx.a
 
 FILE_C		=	main.c
 
-# FILE_C		+=	$(addprefix parser/,\
-# 				parser.c)
+FILE_C		+=	$(addprefix vector/,\
+				vector_create.c\
+				vector_length_normalizing.c\
+				vector_linear_operations.c\
+				vector_print.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))
 

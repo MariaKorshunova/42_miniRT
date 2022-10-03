@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   vector_linear_operations.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/03 16:27:08 by jmabel           ###   ########.fr       */
+/*   Created: 2022/10/03 16:48:44 by jmabel            #+#    #+#             */
+/*   Updated: 2022/10/03 17:14:11 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "vector.h"
 
-# include <fcntl.h>
-# include <unistd.h>
-# include <sys/types.h> 
-# include <sys/uio.h> 
-# include <stdio.h> 
-# include <stdlib.h>
-# include <math.h>
-
-# include "../libft/libft.h"
-# include "vector.h"
-
-typedef struct s_coord
+void	scalar_multiplication(t_coord *vector, float lambda)
 {
-	float	x;
-	float	y;
-	float	z;
-}	t_coord;
-
-#endif
+	vector->x = vector->x * lambda;
+	vector->y = vector->y * lambda;
+	vector->z = vector->z * lambda;
+}

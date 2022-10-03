@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   vector_print.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/03 16:27:08 by jmabel           ###   ########.fr       */
+/*   Created: 2022/10/03 14:20:11 by jmabel            #+#    #+#             */
+/*   Updated: 2022/10/03 15:57:10 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "vector.h"
 
-# include <fcntl.h>
-# include <unistd.h>
-# include <sys/types.h> 
-# include <sys/uio.h> 
-# include <stdio.h> 
-# include <stdlib.h>
-# include <math.h>
-
-# include "../libft/libft.h"
-# include "vector.h"
-
-typedef struct s_coord
+/* 	Вывод на stdout вектора vector, опционально с именем вектора name */
+void	print_vector(char *name, t_coord *vector)
 {
-	float	x;
-	float	y;
-	float	z;
-}	t_coord;
-
-#endif
+	if (vector == NULL)
+		return ;
+	if (name)
+		printf("%s=(%f, %f, %f)\n", name, vector->x, vector->y, vector->z);
+	else
+		printf("(%f, %f, %f)\n", vector->x, vector->y, vector->z);
+	return ;
+}
