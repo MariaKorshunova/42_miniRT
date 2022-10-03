@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/03 22:48:21 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:56:43 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_scene
 	float		camera_fov;
 	float		ambient_light_intensity;
 	int			ambient_light_rgb;
-	t_objects	objects;
+	t_objects	*objects;
 }	t_scene;
 
 static	int	open_file(int argc, char **argv)
