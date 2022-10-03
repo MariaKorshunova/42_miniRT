@@ -43,6 +43,34 @@ man /usr/share/man/man3/mlx.1
 - [ ] scene structure
 - [ ] camera
 
+
+## Math functions
+
+Header: "vector.h" <br />
+Folder: vector
+
+- [X] Структура с координатами t_vector, определящая вектор  $(x, y, z)$, тип данных каждой координаты - float
+- [X] Создание переменной t_vector по трем переданным числам типа float <br />
+`t_coord   *new_vector(float x, float y, float z);`
+- [X] Определение вектора $\overrightarrow{AB}$ по двум точкам $A(x_1, y_1, z_1)$ и $B(x_2, y_2, z_2$) <br />
+$\overrightarrow{AB}= (x_2-x_1, y_2-y_1, z_2=z_1)$ <br />
+`t_coord	*new_vector_by_two_points(t_coord *a, t_coord *b)`
+- [X] Определение длины вектора $\overrightarrow{AB}=(x, y, z)$ <br />
+$|\overrightarrow{AB}|=\sqrt{x^2+y^2+z^2}$ <br />
+`float	vector_length(t_coord *vector)`  <br />
+По двум точкам: <br />
+$|\overrightarrow{AB}|=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}$ 
+- [X] Скалярное произведение вектора на число <br />
+$\lambda\overrightarrow{a}=(\lambda a_x, \lambda a_y, \lambda _z )$ <br />
+`void	scalar_multiplication(t_coord *vector, float lambda)`
+- [ ] 
+
+Дополнительные функции для визуалиции:
+- [X] Вывод на stdout вектора vector, опционально с именем вектора name <br />
+`void	print_vector(char *name, t_coord *vector);`
+
+
+
 ## Useful source
 * https://www.youtube.com/playlist?list=PLUJCSGGiox1Tm3X9ayvMi09K_-RALHJM5 - tutorial from lessie
 * https://www.youtube.com/watch?v=e1xrz9wNpB8&feature=youtu.be - edu_events_mow miniRT by dcelsa
