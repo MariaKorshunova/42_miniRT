@@ -44,26 +44,29 @@ man /usr/share/man/man3/mlx.1
 - [ ] camera
 
 
-## Math functions
+## Vector and matrices functions
 
 Header: "vector.h" <br />
 Folder: vector
 
-- [X] Структура с координатами t_vector, определящая вектор  $(x, y, z)$, тип данных каждой координаты - float
-- [X] Создание переменной t_vector по трем переданным числам типа float <br />
-`t_coord   *new_vector(float x, float y, float z);`
-- [X] Определение вектора $\overrightarrow{AB}$ по двум точкам $A(x_1, y_1, z_1)$ и $B(x_2, y_2, z_2$) <br />
+* Структура с координатами t_vector, определящая вектор  $(x, y, z)$, тип данных каждой координаты - float
+* Создание переменной t_vector по трем переданным числам типа float <br />
+`void	new_vector(t_coord *result, float x, float y, float z)` <br />
+* Определение вектора $\overrightarrow{AB}$ по двум точкам $A(x_1, y_1, z_1)$ и $B(x_2, y_2, z_2$) <br />
 $\overrightarrow{AB}= (x_2-x_1, y_2-y_1, z_2=z_1)$ <br />
-`t_coord	*new_vector_by_two_points(t_coord *a, t_coord *b)`
-- [X] Определение длины вектора $\overrightarrow{AB}=(x, y, z)$ <br />
+`void	new_vector_by_two_points(t_coord *result, t_coord *a, t_coord *b)` <br />
+* Определение длины вектора $\overrightarrow{AB}=(x, y, z)$ <br />
 $|\overrightarrow{AB}|=\sqrt{x^2+y^2+z^2}$ <br />
 `float	vector_length(t_coord *vector)`  <br />
 По двум точкам: <br />
-$|\overrightarrow{AB}|=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}$ 
-- [X] Скалярное произведение вектора на число <br />
+$|\overrightarrow{AB}|=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}$  <br />
+* Скалярное произведение вектора на число <br />
 $\lambda\overrightarrow{a}=(\lambda a_x, \lambda a_y, \lambda _z )$ <br />
-`void	scalar_multiplication(t_coord *vector, float lambda)`
-- [ ] 
+`void	scalar_multiplication(t_coord *vector, float lambda)` <br />
+* Сумма/разность двух векторов <br />
+$\overrightarrow{a}\pm\overrightarrow{b}=(a_x\pm b_x, a_y \pm b_y, a_z \pm b_z)$ <br />
+`void	vector_addition(t_coord *result, t_coord *a, t_coord *b)` <br />
+`void	vector_subtraction(t_coord *result, t_coord *a, t_coord *b)`
 
 Дополнительные функции для визуалиции:
 - [X] Вывод на stdout вектора vector, опционально с именем вектора name <br />
