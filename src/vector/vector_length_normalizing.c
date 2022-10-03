@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 16:04:26 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/03 19:42:25 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/03 20:29:17 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,13 @@ float	vector_length_by_two_points(t_coord *a, t_coord *b)
 	length = sqrtf((b->x - a->x) * (b->x - a->x)
 			+ (b->y - a->y) * (b->y - a->y) + (b->z - a->z) * (b->z - a->z));
 	return (length);
+}
+
+/* record in result normilize vector */
+void	normalizing_vector(t_coord *result, t_coord *vector)
+{
+	float	length;
+
+	length = vector_length(vector);
+	scalar_multiplication(result, 1 / length);
 }

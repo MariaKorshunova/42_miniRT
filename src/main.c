@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/03 19:50:41 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/03 20:21:08 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
+	test_vector();
 	return (0);
 }
 
@@ -35,9 +36,13 @@ void	test_vector(void)
 	new_vector_by_two_points(&ab, &a, &b);
 	print_vector("AB =", &ab);
 	printf("length AB = %f\n", vector_length(&ab));
-	printf("length AB by 2 points = %f\n", vector_length_by_two_points(&b, &a));
 	scalar_multiplication(&ab, -2);
 	print_vector("AB =", &ab);
 	vector_addition(&ab, &ab, &ab);
+	print_vector("AB =", &ab);
 	print_vector("new AB = AB + AB =", &ab);
+	new_vector(&ab, 0, 0, 0);
+	normalizing_vector(&ab, &ab);
+	print_vector("AB =", &ab);
+	printf("length AB = %f\n", vector_length(&ab));
 }

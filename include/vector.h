@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:10:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/03 19:41:06 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/03 20:18:06 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	new_vector_by_two_points(t_coord *result, t_coord *a, t_coord *b);
 	Calculate vector length and normalizing vector */
 float	vector_length(t_coord *vector);
 float	vector_length_by_two_points(t_coord *a, t_coord *b);
+void	normalizing_vector(t_coord *result, t_coord *vector);
 
 /*  print_vector.h
 	Print to stdout vectors and matrices */
