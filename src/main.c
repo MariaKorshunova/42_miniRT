@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/03 22:56:43 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/05 01:09:28 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,18 @@ static	int	open_file(int argc, char **argv)
 	return (i);
 }
 
+int	skipspaces(char *s, int *i)
+{
+	while (/* condition */)
+	{
+		/* code */
+	}
+	
+}
+
 void	parser_linehandler(t_scene *scene, char *tmp)
 {
-	if (!scene || !ft_strncmp(tmp, "\n", 2))
+	if (!scene || !tmp || !ft_strncmp(tmp, "\n", 2))
 		return ;
 }
 
