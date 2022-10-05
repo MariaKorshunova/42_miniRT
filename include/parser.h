@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 04:14:34 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/05 08:04:19 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/05 08:15:15 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define PARSER_H
 
 # include "minirt.h"
-
-t_scene	*parser(int argc, char **argv);
 
 void	parser_skipspaces(char *s, int *i);
 void	parser_error(t_scene *scene, int exitcode);

@@ -6,11 +6,12 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 07:49:56 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/05 08:01:17 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/05 08:16:04 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
+#include "../../include/parser.h"
 
 static void	free_spheres(t_objects *obj)
 {

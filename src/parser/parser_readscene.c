@@ -6,11 +6,12 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 07:14:54 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/05 07:30:48 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/05 08:16:05 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
+#include "../../include/parser.h"
 
 void	parser_readambient(t_scene *scene, char *s, int *i, int *readelem)
 {

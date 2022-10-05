@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/05 06:16:46 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/05 08:15:32 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # include "get_next_line.h"
 # include "vector.h"
 # include "scene.h"
-# include "parser.h"
+
+t_scene	*parser(int argc, char **argv);
+void	free_scene(t_scene *scene);
+
 
 #endif
