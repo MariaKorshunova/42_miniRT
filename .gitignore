@@ -2,4 +2,5 @@
 .vscode
 *.rt
 objects/*
+libft_obj
 miniRT
