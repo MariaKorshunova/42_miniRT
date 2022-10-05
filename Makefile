@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+         #
+#    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/05 08:04:31 by bpoetess         ###   ########.fr        #
+#    Updated: 2022/10/05 16:37:36 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,13 +35,15 @@ LIBMLX		=	./libmlx/libmlx.a
 FILE_C		=	main.c
 
 FILE_C		+=	$(addprefix vector/,\
+				scalar_product.c\
 				vector_create.c\
 				vector_length_normalizing.c\
 				vector_linear_operations.c\
 				vector_print.c)
 
 FILE_C		+=	$(addprefix utils/,\
-				get_next_line.c)
+				get_next_line.c\
+				print_scene.c)
 				
 FILE_C		+=	$(addprefix parser/,\
 				parser.c\

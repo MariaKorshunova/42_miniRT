@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:10:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/03 20:18:06 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/05 15:43:13 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include "minirt.h"
 
 typedef struct s_coord	t_coord;
+
+/*  scalar_product.c
+	Скалярное умножение векторов */
+float	scalar_product_2_vectors(t_coord *a, t_coord *b);
+float	angle_between_2_vectors(t_coord *a, t_coord *b);
 
 /*  vector_create.c
 	Create a new vector, matrices */
