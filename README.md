@@ -74,7 +74,14 @@ $\overrightarrow{a}\pm\overrightarrow{b}=(a_x\pm b_x, a_y \pm b_y, a_z \pm b_z)$
 `void	vector_subtraction(t_coord *result, t_coord *a, t_coord *b)`
 
 * Нахождение орта (вектора единичной длины)  <br />
-$\overrightarrow{e}_{\overrightarrow{a}}=\frac{\overrightarrow{a}}{|\overrightarrow{a}|}$
+$\overrightarrow{e}_{\overrightarrow{a}}=\frac{\overrightarrow{a}}{|\overrightarrow{a}|}$  <br />
+`void	normalizing_vector(t_coord *result, t_coord *vector)`
+
+* Скалярное умножение векторов
+$\overrightarrow{a}\overrightarrow{b}=a_x b_x + a_y b_y + a_z b_z$
+
+* Вычисление угла между векторами
+$\cos{\phi}=\frac{\overrightarrow{a}\overrightarrow{b}}{|\overrightarrow{a}||\overrightarrow{b}| }$
 
 Дополнительные функции для визуалиции:
 - [X] Вывод на stdout вектора vector, опционально с именем вектора name <br />

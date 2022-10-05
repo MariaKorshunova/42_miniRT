@@ -1,2 +1,7 @@
 .DS_Store
 .vscode
+*.rt
+objects/
+objects/*
+libft_obj
+miniRT

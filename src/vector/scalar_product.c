@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   scalar_product.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/05 13:27:11 by jmabel           ###   ########.fr       */
+/*   Created: 2022/10/05 14:26:09 by jmabel            #+#    #+#             */
+/*   Updated: 2022/10/05 14:35:26 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "vector.h"
 
-int	main(int argc, char **argv)
+/* Возвращает  */
+float	scalar_product_2_vectors(t_coord *a, t_coord *b)
 {
-	t_scene	*scene;
+	float	result;
 
-	scene = parser(argc, argv);
-	free_scene (scene);
-	exit (0);
+	result = a->x * b->x + a->y * b->y + a->z * b->z;
+	return (result);
 }

@@ -3,20 +3,22 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
+#    By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/03 19:48:09 by jmabel           ###   ########.fr        #
+#    Updated: 2022/10/05 08:04:31 by bpoetess         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY		:	all clean fclean re libft
 
-NAME		=	minirt
+NAME		=	miniRT
 
 HEADER		=	$(addprefix include/,\
 					minirt.h\
 					vector.h\
+					parser.h\
+					scene.h\
 					get_next_line.h)
 
 CFLAGS		=	-I include
@@ -40,6 +42,12 @@ FILE_C		+=	$(addprefix vector/,\
 
 FILE_C		+=	$(addprefix utils/,\
 				get_next_line.c)
+				
+FILE_C		+=	$(addprefix parser/,\
+				parser.c\
+				free_scene.c\
+				parser_readscene.c\
+				parser_utils.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))
 

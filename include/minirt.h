@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/03 19:49:24 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/05 08:17:42 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,11 @@
 # include <math.h>
 
 # include "../libft/libft.h"
-# include "vector.h"
 # include "get_next_line.h"
+# include "vector.h"
+# include "scene.h"
 
-typedef struct s_coord
-{
-	float	x;
-	float	y;
-	float	z;
-}	t_coord;
+t_scene	*parser(int argc, char **argv);
+void	free_scene(t_scene *scene);
 
 #endif
