@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/05 08:03:34 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/05 08:10:31 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int	main(int argc, char **argv)
 	t_scene	*scene;
 
 	scene = parser(argc, argv);
-	free (scene->obj);
-	free (scene);
+	free_scene (scene);
 	exit (0);
 }
 
