@@ -6,13 +6,14 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:14:57 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/06 18:28:31 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:44:19 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static void	print_scene_characteristics(t_scene *scene);
+void		print_color(int color);
 
 void	print_spheres(t_sphere	*sp)
 {
@@ -26,8 +27,7 @@ void	print_spheres(t_sphere	*sp)
 		print_coordinate(&sp->point, "\n");
 		printf("        \t\e[0;34mDiameter: \e[0m%f\n",
 			sp->diameter);
-		printf("        \t\e[0;34mColor: \e[0m0x%x\n",
-			sp->color);
+		print_color(sp->color);
 		sp = sp->next;
 	}
 }
@@ -44,8 +44,7 @@ void	print_lights(t_light	*l)
 		print_coordinate(&l->point, "\n");
 		printf("        \t\e[0;34mLighting ratio: \e[0m%f\n",
 			l->lighting_ratio);
-		printf("        \t\e[0;34mColor: \e[0m0x%x\n",
-			l->color);
+		print_color(l->color);
 		l = l->next;
 	}
 }
@@ -62,8 +61,7 @@ void	print_cylinders(t_cylinder	*cy)
 		print_coordinate(&cy->point, "\n");
 		printf("        \t\e[0;34mOrientation: \e[0m");
 		print_coordinate(&cy->orientation, "\n");
-		printf("\n        \t\e[0;34mColor: \e[0m0x%x\n",
-			cy->color);
+		print_color(cy->color);
 		printf("        \t\e[0;34mDiameter: \e[0m%f\n",
 			cy->diameter);
 		printf("        \t\e[0;34mHeight: \e[0m%f\n",
@@ -84,8 +82,7 @@ void	print_planes(t_plane	*pl)
 		print_coordinate(&pl->point, "\n");
 		printf("        \t\e[0;34mOrientation: \e[0m");
 		print_coordinate(&pl->orientation, "\n");
-		printf("\n        \t\e[0;34mColor: \e[0m0x%x\n",
-			pl->color);
+		print_color(pl->color);
 		pl = pl->next;
 	}
 }
@@ -121,4 +118,10 @@ void	print_coordinate(t_coord *coord, char *endchar)
 	printf("(%f, %f, %f)", coord->x, coord->y, coord->z);
 	if (endchar)
 		printf("%s", endchar);
+}
+
+void	print_color(int color)
+{
+	printf("        \t\e[0;34mColor, RGB:\t \e[0m%d, %d, %d\n",
+		color >> 24 & 255, color >> 16 & 255, color >> 8 & 255);
 }
