@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:29:05 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 20:09:58 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:32:45 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_plane	*parser_addplane(t_scene *scene)
 		return (scene->obj->planes);
 	}
 	plane = scene->obj->planes;
-	while (!plane && !plane->next)
+	while (plane && plane->next)
 		plane = plane->next;
 	plane->next = (t_plane *) malloc (sizeof(t_plane));
 	if (!(plane->next))

@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:20:46 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 20:10:29 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:33:15 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_sphere	*parser_addsphere(t_scene *scene)
 		return (scene->obj->spheres);
 	}
 	sphere = scene->obj->spheres;
-	while (!sphere && !sphere->next)
+	while (sphere && sphere->next)
 		sphere = sphere->next;
 	sphere->next = (t_sphere *) malloc (sizeof(t_sphere));
 	if (!(sphere->next))

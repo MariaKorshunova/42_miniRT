@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:48:25 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 20:10:37 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:33:04 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_cylinder	*parser_addcylinder(t_scene *scene)
 		return (scene->obj->cylinders);
 	}
 	cylinder = scene->obj->cylinders;
-	while (!cylinder && !cylinder->next)
+	while (cylinder && cylinder->next)
 		cylinder = cylinder->next;
 	cylinder->next = (t_cylinder *) malloc (sizeof(t_cylinder));
 	if (!(cylinder->next))
