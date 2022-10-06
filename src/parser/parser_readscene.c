@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 07:14:54 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 17:30:41 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/06 19:14:00 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static t_light	*parser_addlight(t_scene *scene)
 	{
 		scene->obj->lights = (t_light *) malloc (sizeof(t_light));
 		if (!(scene->obj->lights))
-			exit (12);
+			parser_error (scene, 12);
 		scene->obj->lights->next = 0;
 		return (scene->obj->lights);
 	}
@@ -65,7 +65,7 @@ static t_light	*parser_addlight(t_scene *scene)
 		light = light->next;
 	light->next = (t_light *) malloc (sizeof(t_light));
 	if (!(light->next))
-		exit (12);
+		parser_error (scene, 12);
 	light->next->next = 0;
 	return (light->next);
 }

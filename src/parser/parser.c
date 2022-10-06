@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 08:03:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 18:31:10 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/06 19:13:40 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ t_scene	*parser_createscene(void)
 
 	scene = (t_scene *) malloc (sizeof(t_scene));
 	if (!scene)
-		exit (12);
+		parser_error (scene, 12);
 	scene->obj = (t_objects *) malloc (sizeof(t_objects));
 	if (!(scene->obj))
-		exit (12);
+		parser_error (scene, 12);
 	scene->obj->cylinders = 0;
 	scene->obj->lights = 0;
 	scene->obj->planes = 0;
