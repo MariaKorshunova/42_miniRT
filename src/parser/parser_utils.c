@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 04:57:56 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 18:05:38 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:54:47 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	parser_skipspaces(char *s, int *i)
 void	parser_error(t_scene *scene, int exitcode)
 {
 	free_scene(scene);
-	printf("Error!\n");
+	ft_putstr_fd("Error!\n", STDERR_FILENO);
 	exit(exitcode);
 }
 

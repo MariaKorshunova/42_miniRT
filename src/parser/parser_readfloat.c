@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:05:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 18:06:48 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/06 19:01:10 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ float	parser_readfloat(t_scene *scene, char *s, int *i)
 	tmp1 = parser_readfloat_getfractionalpart(s, *i);
 	while (s[*i] && ft_isdigit(s[*i]))
 		(*i)++;
-	return (res + tmp1);
+	if (res >= 0)
+		return (res + tmp1);
+	return (res - tmp1);
 }
