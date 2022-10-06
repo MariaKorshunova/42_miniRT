@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 08:03:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 20:11:15 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:41:51 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,17 @@ static void	parser_linehandler(t_scene *scene, char *s, int *readelem)
 	parser_skipspaces(s, &i);
 	if (!scene || !s || !s[i])
 		return ;
-	if (s[i] == 'A')
+	else if (s[i] == 'A')
 		parser_readambient(scene, s, &i, readelem);
-	if (s[i] == 'C')
+	else if (s[i] == 'C')
 		parser_readcamera(scene, s, &i, readelem);
-	if (s[i] == 'L')
+	else if (s[i] == 'L')
 		parser_readlight(scene, s, &i, readelem);
-	if (!ft_strncmp(s + i, "sp", 2))
+	else if (!ft_strncmp(s + i, "sp ", 3))
 		parser_readsphere(scene, s, &i);
-	if (!ft_strncmp(s + i, "pl", 2))
+	else if (!ft_strncmp(s + i, "pl ", 3))
 		parser_readplane(scene, s, &i);
-	if (!ft_strncmp(s + i, "cy", 2))
+	else if (!ft_strncmp(s + i, "cy ", 3))
 		parser_readcylinder(scene, s, &i);
 }
 
