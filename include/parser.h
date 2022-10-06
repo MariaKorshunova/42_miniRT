@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 04:14:34 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 18:05:50 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/06 19:54:32 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,12 @@ void	parser_readlight(t_scene *scene, char *s, int *i, int *readelem);
 void	free_scene(t_scene *scene);
 
 float	parser_readfloat(t_scene *scene, char *s, int *i);
+
+void	parser_readsphere(t_scene *scene, char *s, int *i);
+
+void	parser_check_isnotnormailzed(t_scene *scene, t_coord vect);
+void	parser_readplane(t_scene *scene, char *s, int *i);
+
+void	parser_readcylinder(t_scene *scene, char *s, int *i);
 
 #endif

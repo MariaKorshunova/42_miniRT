@@ -6,7 +6,7 @@
 #    By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/06 18:06:03 by bpoetess         ###   ########.fr        #
+#    Updated: 2022/10/06 19:55:30 by bpoetess         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,10 @@ FILE_C		+=	$(addprefix parser/,\
 				free_scene.c\
 				parser_readscene.c\
 				parser_utils.c\
-				parser_readfloat.c)
+				parser_readfloat.c\
+				parser_readplane.c\
+				parser_readsphere.c\
+				parser_readcylinder.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))
 

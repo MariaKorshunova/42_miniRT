@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 04:57:56 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 19:11:04 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:10:08 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	parser_error(t_scene *scene, int exitcode)
 {
 	free_scene(scene);
 	if (exitcode == 12)
-		ft_putstr_fd("Memory allocation\n", STDERR_FILENO);
+		ft_putstr_fd("Memory allocation error\n", STDERR_FILENO);
 	else
 		ft_putstr_fd("Error!\n", STDERR_FILENO);
 	exit(exitcode);

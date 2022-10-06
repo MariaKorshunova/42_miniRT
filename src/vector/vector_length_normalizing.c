@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_length_normalizing.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 16:04:26 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/05 14:27:23 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/06 19:37:34 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ float	vector_length(t_coord *vector)
 {
 	float	length;
 
+	if (!vector)
+		return (0);
 	length = sqrtf(vector->x * vector->x
 			+ vector->y * vector->y + vector->z * vector->z);
 	return (length);
