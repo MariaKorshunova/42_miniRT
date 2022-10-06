@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:14:57 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/06 18:44:19 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:46:15 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,10 @@ static void	print_scene_characteristics(t_scene *scene)
 	printf("\e[0;32mCamera_fov: \e[0m%f\n", scene->camera_fov);
 	printf("\e[0;32mAmbient_light_intensity: \e[0m%f\n",
 		scene->ambient_light_intensity);
-	printf("\e[0;32mAmbient_light_rgb: \e[0m0x%x\n", scene->ambient_light_rgb);
+	printf("\e[0;32mAmbient_light_rgb:\e[0m\t%d, %d, %d\n",
+		scene->ambient_light_rgb >> 24 & 255,
+		scene->ambient_light_rgb >> 16 & 255,
+		scene->ambient_light_rgb >> 8 & 255);
 	printf("\e[0;32mObjects:\e[0m\n");
 }
 
