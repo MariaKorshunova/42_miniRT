@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 04:14:34 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/05 17:20:38 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/06 18:05:50 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ void	parser_readcamera(t_scene *scene, char *s, int *i, int *readelem);
 void	parser_readlight(t_scene *scene, char *s, int *i, int *readelem);
 
 void	free_scene(t_scene *scene);
+
+float	parser_readfloat(t_scene *scene, char *s, int *i);
 
 #endif

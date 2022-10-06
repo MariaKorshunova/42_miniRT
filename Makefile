@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
+#    By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/05 16:37:36 by jmabel           ###   ########.fr        #
+#    Updated: 2022/10/06 18:06:03 by bpoetess         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ FILE_C		+=	$(addprefix parser/,\
 				parser.c\
 				free_scene.c\
 				parser_readscene.c\
-				parser_utils.c)
+				parser_utils.c\
+				parser_readfloat.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))
 

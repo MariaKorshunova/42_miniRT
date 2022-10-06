@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:14:57 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/05 17:44:09 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/06 16:51:33 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ static void	print_scene_characteristics(t_scene *scene)
 	printf("\e[0;32mCamera_point: \e[0m");
 	print_coordinate(&scene->camera_point, "\n");
 	printf("\e[0;32mCamera_orientation: \e[0m");
-	print_coordinate(&scene->camera_point, "\n");
+	print_coordinate(&scene->camera_orientation, "\n");
 	printf("\e[0;32mCamera_fov: \e[0m%f\n", scene->camera_fov);
 	printf("\e[0;32mAmbient_light_intensity: \e[0m%f\n",
 		scene->ambient_light_intensity);
-	printf("\e[0;32mAmbient_light_rgb: \e[0m%d\n", scene->ambient_light_rgb);
+	printf("\e[0;32mAmbient_light_rgb: \e[0m0x%x\n", scene->ambient_light_rgb);
 	printf("\e[0;32mObjects:\e[0m\n");
 }
 
