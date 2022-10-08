@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/08 19:48:45 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/08 19:52:06 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,17 @@ int	solve_quadratic_equation(float a, float b, float c, float roots[2])
 	{
 		roots[0] = INFINITY;
 		roots[1] = INFINITY;
-		return (-1);
+		return (0);
+	}
+	if (d_sqare == 0)
+	{
+		roots[0] = (-b - sqrt(d_sqare)) / (2 * a);
+		roots[1] = roots[0];
+		return (1);
 	}
 	roots[0] = (-b - sqrt(d_sqare)) / (2 * a);
 	roots[1] = (-b + sqrt(d_sqare)) / (2 * a);
-	if (d_sqare == 0)
-		roots[1] = roots[0];
-	return (0);
+	return (2);
 }
 
 int	main(int argc, char **argv)
@@ -35,6 +39,9 @@ int	main(int argc, char **argv)
 	t_scene	*scene;
 
 	scene = parser(argc, argv);
+	float roots[2];
+	solve_quadratic_equation(-1, 0, 0, roots);
+	printf("roots = %f, %f\n", roots[0], roots[1]);
 	print_scene(scene);
 	free_scene (scene);
 	exit (0);
