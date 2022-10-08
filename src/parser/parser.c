@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 08:03:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/08 18:40:35 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/08 18:56:07 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	parser_linehandler(t_scene *scene, char *s, int *readelem)
 
 	i = 0;
 	parser_skipspaces(s, &i);
-	if (!scene || !s || !s[i])
+	if (!scene || !s || !s[i] || s[i] == '#')
 		return ;
 	else if (s[i] == 'A')
 		parser_readambient(scene, s, &i, readelem);
@@ -87,6 +87,8 @@ static void	parser_linehandler(t_scene *scene, char *s, int *readelem)
 		parser_readplane(scene, s, &i);
 	else if (!ft_strncmp(s + i, "cy", 2) && ft_isspace(s[i + 2]))
 		parser_readcylinder(scene, s, &i);
+	else
+		parser_error(scene, 1);
 }
 
 t_scene	*parser(int argc, char **argv)
