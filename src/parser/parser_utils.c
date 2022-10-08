@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 04:57:56 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 20:10:08 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/08 18:09:14 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,12 @@ t_coord	parser_readcoord(t_scene *scene, char *s, int *i)
 	if (s[*i] != ',')
 		parser_error(scene, 1);
 	(*i)++;
+	parser_skipspaces(s, i);
 	res.y = parser_readfloat(scene, s, i);
 	if (s[*i] != ',')
 		parser_error(scene, 1);
 	(*i)++;
+	parser_skipspaces(s, i);
 	res.z = parser_readfloat(scene, s, i);
 	return (res);
 }
