@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 08:03:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 20:41:51 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/08 18:33:54 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,14 @@ t_scene	*parser_createscene(void)
 	return (scene);
 }
 
+static int	ft_isspace(char c)
+{
+	if (c == '\t' || c == ' ' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r')
+		return ((int) c);
+	return (0);
+}
+
 static void	parser_linehandler(t_scene *scene, char *s, int *readelem)
 {
 	int	i;
@@ -73,11 +81,11 @@ static void	parser_linehandler(t_scene *scene, char *s, int *readelem)
 		parser_readcamera(scene, s, &i, readelem);
 	else if (s[i] == 'L')
 		parser_readlight(scene, s, &i, readelem);
-	else if (!ft_strncmp(s + i, "sp ", 3))
+	else if (!ft_strncmp(s + i, "sp", 2) && ft_isspace(s[i + 2]))
 		parser_readsphere(scene, s, &i);
-	else if (!ft_strncmp(s + i, "pl ", 3))
+	else if (!ft_strncmp(s + i, "pl", 2) && ft_isspace(s[i + 2]))
 		parser_readplane(scene, s, &i);
-	else if (!ft_strncmp(s + i, "cy ", 3))
+	else if (!ft_strncmp(s + i, "cy", 2) && ft_isspace(s[i + 2]))
 		parser_readcylinder(scene, s, &i);
 }
 
@@ -100,6 +108,5 @@ t_scene	*parser(int argc, char **argv)
 		tmp = get_next_line(file_fd);
 	}
 	printf("\n");
-	print_scene(scene);
 	return (scene);
 }
