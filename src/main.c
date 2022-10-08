@@ -6,11 +6,23 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/08 18:46:23 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/08 19:27:49 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int	solve_quadratic_equation(float a, float b, float c, float roots[2])
+{
+	float	d_sqare;
+
+	d_sqare = b * b - 4 * a * c;
+	if (d_sqare < 0)
+		return (-1);
+	roots[0] = (-b - sqrt(d_sqare)) / (2 * a);
+	roots[1] = (-b + sqrt(d_sqare)) / (2 * a);
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
