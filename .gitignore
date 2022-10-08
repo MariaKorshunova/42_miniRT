@@ -1,6 +1,5 @@
 .DS_Store
 .vscode
-*.rt
 libft/libft.a
 libmlx/libmlx.a
 libmlx/mlx_init_loop.o

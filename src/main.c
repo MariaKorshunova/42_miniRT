@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/06 20:31:32 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/07 18:43:48 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(int argc, char **argv)
 	t_scene	*scene;
 
 	scene = parser(argc, argv);
+	print_scene(scene);
 	free_scene (scene);
 	exit (0);
 }
@@ -44,13 +45,13 @@ void	scene_imitation_test(t_scene *scene)
 {
 	t_coord		coord;
 
-	new_vector(&scene->camera_point, 0, 0, -1);
-	new_vector(&scene->camera_orientation, 0, 0, 1);
-	scene->camera_fov = M_PI;
+	new_vector(&scene->camera_point, 0, 0, 0);
+	new_vector(&scene->camera_orientation, 0, 0, -1);
+	scene->camera_fov = 70;
 	scene->ambient_light_intensity = 1.0f;
 	scene->ambient_light_rgb = 1;
 	new_vector(&coord, 3, 2, -32);
-	scene->obj->spheres = create_sphere(coord, 5, 10);
+	scene->obj->spheres = create_sphere(coord, 12, 10);
 }
 
 t_sphere	*create_sphere(t_coord point, float d, int color)
@@ -65,5 +66,4 @@ t_sphere	*create_sphere(t_coord point, float d, int color)
 	new_sphere->color = color;
 	new_sphere->next = NULL;
 	return (new_sphere);
-}
-*/
+}*/

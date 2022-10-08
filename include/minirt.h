@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/06 18:09:33 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/07 18:43:32 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 # include "get_next_line.h"
 # include "vector.h"
 # include "scene.h"
+# include "parser.h"
+
+# define WIDTH 800
+# define HEIGHT 600
 
 t_scene	*parser(int argc, char **argv);
 void	free_scene(t_scene *scene);
