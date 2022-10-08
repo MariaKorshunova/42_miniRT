@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 08:03:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/08 18:40:05 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/08 18:40:35 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,6 @@ t_scene	*parser(int argc, char **argv)
 		tmp = get_next_line(file_fd);
 	}
 	close(file_fd);
-	printf("reading is done, file_fd closed\n");
+	printf("\nreading is done, file_fd closed\n");
 	return (scene);
 }
