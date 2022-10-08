@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 08:03:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/08 18:56:07 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/08 19:41:35 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ static void	parser_linehandler(t_scene *scene, char *s, int *readelem)
 	parser_skipspaces(s, &i);
 	if (!scene || !s || !s[i] || s[i] == '#')
 		return ;
-	else if (s[i] == 'A')
+	else if (s[i] == 'A' && ft_isspace(s[i + 1]))
 		parser_readambient(scene, s, &i, readelem);
-	else if (s[i] == 'C')
+	else if (s[i] == 'C' && ft_isspace(s[i + 1]))
 		parser_readcamera(scene, s, &i, readelem);
-	else if (s[i] == 'L')
+	else if (s[i] == 'L' && ft_isspace(s[i + 1]))
 		parser_readlight(scene, s, &i, readelem);
 	else if (!ft_strncmp(s + i, "sp", 2) && ft_isspace(s[i + 2]))
 		parser_readsphere(scene, s, &i);
