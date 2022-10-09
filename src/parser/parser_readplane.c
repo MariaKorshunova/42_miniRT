@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:29:05 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 20:32:45 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/09 14:09:28 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	parser_check_isnotnormailzed(t_scene *scene, t_coord vect)
 {
 	if (abs ((int) vect.x) > 1 || abs ((int) vect.y) > 1
 		|| abs ((int) vect.z) > 1
-		|| vector_length (&vect) > 1)
+		|| vector_length (&vect) != 1)
 		parser_error(scene, 1);
 }
 

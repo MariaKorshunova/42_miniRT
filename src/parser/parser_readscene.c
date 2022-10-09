@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 07:14:54 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 20:02:39 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/09 14:11:14 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	parser_readcamera(t_scene *scene, char *s, int *i, int *readelem)
 	parser_skipspaces(s, i);
 	if (s[*i])
 		parser_error(scene, 1);
+	parser_check_isnotnormailzed(scene, scene->camera_orientation);
 }
 
 static t_light	*parser_addlight(t_scene *scene)
