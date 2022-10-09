@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/09 17:48:04 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/09 20:42:31 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv)
 	data.scene = parser(argc, argv);
 	print_scene(data.scene);
 	init_image(&data);
+	raytracing(&data);
 	hook(&data);
 	mlx_loop(data.mlx);
 	minirt_close(&data);
