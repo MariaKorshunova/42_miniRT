@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 04:14:34 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/07 18:30:34 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/09 17:38:26 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "minirt.h"
 
 t_scene	*parser_createscene(void);
+int		ft_isspace(char c);
 
 void	parser_skipspaces(char *s, int *i);
 void	parser_error(t_scene *scene, int exitcode);
@@ -29,6 +30,7 @@ void	parser_readlight(t_scene *scene, char *s, int *i, int *readelem);
 
 void	free_scene(t_scene *scene);
 
+void	parser_skipspacesifnotspaceerror(t_scene *scene, char*s, int *i);
 float	parser_readfloat(t_scene *scene, char *s, int *i);
 
 void	parser_readsphere(t_scene *scene, char *s, int *i);

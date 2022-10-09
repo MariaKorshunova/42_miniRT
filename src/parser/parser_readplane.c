@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:29:05 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 20:32:45 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/09 17:39:12 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 
 void	parser_check_isnotnormailzed(t_scene *scene, t_coord vect)
 {
+	float	vec_length;
+
 	if (abs ((int) vect.x) > 1 || abs ((int) vect.y) > 1
-		|| abs ((int) vect.z) > 1
-		|| vector_length (&vect) > 1)
+		|| abs ((int) vect.z) > 1)
+		parser_error(scene, 1);
+	vec_length = vector_length (&vect);
+	if (vec_length < 0.98 || vec_length > 1.02)
 		parser_error(scene, 1);
 }
 
@@ -49,12 +53,12 @@ void	parser_readplane(t_scene *scene, char *s, int *i)
 
 	plane = parser_addplane(scene);
 	(*i) += 2;
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	plane->point = parser_readcoord(scene, s, i);
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	plane->orientation = parser_readcoord(scene, s, i);
 	parser_check_isnotnormailzed(scene, plane->orientation);
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	if (!ft_isdigit(s[*i]))
 		parser_error(scene, 1);
 	plane->color = parser_readcolor(scene, s, i);

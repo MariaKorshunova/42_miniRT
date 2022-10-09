@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:20:46 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/08 18:24:55 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/09 17:41:05 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	parser_readsphere(t_scene *scene, char *s, int *i)
 
 	sphere = parser_addsphere(scene);
 	(*i) += 2;
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	sphere->point = parser_readcoord(scene, s, i);
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	sphere->diameter = parser_readfloat(scene, s, i);
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	if (!ft_isdigit(s[*i]))
 		parser_error(scene, 1);
 	sphere->color = parser_readcolor(scene, s, i);

@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 07:14:54 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 20:02:39 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/09 17:42:57 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	parser_readambient(t_scene *scene, char *s, int *i, int *readelem)
 		parser_error(scene, 1);
 	*readelem |= 1;
 	(*i)++;
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	scene->ambient_light_intensity = parser_readfloat(scene, s, i);
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	if (scene->ambient_light_intensity > 1
 		|| scene->ambient_light_intensity < 0 || !ft_isdigit(s[*i]))
 		parser_error(scene, 1);
@@ -37,11 +37,12 @@ void	parser_readcamera(t_scene *scene, char *s, int *i, int *readelem)
 		parser_error(scene, 1);
 	*readelem |= 2;
 	(*i)++;
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	scene->camera_point = parser_readcoord(scene, s, i);
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	scene->camera_orientation = parser_readcoord(scene, s, i);
-	parser_skipspaces(s, i);
+	parser_check_isnotnormailzed(scene, scene->camera_orientation);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	scene->camera_fov = parser_readfloat(scene, s, i);
 	parser_skipspaces(s, i);
 	if (s[*i])
@@ -79,11 +80,11 @@ void	parser_readlight(t_scene *scene, char *s, int *i, int *readelem)
 	*readelem |= 4;
 	light = parser_addlight(scene);
 	(*i)++;
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	light->point = parser_readcoord(scene, s, i);
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	light->lighting_ratio = parser_readfloat(scene, s, i);
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	if (!s[*i])
 		return ;
 	if (!ft_isdigit(s[*i]))

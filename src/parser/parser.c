@@ -6,12 +6,20 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 08:03:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/08 19:41:35 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/09 17:15:27 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 #include "../../include/parser.h"
+
+int	ft_isspace(char c)
+{
+	if (c == '\t' || c == ' ' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r')
+		return ((int) c);
+	return (0);
+}
 
 static	int	open_file(int argc, char **argv)
 {
@@ -57,14 +65,6 @@ t_scene	*parser_createscene(void)
 	scene->obj->planes = 0;
 	scene->obj->spheres = 0;
 	return (scene);
-}
-
-static int	ft_isspace(char c)
-{
-	if (c == '\t' || c == ' ' || c == '\n' || c == '\v' || c == '\f'
-		|| c == '\r')
-		return ((int) c);
-	return (0);
 }
 
 static void	parser_linehandler(t_scene *scene, char *s, int *readelem)
