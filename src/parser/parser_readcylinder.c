@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:48:25 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 20:33:04 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/09 17:40:35 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ void	parser_readcylinder(t_scene *scene, char *s, int *i)
 
 	cylinder = parser_addcylinder(scene);
 	(*i) += 2;
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	cylinder->point = parser_readcoord(scene, s, i);
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	cylinder->orientation = parser_readcoord(scene, s, i);
 	parser_check_isnotnormailzed(scene, cylinder->orientation);
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	cylinder->diameter = parser_readfloat(scene, s, i);
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	cylinder->height = parser_readfloat(scene, s, i);
-	parser_skipspaces(s, i);
+	parser_skipspacesifnotspaceerror(scene, s, i);
 	if (!ft_isdigit(s[*i]))
 		parser_error(scene, 1);
 	cylinder->color = parser_readcolor(scene, s, i);

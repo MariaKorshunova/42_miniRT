@@ -6,12 +6,19 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:05:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/06 20:10:06 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/09 17:37:59 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 #include "../../include/parser.h"
+
+void	parser_skipspacesifnotspaceerror(t_scene *scene, char*s, int *i)
+{
+	if (!ft_isspace(s[*i]))
+		parser_error(scene, 1);
+	parser_skipspaces(s, i);
+}
 
 static float	parser_readfloat_getfractionalpart(char *s, int i)
 {
