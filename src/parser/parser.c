@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 08:03:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/09 17:15:27 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/09 18:50:24 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ static	int	open_file(int argc, char **argv)
 	return (i);
 }
 
-t_scene	*parser_createscene(void)
+t_scene	*parser_createscene(t_parser *p)
 {
 	t_scene	*scene;
 
 	scene = (t_scene *) malloc (sizeof(t_scene));
 	if (!scene)
-		parser_error (scene, 12);
+		parser_error (12, 0);
 	scene->obj = (t_objects *) malloc (sizeof(t_objects));
 	if (!(scene->obj))
-		parser_error (scene, 12);
+		parser_error (12, p);
 	scene->obj->cylinders = 0;
 	scene->obj->lights = 0;
 	scene->obj->planes = 0;
@@ -67,49 +67,44 @@ t_scene	*parser_createscene(void)
 	return (scene);
 }
 
-static void	parser_linehandler(t_scene *scene, char *s, int *readelem)
+static void	parser_linehandler(t_parser	*p)
 {
-	int	i;
-
-	i = 0;
-	parser_skipspaces(s, &i);
-	if (!scene || !s || !s[i] || s[i] == '#')
+	p->i = 0;
+	parser_skipspaces(p->s, &(p->i));
+	if (!p->s || !p->s[p->i] || p->s[p->i] == '#')
 		return ;
-	else if (s[i] == 'A' && ft_isspace(s[i + 1]))
-		parser_readambient(scene, s, &i, readelem);
-	else if (s[i] == 'C' && ft_isspace(s[i + 1]))
-		parser_readcamera(scene, s, &i, readelem);
-	else if (s[i] == 'L' && ft_isspace(s[i + 1]))
-		parser_readlight(scene, s, &i, readelem);
-	else if (!ft_strncmp(s + i, "sp", 2) && ft_isspace(s[i + 2]))
-		parser_readsphere(scene, s, &i);
-	else if (!ft_strncmp(s + i, "pl", 2) && ft_isspace(s[i + 2]))
-		parser_readplane(scene, s, &i);
-	else if (!ft_strncmp(s + i, "cy", 2) && ft_isspace(s[i + 2]))
-		parser_readcylinder(scene, s, &i);
+	else if (p->s[p->i] == 'A' && ft_isspace(p->s[p->i + 1]))
+		parser_readambient(p);
+	else if (p->s[p->i] == 'C' && ft_isspace(p->s[p->i + 1]))
+		parser_readcamera(p);
+	else if (p->s[p->i] == 'L' && ft_isspace(p->s[p->i + 1]))
+		parser_readlight(p);
+	else if (!ft_strncmp(p->s + p->i, "sp", 2) && ft_isspace(p->s[p->i + 2]))
+		parser_readsphere(p);
+	else if (!ft_strncmp(p->s + p->i, "pl", 2) && ft_isspace(p->s[p->i + 2]))
+		parser_readplane(p);
+	else if (!ft_strncmp(p->s + p->i, "cy", 2) && ft_isspace(p->s[p->i + 2]))
+		parser_readcylinder(p);
 	else
-		parser_error(scene, 1);
+		parser_error(1, p);
 }
 
 t_scene	*parser(int argc, char **argv)
 {
-	int		file_fd;
-	char	*tmp;
-	int		readelem;
-	t_scene	*scene;
+	t_parser	parser_env;
 
-	file_fd = open_file(argc, argv);
-	scene = parser_createscene();
-	readelem = 0;
-	tmp = get_next_line(file_fd);
-	while (tmp)
+	parser_env.file_fd = open_file(argc, argv);
+	parser_env.scene = parser_createscene(&parser_env);
+	parser_env.readelem = 0;
+	parser_env.s = get_next_line(parser_env.file_fd);
+	while (parser_env.s)
 	{
-		parser_linehandler(scene, tmp, &readelem);
-		printf("%s", tmp);
-		free (tmp);
-		tmp = get_next_line(file_fd);
+		parser_linehandler(&parser_env);
+		printf("%s", parser_env.s);
+		free (parser_env.s);
+		parser_env.s = get_next_line(parser_env.file_fd);
 	}
-	close(file_fd);
+	close(parser_env.file_fd);
 	printf("\nreading is done, file_fd closed\n");
-	return (scene);
+	return (parser_env.scene);
 }

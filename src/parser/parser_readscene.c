@@ -6,91 +6,93 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 07:14:54 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/09 17:42:57 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/09 18:49:59 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 #include "../../include/parser.h"
 
-void	parser_readambient(t_scene *scene, char *s, int *i, int *readelem)
+void	parser_readambient(t_parser *p)
 {
-	if ((*readelem) & 1)
-		parser_error(scene, 1);
-	*readelem |= 1;
-	(*i)++;
-	parser_skipspacesifnotspaceerror(scene, s, i);
-	scene->ambient_light_intensity = parser_readfloat(scene, s, i);
-	parser_skipspacesifnotspaceerror(scene, s, i);
-	if (scene->ambient_light_intensity > 1
-		|| scene->ambient_light_intensity < 0 || !ft_isdigit(s[*i]))
-		parser_error(scene, 1);
-	scene->ambient_light_rgb = parser_readcolor(scene, s, i);
-	parser_skipspaces(s, i);
-	if (s[*i])
-		parser_error(scene, 1);
+	if ((p->readelem) & 1)
+		parser_error(1, p);
+	p->readelem |= 1;
+	(p->i)++;
+	parser_skipspacesifnotspaceerror(p);
+	p->scene->ambient_light_intensity = parser_readfloat(p);
+	parser_skipspacesifnotspaceerror(p);
+	if (p->scene->ambient_light_intensity > 1
+		|| p->scene->ambient_light_intensity < 0 || !ft_isdigit(p->s[p->i]))
+		parser_error(1, p);
+	p->scene->ambient_light_rgb = parser_readcolor(p);
+	parser_skipspaces(p->s, &(p->i));
+	if (p->s[p->i])
+		parser_error(1, p);
 }
 
-void	parser_readcamera(t_scene *scene, char *s, int *i, int *readelem)
+void	parser_readcamera(t_parser *p)
 {
-	if ((*readelem) & 2)
-		parser_error(scene, 1);
-	*readelem |= 2;
-	(*i)++;
-	parser_skipspacesifnotspaceerror(scene, s, i);
-	scene->camera_point = parser_readcoord(scene, s, i);
-	parser_skipspacesifnotspaceerror(scene, s, i);
-	scene->camera_orientation = parser_readcoord(scene, s, i);
-	parser_check_isnotnormailzed(scene, scene->camera_orientation);
-	parser_skipspacesifnotspaceerror(scene, s, i);
-	scene->camera_fov = parser_readfloat(scene, s, i);
-	parser_skipspaces(s, i);
-	if (s[*i])
-		parser_error(scene, 1);
+	if ((p->readelem) & 2)
+		parser_error(1, p);
+	p->readelem |= 2;
+	(p->i)++;
+	parser_skipspacesifnotspaceerror(p);
+	p->scene->camera_point = parser_readcoord(p);
+	parser_skipspacesifnotspaceerror(p);
+	p->scene->camera_orientation = parser_readcoord(p);
+	parser_check_isnotnormailzed(p, p->scene->camera_orientation);
+	parser_skipspacesifnotspaceerror(p);
+	p->scene->camera_fov = parser_readfloat(p);
+	parser_skipspaces(p->s, &(p->i));
+	if (p->s[p->i])
+		parser_error(1, p);
 }
 
-static t_light	*parser_addlight(t_scene *scene)
+static t_light	*parser_addlight(t_parser *p)
 {
 	t_light	*light;
 
-	if (!scene->obj->lights)
+	if (!p->scene->obj->lights)
 	{
-		scene->obj->lights = (t_light *) malloc (sizeof(t_light));
-		if (!(scene->obj->lights))
-			parser_error (scene, 12);
-		scene->obj->lights->next = 0;
-		return (scene->obj->lights);
+		p->scene->obj->lights = (t_light *) malloc (sizeof(t_light));
+		if (!(p->scene->obj->lights))
+			parser_error (12, p);
+		p->scene->obj->lights->next = 0;
+		return (p->scene->obj->lights);
 	}
-	light = scene->obj->lights;
+	light = p->scene->obj->lights;
 	while (!light && !light->next)
 		light = light->next;
 	light->next = (t_light *) malloc (sizeof(t_light));
 	if (!(light->next))
-		parser_error (scene, 12);
+		parser_error (12, p);
 	light->next->next = 0;
 	return (light->next);
 }
 
-void	parser_readlight(t_scene *scene, char *s, int *i, int *readelem)
+void	parser_readlight(t_parser *p)
 {
 	t_light	*light;
 
-	if ((*readelem) & 4)
-		parser_error(scene, 1);
-	*readelem |= 4;
-	light = parser_addlight(scene);
-	(*i)++;
-	parser_skipspacesifnotspaceerror(scene, s, i);
-	light->point = parser_readcoord(scene, s, i);
-	parser_skipspacesifnotspaceerror(scene, s, i);
-	light->lighting_ratio = parser_readfloat(scene, s, i);
-	parser_skipspacesifnotspaceerror(scene, s, i);
-	if (!s[*i])
+	if ((p->readelem) & 4)
+		parser_error(1, p);
+	p->readelem |= 4;
+	light = parser_addlight(p);
+	(p->i)++;
+	parser_skipspacesifnotspaceerror(p);
+	light->point = parser_readcoord (p);
+	parser_skipspacesifnotspaceerror(p);
+	light->lighting_ratio = parser_readfloat(p);
+	parser_skipspacesifnotspaceerror(p);
+	if (light->lighting_ratio > 1 || light->lighting_ratio < 0)
+		parser_error(1, p);
+	if (!p->s[p->i])
 		return ;
-	if (!ft_isdigit(s[*i]))
-		parser_error(scene, 1);
-	light->color = parser_readcolor(scene, s, i);
-	parser_skipspaces(s, i);
-	if (s[*i])
-		parser_error(scene, 1);
+	if (!ft_isdigit(p->s[p->i]))
+		parser_error(1, p);
+	light->color = parser_readcolor(p);
+	parser_skipspaces(p->s, &(p->i));
+	if (p->s[p->i])
+		parser_error(1, p);
 }

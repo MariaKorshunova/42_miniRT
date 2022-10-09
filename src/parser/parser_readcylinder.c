@@ -6,55 +6,55 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:48:25 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/09 17:40:35 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/09 18:49:36 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 #include "../../include/parser.h"
 
-static t_cylinder	*parser_addcylinder(t_scene *scene)
+static t_cylinder	*parser_addcylinder(t_parser *p)
 {
 	t_cylinder	*cylinder;
 
-	if (!scene->obj->cylinders)
+	if (!p->scene->obj->cylinders)
 	{
-		scene->obj->cylinders = (t_cylinder *) malloc (sizeof(t_cylinder));
-		if (!(scene->obj->cylinders))
-			parser_error (scene, 12);
-		scene->obj->cylinders->next = 0;
-		return (scene->obj->cylinders);
+		p->scene->obj->cylinders = (t_cylinder *) malloc (sizeof(t_cylinder));
+		if (!(p->scene->obj->cylinders))
+			parser_error (12, p);
+		p->scene->obj->cylinders->next = 0;
+		return (p->scene->obj->cylinders);
 	}
-	cylinder = scene->obj->cylinders;
+	cylinder = p->scene->obj->cylinders;
 	while (cylinder && cylinder->next)
 		cylinder = cylinder->next;
 	cylinder->next = (t_cylinder *) malloc (sizeof(t_cylinder));
 	if (!(cylinder->next))
-		parser_error (scene, 12);
+		parser_error (12, p);
 	cylinder->next->next = 0;
 	return (cylinder->next);
 }
 
-void	parser_readcylinder(t_scene *scene, char *s, int *i)
+void	parser_readcylinder(t_parser *p)
 {
 	t_cylinder	*cylinder;
 
-	cylinder = parser_addcylinder(scene);
-	(*i) += 2;
-	parser_skipspacesifnotspaceerror(scene, s, i);
-	cylinder->point = parser_readcoord(scene, s, i);
-	parser_skipspacesifnotspaceerror(scene, s, i);
-	cylinder->orientation = parser_readcoord(scene, s, i);
-	parser_check_isnotnormailzed(scene, cylinder->orientation);
-	parser_skipspacesifnotspaceerror(scene, s, i);
-	cylinder->diameter = parser_readfloat(scene, s, i);
-	parser_skipspacesifnotspaceerror(scene, s, i);
-	cylinder->height = parser_readfloat(scene, s, i);
-	parser_skipspacesifnotspaceerror(scene, s, i);
-	if (!ft_isdigit(s[*i]))
-		parser_error(scene, 1);
-	cylinder->color = parser_readcolor(scene, s, i);
-	parser_skipspaces(s, i);
-	if (s[*i])
-		parser_error(scene, 1);
+	cylinder = parser_addcylinder(p);
+	(p->i) += 2;
+	parser_skipspacesifnotspaceerror(p);
+	cylinder->point = parser_readcoord(p);
+	parser_skipspacesifnotspaceerror(p);
+	cylinder->orientation = parser_readcoord(p);
+	parser_check_isnotnormailzed(p, cylinder->orientation);
+	parser_skipspacesifnotspaceerror(p);
+	cylinder->diameter = parser_readfloat(p);
+	parser_skipspacesifnotspaceerror(p);
+	cylinder->height = parser_readfloat(p);
+	parser_skipspacesifnotspaceerror(p);
+	if (!ft_isdigit(p->s[p->i]))
+		parser_error(1, p);
+	cylinder->color = parser_readcolor(p);
+	parser_skipspaces(p->s, &(p->i));
+	if (p->s[p->i])
+		parser_error(1, p);
 }

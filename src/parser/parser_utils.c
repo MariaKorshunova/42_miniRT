@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 04:57:56 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/08 18:22:55 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/09 18:50:49 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ void	parser_skipspaces(char *s, int *i)
 		(*i)++;
 }
 
-void	parser_error(t_scene *scene, int exitcode)
+void	parser_error(int exitcode, t_parser *p)
 {
-	free_scene(scene);
+	if (p && p->scene)
+		free_scene(p->scene);
+	if (p && p->file_fd != -1)
+		close(p->file_fd);
 	if (exitcode == 12)
 		ft_putstr_fd("Memory allocation error\n", STDERR_FILENO);
 	else
@@ -34,46 +37,46 @@ void	parser_error(t_scene *scene, int exitcode)
 	exit(exitcode);
 }
 
-static void	parser_skip_toanextnumber(t_scene *scene, char *s, int *i)
+static void	parser_skip_toanextnumber(t_parser *p)
 {
-	while (s[*i] && ft_isdigit(s[*i]))
-		(*i)++;
-	if (s[*i] != ',')
-		parser_error(scene, 1);
-	(*i)++;
-	parser_skipspaces(s, i);
-	if (!ft_isdigit(s[*i]) && s[*i] != '-' && s[*i] != '+')
-		parser_error(scene, 1);
+	while (p->s[p->i] && ft_isdigit(p->s[p->i]))
+		(p->i)++;
+	if (p->s[p->i] != ',')
+		parser_error(1, p);
+	(p->i)++;
+	parser_skipspaces(p->s, &(p->i));
+	if (!ft_isdigit(p->s[p->i]) && p->s[p->i] != '-' && p->s[p->i] != '+')
+		parser_error(1, p);
 }
 
-int	parser_readcolor(t_scene *scene, char *s, int *i)
+int	parser_readcolor(t_parser *p)
 {
 	int	res;
 
-	res = (ft_atoi(s + *i)) << 8;
-	if (ft_atoi(s + *i) > 255 || ft_atoi(s + *i) < 0)
-		parser_error(scene, 1);
-	parser_skip_toanextnumber(scene, s, i);
-	res = (res + ft_atoi(s + *i)) << 8;
-	if (ft_atoi(s + *i) > 255 || ft_atoi(s + *i) < 0)
-		parser_error(scene, 1);
-	parser_skip_toanextnumber(scene, s, i);
-	res = (res + ft_atoi(s + *i)) << 8;
-	if (ft_atoi(s + *i) > 255 || ft_atoi(s + *i) < 0)
-		parser_error(scene, 1);
-	while (s[*i] && ft_isdigit(s[*i]))
-		(*i)++;
+	res = (ft_atoi(p->s + p->i)) << 8;
+	if (ft_atoi(p->s + p->i) > 255 || ft_atoi(p->s + p->i) < 0)
+		parser_error(1, p);
+	parser_skip_toanextnumber(p);
+	res = (res + ft_atoi(p->s + p->i)) << 8;
+	if (ft_atoi(p->s + p->i) > 255 || ft_atoi(p->s + p->i) < 0)
+		parser_error(1, p);
+	parser_skip_toanextnumber(p);
+	res = (res + ft_atoi(p->s + p->i)) << 8;
+	if (ft_atoi(p->s + p->i) > 255 || ft_atoi(p->s + p->i) < 0)
+		parser_error(1, p);
+	while (p->s[p->i] && ft_isdigit(p->s[p->i]))
+		(p->i)++;
 	return (res);
 }
 
-t_coord	parser_readcoord(t_scene *scene, char *s, int *i)
+t_coord	parser_readcoord(t_parser *p)
 {
 	t_coord	res;
 
-	res.x = parser_readfloat(scene, s, i);
-	parser_skip_toanextnumber(scene, s, i);
-	res.y = parser_readfloat(scene, s, i);
-	parser_skip_toanextnumber(scene, s, i);
-	res.z = parser_readfloat(scene, s, i);
+	res.x = parser_readfloat (p);
+	parser_skip_toanextnumber(p);
+	res.y = parser_readfloat (p);
+	parser_skip_toanextnumber(p);
+	res.z = parser_readfloat (p);
 	return (res);
 }
