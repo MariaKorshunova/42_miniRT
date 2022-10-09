@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/08 19:34:57 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/09 17:43:03 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,49 @@
 # include "vector.h"
 # include "scene.h"
 # include "parser.h"
+# include "../libmlx/mlx.h"
 
 # define WIDTH 800
 # define HEIGHT 600
 
-typedef struct s_mlx
+/* set mlx events */
+# define ON_DESTROY 17
+# define ON_KEYDOWN 2
+
+typedef struct s_img
 {
-	void	*mlx;
-	void	*window;
-	void	*image;
-}	t_mlx;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}	t_img;
 
 typedef struct s_global
 {
 	t_scene	*scene;
-	t_mlx	*mlx;
+	void	*mlx;
+	void	*window;
+	t_img	img;
 }	t_global;
 
 t_scene	*parser(int argc, char **argv);
 void	free_scene(t_scene *scene);
+int		minirt_close(t_global *data);
+
+/* 	./image/image.c 
+	functions for mlx management with image*/
+void	ft_mlx_pixel_put_img(t_img	*img, int x, int y, int color);
+void	init_image(t_global *data);
+
+/* 	./image/hook.c
+	manage events*/
+void	hook(t_global *data);
+int		key_print_hook(int keycode, t_global *data);
+
+/*	 ./raytracing/solver.c
+	 solver of equations*/
+int		solve_quadratic_equation(float a, float b, float c, float roots[2]);
 
 /* utils */
 void	print_scene(t_scene	*scene);

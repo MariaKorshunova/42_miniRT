@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+         #
+#    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/06 19:55:30 by bpoetess         ###   ########.fr        #
+#    Updated: 2022/10/09 17:44:14 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ CFLAGS		=	-I include
 
 CFLAGS		+=	-Wall -Wextra -Werror
 
+# CFLAGS		+=	-fsanitize=address
+
 RM			=	rm -rf
 
 LIBFT		=	./libft/libft.a
@@ -33,6 +35,13 @@ LIBFT_H		=	./libft/libft.h
 LIBMLX		=	./libmlx/libmlx.a
 
 FILE_C		=	main.c
+
+FILE_C		+=	$(addprefix image/,\
+				hook.c\
+				image.c)
+
+FILE_C		+=	$(addprefix raytracing/,\
+				solver.c)
 
 FILE_C		+=	$(addprefix vector/,\
 				scalar_product.c\

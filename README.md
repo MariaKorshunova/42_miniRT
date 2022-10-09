@@ -36,8 +36,8 @@ man /usr/share/man/man3/mlx.1
 ## Tasks
 - [X] Makefile
 - [ ] Mlx management (window, etc)
-- [ ] Validation arguments
-- [ ] Parser
+- [X] Validation arguments
+- [X] Parser from file *.rt
 - [ ] math functions (matrices, vectors etc)
 - [ ] object structure
 - [ ] scene structure

@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   solver.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/09 17:44:39 by jmabel           ###   ########.fr       */
+/*   Created: 2022/10/09 17:38:00 by jmabel            #+#    #+#             */
+/*   Updated: 2022/10/09 17:42:47 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+int	solve_quadratic_equation(float a, float b, float c, float roots[2])
 {
-	t_global	data;
+	float	d_sqare;
 
-	data.scene = parser(argc, argv);
-	print_scene(data.scene);
-	init_image(&data);
-	hook(&data);
-	mlx_loop(data.mlx);
-	minirt_close(&data);
-	exit (0);
-}
-
-int	minirt_close(t_global *data)
-{
-	free_scene(data->scene);
-	mlx_destroy_window(data->mlx, data->window);
-	exit(0);
+	d_sqare = b * b - 4 * a * c;
+	if (d_sqare < 0)
+	{
+		roots[0] = INFINITY;
+		roots[1] = INFINITY;
+		return (0);
+	}
+	if (d_sqare == 0)
+	{
+		roots[0] = (-b - sqrt(d_sqare)) / (2 * a);
+		roots[1] = roots[0];
+		return (1);
+	}
+	roots[0] = (-b - sqrt(d_sqare)) / (2 * a);
+	roots[1] = (-b + sqrt(d_sqare)) / (2 * a);
+	return (2);
 }
