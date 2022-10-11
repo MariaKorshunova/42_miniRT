@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/11 19:12:52 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:13:04 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ int		key_print_hook(int keycode, t_global *data);
 /*	 ./raytracing/solver.c
 	 solver of equations*/
 int		solve_quadratic_equation(float a, float b, float c, float roots[2]);
+
+/* 	raytracing.c */
+void	raytracing(t_global *data);
 
 /* utils */
 void	print_scene(t_scene	*scene);

@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/09 17:44:14 by jmabel           ###   ########.fr        #
+#    Updated: 2022/10/09 20:33:49 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ FILE_C		+=	$(addprefix image/,\
 				image.c)
 
 FILE_C		+=	$(addprefix raytracing/,\
+				raytracing.c\
 				solver.c)
 
 FILE_C		+=	$(addprefix vector/,\
