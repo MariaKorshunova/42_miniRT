@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 18:46:08 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/11 21:12:15 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:19:47 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void	raytracing(t_global *data)
 		x_img = 0;
 		while (x_img <= WIDTH)
 		{
-			ft_mlx_pixel_put_img(&data->img, x_img, y_img, 0x0000FF + x);
+			ft_mlx_pixel_put_img(&data->img, x_img, y_img,
+				((int) hypot((int) x_img, (int) y_img) & 0xff)
+				| ((int) hypot((int)x_img, (int)y_img) & 0xff00)
+				| ((int) hypot((int)x_img, (int)y_img) & 0xff0000));
 			x_img += 1;
 		}
 		y_img += 1;
