@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 08:03:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/09 18:50:24 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/11 19:15:11 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ t_scene	*parser(int argc, char **argv)
 	}
 	close(parser_env.file_fd);
 	printf("\nreading is done, file_fd closed\n");
+	get_fov_angles(parser_env.scene);
 	return (parser_env.scene);
 }

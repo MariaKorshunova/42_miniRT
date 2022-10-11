@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 04:14:34 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/09 18:48:36 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/11 19:15:41 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_coord	parser_readcoord(t_parser *parser);
 void	parser_readambient(t_parser *parser);
 void	parser_readcamera(t_parser *parser);
 void	parser_readlight(t_parser *parser);
+void	get_fov_angles(t_scene *data);
 
 void	free_scene(t_scene *scene);
 

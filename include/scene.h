@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 03:57:30 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/05 12:19:06 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/11 19:26:10 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ typedef struct s_coord
 	float	y;
 	float	z;
 }	t_coord;
+
+typedef struct s_ray
+{
+	t_coord	point[2];
+}	t_ray;
 
 struct s_light
 {
@@ -75,6 +80,7 @@ struct s_scene
 	t_coord		camera_point;
 	t_coord		camera_orientation;
 	float		camera_fov;
+	float		camera_angles[2];
 	float		ambient_light_intensity;
 	int			ambient_light_rgb;
 	t_objects	*obj;

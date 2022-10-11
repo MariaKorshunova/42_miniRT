@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 07:14:54 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/09 18:49:59 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/11 19:46:45 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,11 @@ void	parser_readlight(t_parser *p)
 	parser_skipspaces(p->s, &(p->i));
 	if (p->s[p->i])
 		parser_error(1, p);
+}
+
+void	get_fov_angles(t_scene *scene)
+{
+	scene->camera_angles[0] = tan(scene->camera_fov * M_PI / 360);
+	scene->camera_angles[1] = (scene->camera_angles[0]
+			* (((float) HEIGHT) / ((float) WIDTH)));
 }

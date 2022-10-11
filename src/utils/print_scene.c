@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:14:57 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/06 20:46:15 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/11 19:45:44 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ static void	print_scene_characteristics(t_scene *scene)
 {
 	printf("\e[0;32mCamera_point: \e[0m");
 	print_coordinate(&scene->camera_point, "\n");
+	printf("\e[0;32mCamera_angles: \e[0m%f\t%f\n", scene->camera_angles[0],
+		scene->camera_angles[1]);
 	printf("\e[0;32mCamera_orientation: \e[0m");
 	print_coordinate(&scene->camera_orientation, "\n");
 	printf("\e[0;32mCamera_fov: \e[0m%f\n", scene->camera_fov);
