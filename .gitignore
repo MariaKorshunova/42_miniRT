@@ -1,15 +1,6 @@
 .DS_Store
-.vscode
-libft/libft.a
-libmlx/libmlx.a
-libmlx/mlx_init_loop.o
-libmlx/mlx_int_str_to_wordtab.o
-libmlx/mlx_mouse.o
-libmlx/mlx_new_image.o
-libmlx/mlx_new_window.o
-libmlx/mlx_png.o
-libmlx/mlx_shaders.o
-libmlx/mlx_xpm.o
+*.o
+*.a
 objects/
 objects/*
 libft_obj
