@@ -6,11 +6,11 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/09 20:33:49 by jmabel           ###   ########.fr        #
+#    Updated: 2022/10/12 21:19:21 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY		:	all clean fclean re libft
+.PHONY		:	all clean fclean re libft debug
 
 NAME		=	miniRT
 
@@ -74,7 +74,7 @@ FOLDER		=	$(sort $(dir objects/ $(OBJ)))
 all			:	$(FOLDER) $(LIBFT) $(LIBMLX) $(NAME)
 
 $(NAME)		:	$(OBJ) $(LIBFT) $(LIBMLX)
-				$(CC) $(CFLAGS) $(LIBFT) $(LIBMLX) -framework OpenGL -framework AppKit $(OBJ) -o $(NAME)
+				$(CC) $(CFLAGS) $(DEBF) $(LIBFT) $(LIBMLX) -framework OpenGL -framework AppKit $(OBJ) -o $(NAME)
 
 $(LIBFT)		:	libft_obj
 				make -C ./libft
@@ -90,7 +90,10 @@ $(FOLDER)	:
 				mkdir -p $@
 
 objects/%.o	:	./src/%.c $(HEADER) Makefile $(LIBFT_H)
-				$(CC) $(CFLAGS) -c $< -o $@
+				$(CC) $(CFLAGS) $(DEBF) -c $< -o $@
+
+debug:
+				make DEBF="-g3"
 
 clean		:
 				$(RM) $(OBJ)
