@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 17:38:00 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/11 20:04:58 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/12 20:08:35 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	solve_quadratic_equation(float a, float b, float c, float roots[2])
 	}
 	if (d_sqare == 0 && roots)
 	{
-		put_roots(roots, (-b - sqrt(d_sqare)) / (2 * a), 0);
+		put_roots(roots, (-b) / (2 * a), (-b) / (2 * a));
 		if (roots)
 			roots[1] = roots[0];
 		return (1);

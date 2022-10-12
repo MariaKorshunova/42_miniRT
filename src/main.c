@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/12 17:56:19 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/12 20:30:43 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,23 @@ void	set_point(t_coord *point, float x, float y, float z)
 float	check_intersection_sphere(t_sphere *sphere, t_ray *ray)
 {
 	float	points[2];
+	t_coord	d;
+	t_coord	oc;
 
+	vector_addition(&d, &ray->point[1], &(ray->point[0]));
+	vector_subtraction(&oc, &ray->point[0], &(sphere->point));
 	if (!solve_quadratic_equation(
-			pow(2, vector_length(&(ray->point[1]))),
-			vector_length_by_two_points(&(ray->point[1]), &(sphere->point)),
-			pow(2, vector_length(&(sphere->point)))
-			- pow(2, sphere->diameter / 2),
+			scalar_product_2_vectors(&(d), &(d)),
+			2 * scalar_product_2_vectors(&(d), &(oc)),
+			scalar_product_2_vectors(&(oc), &(oc))
+			- ((sphere->diameter / 2) * (sphere->diameter / 2)),
 			points))
 		return (-1);
-	if (points[0] < points[1])
+	if (points[0] < points[1] && points[0] > 0)
 		return (points[0]);
-	return (points[1]);
+	if (points[1] < points[0] && points[1] > 0)
+		return (points[1]);
+	return (-1);
 }
 
 void	check_for_spheres(t_global *global, t_ray *ray, int *x, int *y)
@@ -61,12 +67,13 @@ void	raytracer(t_global *global)
 {
 	t_ray	ray;
 	t_coord	lambda;
+	t_coord	camera_plane;
 	int		x;
 	int		y;
 
-	new_vector(&(ray.point[0]), 0, 0, -1);
-	new_vector(&(ray.point[1]), -global->scene->camera_angles[0],
-		global->scene->camera_angles[1], 0);
+	ray.point[0] = global->scene->camera_point;
+	vector_addition(&(camera_plane), &(ray.point[0]),
+		&(global->scene->camera_orientation));
 	lambda.x = 2 * global->scene->camera_angles[0] / WIDTH;
 	lambda.y = 2 * global->scene->camera_angles[1] / HEIGHT;
 	y = 0;

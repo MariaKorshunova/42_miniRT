@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scalar_product.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:26:09 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/05 15:46:02 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/12 19:38:23 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ float	scalar_product_2_vectors(t_coord *a, t_coord *b)
 {
 	float	result;
 
-	result = a->x * b->x + a->y * b->y + a->z * b->z;
+	result = (a->x * b->x) + (a->y * b->y) + (a->z * b->z);
 	return (result);
 }
 
