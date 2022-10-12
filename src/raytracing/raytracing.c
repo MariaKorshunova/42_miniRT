@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 18:46:08 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/11 21:19:47 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/12 17:21:37 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	raytracing(t_global *data)
 {
 	int			x_img;
 	int			y_img;
-	// t_coord		plane;
 
 	y_img = 0;
 	while (y_img <= HEIGHT)

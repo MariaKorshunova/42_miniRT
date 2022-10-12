@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/11 21:15:22 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/12 17:56:19 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ float	check_intersection_sphere(t_sphere *sphere, t_ray *ray)
 {
 	float	points[2];
 
-	if (solve_quadratic_equation(
+	if (!solve_quadratic_equation(
 			pow(2, vector_length(&(ray->point[1]))),
 			vector_length_by_two_points(&(ray->point[1]), &(sphere->point)),
 			pow(2, vector_length(&(sphere->point)))
@@ -60,21 +60,24 @@ void	check_for_spheres(t_global *global, t_ray *ray, int *x, int *y)
 void	raytracer(t_global *global)
 {
 	t_ray	ray;
+	t_coord	lambda;
 	int		x;
 	int		y;
 
-	set_point(&(ray.point[0]), 0, 0, -1);
-	set_point(&(ray.point[1]), global->scene->camera_angles[0],
+	new_vector(&(ray.point[0]), 0, 0, -1);
+	new_vector(&(ray.point[1]), -global->scene->camera_angles[0],
 		global->scene->camera_angles[1], 0);
+	lambda.x = 2 * global->scene->camera_angles[0] / WIDTH;
+	lambda.y = 2 * global->scene->camera_angles[1] / HEIGHT;
 	y = 0;
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			set_point(&(ray.point[1]),
-				(-WIDTH + x) * global->scene->camera_angles[0] / WIDTH,
-				(-HEIGHT + y) * global->scene->camera_angles[1] / HEIGHT, 0);
+			new_vector(&(ray.point[1]),
+				-global->scene->camera_angles[0] + lambda.x * x,
+				global->scene->camera_angles[1] - lambda.y * y, 0);
 			check_for_spheres(global, &ray, &x, &y);
 			x++;
 		}
@@ -89,8 +92,8 @@ int	main(int argc, char **argv)
 	data.scene = parser(argc, argv);
 	print_scene(data.scene);
 	init_image(&data);
-	// raytracer(&data);
-	raytracing(&data);
+	raytracer(&data);
+	// raytracing(&data);
 	mlx_put_image_to_window(data.mlx, data.img.img, data.window, 0, 0);
 	hook(&data);
 	mlx_loop(data.mlx);
