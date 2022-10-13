@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/12 20:46:44 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/12 21:56:43 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include "parser.h"
 # include "../libmlx/mlx.h"
 
-# define WIDTH 10
-# define HEIGHT 5
+# define WIDTH 800
+# define HEIGHT 600
 
 /* set mlx events */
 # define ON_DESTROY 17

@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/12 21:42:40 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/12 21:54:48 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ float	check_intersection_sphere(t_sphere *sphere, t_ray *ray)
 	t_coord	d;
 	t_coord	oc;
 
-	vector_addition(&d, &ray->point[1], &(ray->point[0]));
-	vector_subtraction(&oc, &ray->point[0], &(sphere->point));
+	vector_subtraction(&d, &ray->point[1], &(ray->point[0]));
+	vector_subtraction(&oc, &sphere->point, &(ray->point[0]));
 	if (!solve_quadratic_equation(
 			scalar_product_2_vectors(&(d), &(d)),
 			2 * scalar_product_2_vectors(&(d), &(oc)),
