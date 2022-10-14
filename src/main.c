@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/14 05:03:01 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/14 06:18:55 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,14 @@ void	raytracer(t_global *global)
 		while (x < WIDTH)
 		{
 			new_vector(&(ray.point[1]),
+				global->scene->camera_point.x
+				+global->scene->camera_orientation.x
 				-global->scene->camera_angles[0] + lambda * x,
-				global->scene->camera_angles[1] - lambda * y,
-				global->scene->camera_point.z + 1);
+				global->scene->camera_point.y
+				+ global->scene->camera_orientation.y
+				+ global->scene->camera_angles[1] - lambda * y,
+				global->scene->camera_point.z
+				+ global->scene->camera_orientation.z);
 			check_for_spheres(global, &ray, &x, &y);
 			x++;
 		}
