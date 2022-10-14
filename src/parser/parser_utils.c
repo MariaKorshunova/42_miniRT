@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 04:57:56 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/09 18:50:49 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/14 05:02:52 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	parser_readcolor(t_parser *p)
 	if (ft_atoi(p->s + p->i) > 255 || ft_atoi(p->s + p->i) < 0)
 		parser_error(1, p);
 	parser_skip_toanextnumber(p);
-	res = (res + ft_atoi(p->s + p->i)) << 8;
+	res = (res + ft_atoi(p->s + p->i));
 	if (ft_atoi(p->s + p->i) > 255 || ft_atoi(p->s + p->i) < 0)
 		parser_error(1, p);
 	while (p->s[p->i] && ft_isdigit(p->s[p->i]))
