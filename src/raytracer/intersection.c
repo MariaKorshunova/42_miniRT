@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:22:39 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/15 14:17:32 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/15 14:35:44 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ float	check_intersection_plane(t_plane *plane, t_ray *ray, t_coord *d)
 {
 	float	t;
 	float	dot_dn;
+	t_coord	sub_ra;
 
 	dot_dn = scalar_product_2_vectors(d, &(plane->orientation));
 	if (dot_dn == 0)
 		return (-1);
-	t = (vector_length(&plane->point)
-			- scalar_product_2_vectors(&(ray->point[0]), &(plane->orientation)))
-		/ dot_dn;
+	vector_subtraction(&sub_ra, &(plane->point), &(ray->point[0]));
+	t = scalar_product_2_vectors(&sub_ra, &(plane->orientation)) / dot_dn;
 	if (t < 0)
 		return (-1);
 	return (t);
