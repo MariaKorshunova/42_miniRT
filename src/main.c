@@ -3,48 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/14 06:18:55 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/15 14:09:43 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	set_point(t_coord *point, float x, float y, float z)
-{
-	point->x = x;
-	point->y = y;
-	point->z = z;
-}
-
-float	check_intersection_sphere(t_sphere *sphere, t_ray *ray)
-{
-	float	points[2];
-	t_coord	d;
-	t_coord	oc;
-
-	vector_subtraction(&d, &ray->point[0], &(ray->point[1]));
-	vector_subtraction(&oc, &sphere->point, &(ray->point[0]));
-	if (!solve_quadratic_equation(
-			scalar_product_2_vectors(&(d), &(d)),
-			2 * scalar_product_2_vectors(&(d), &(oc)),
-			scalar_product_2_vectors(&(oc), &(oc))
-			- ((sphere->diameter / 2) * (sphere->diameter / 2)),
-			points) || (points[0] < 0 && points[1] < 0))
-		return (-1);
-	if (points[0] < 0)
-		points[0] = points[1];
-	else if (points[1] < 0)
-		points[1] = points[0];
-	if (points[0] <= points[1] && points[0] > 0)
-		return (points[0]);
-	if (points[1] <= points[0] && points[1] > 0)
-		return (points[1]);
-	return (-1);
-}
-
+/* 	Сделать универсальной функцию
+	Подсчет вектора луча вытащить наверх,
+	чтобы не считать отдельно в каждом фигуре */
 void	check_for_spheres(t_global *global, t_ray *ray, int *x, int *y)
 {
 	t_sphere	*sphere;
