@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:22:39 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/15 14:43:51 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/15 20:50:11 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,23 @@ float	check_intersection_plane(t_plane *plane, t_ray *ray, t_coord *d)
 	dot_dn = scalar_product_2_vectors(d, &(plane->orientation));
 	if (dot_dn == 0)
 		return (-1);
-	vector_subtraction(&sub_ra, &(plane->point), &(ray->point[0]));
+	vector_subtraction(&sub_ra, &(ray->point[0]), &(plane->point));
 	t = scalar_product_2_vectors(&sub_ra, &(plane->orientation)) / dot_dn;
 	if (t < 0)
 		return (-1);
 	return (t);
 }
 
-float	check_intersection_sphere(t_sphere *sphere, t_ray *ray)
+float	check_intersection_sphere(t_sphere *sphere, t_ray *ray, t_coord *d)
 {
 	float	points[2];
-	t_coord	d;
 	t_coord	oc;
 
-	vector_subtraction(&d, &ray->point[0], &(ray->point[1]));
 	vector_subtraction(&oc, &sphere->point, &(ray->point[0]));
 	if (!solve_quadratic_equation(
-			scalar_product_2_vectors(&(d), &(d)),
-			2 * scalar_product_2_vectors(&(d), &(oc)),
-			scalar_product_2_vectors(&(oc), &(oc))
+			scalar_product_2_vectors(d, d),
+			2 * scalar_product_2_vectors(d, &oc),
+			scalar_product_2_vectors(&oc, &oc)
 			- ((sphere->diameter / 2) * (sphere->diameter / 2)),
 			points) || (points[0] < 0 && points[1] < 0))
 		return (-1);

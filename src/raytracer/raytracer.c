@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 18:46:08 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/15 18:02:44 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/15 20:54:55 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 static void		check_intersection(t_global *global, t_ray *ray,
 					int *x, int *y);
-static float	check_for_spheres(t_global *global, t_ray *ray, int *color);
+static float	check_for_spheres(t_global *global, t_ray *ray,
+					t_coord *d, int *color);
+static float	check_for_planes(t_global *global, t_ray *ray,
+					t_coord *d, int *color);
 
 void	raytracer(t_global *global)
 {
@@ -53,20 +56,25 @@ void	raytracer(t_global *global)
 static void	check_intersection(t_global *global, t_ray *ray, int *x, int *y)
 {
 	float	dist;
-	// float	nearest_dist;
+	float	nearest_dist;
 	int		color;
-	// int		nearest_color;
+	t_coord	d;
 
 	color = 0;
-	dist = check_for_spheres(global, ray, &color);
+	nearest_dist = -1;
+	vector_subtraction(&d, &ray->point[0], &(ray->point[1]));
+	dist = check_for_planes(global, ray, &d, &color);
 	if (dist != -1)
+		nearest_dist = dist;
+	dist = check_for_spheres(global, ray, &d, &color);
+	if (dist != -1 && dist < nearest_dist)
+		nearest_dist = dist;
+	if (nearest_dist != -1)
 		mlx_pixel_put(global->mlx, global->window, *x, *y, color);
 }
 
-/* 	Сделать универсальной функцию
-	Подсчет вектора луча вытащить наверх,
-	чтобы не считать отдельно в каждом фигуре */
-static float	check_for_spheres(t_global *global, t_ray *ray, int *color)
+static float	check_for_spheres(t_global *global, t_ray *ray,
+					t_coord *d, int *color)
 {
 	t_sphere	*sphere;
 	float		tmp;
@@ -76,7 +84,7 @@ static float	check_for_spheres(t_global *global, t_ray *ray, int *color)
 	length = -1;
 	while (sphere)
 	{
-		tmp = check_intersection_sphere(sphere, ray);
+		tmp = check_intersection_sphere(sphere, ray, d);
 		if (tmp != -1 && (length == -1 || tmp < length))
 		{
 			length = tmp;
@@ -85,4 +93,26 @@ static float	check_for_spheres(t_global *global, t_ray *ray, int *color)
 		sphere = sphere->next;
 	}
 	return (length);
+}
+
+static float	check_for_planes(t_global *global, t_ray *ray,
+					t_coord *d, int *color)
+{
+	t_plane	*plane;
+	float	dist;
+	float	nearest_dist;
+
+	plane = global->scene->obj->planes;
+	nearest_dist = -1;
+	while (plane)
+	{
+		dist = check_intersection_plane(plane, ray, d);
+		if (dist != -1 && (nearest_dist == -1 || dist < nearest_dist))
+		{
+			nearest_dist = dist;
+			*color = plane->color;
+		}
+		plane = plane->next;
+	}
+	return (nearest_dist);
 }
