@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/14 05:29:37 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/15 20:17:49 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include "parser.h"
 # include "../libmlx/mlx.h"
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 800
+# define HEIGHT 600
 
 /* set mlx events */
 # define ON_DESTROY 17
@@ -66,12 +66,17 @@ void	init_image(t_global *data);
 void	hook(t_global *data);
 int		key_print_hook(int keycode, t_global *data);
 
+/*	 ./raytracing/intersection.c
+	 function for check interscetion with objects */
+float	check_intersection_plane(t_plane *plane, t_ray *ray, t_coord *d);
+float	check_intersection_sphere(t_sphere *sphere, t_ray *ray, t_coord *d);
+
+/*	./raytracer/rayracer.c */
+void	raytracer(t_global *global);
+
 /*	 ./raytracing/solver.c
 	 solver of equations*/
 int		solve_quadratic_equation(float a, float b, float c, float roots[2]);
-
-/* 	raytracing.c */
-void	raytracing(t_global *data);
 
 /* utils */
 void	print_scene(t_scene	*scene);

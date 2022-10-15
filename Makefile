@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
+#    By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/12 21:19:21 by jmabel           ###   ########.fr        #
+#    Updated: 2022/10/15 14:12:24 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,9 @@ FILE_C		+=	$(addprefix image/,\
 				hook.c\
 				image.c)
 
-FILE_C		+=	$(addprefix raytracing/,\
-				raytracing.c\
+FILE_C		+=	$(addprefix raytracer/,\
+				intersection.c\
+				raytracer.c\
 				solver.c)
 
 FILE_C		+=	$(addprefix vector/,\

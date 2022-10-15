@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 03:57:30 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/11 19:26:10 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/15 13:23:57 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ struct s_plane
 	int		color;
 	t_plane	*next;
 };
+
 struct s_cylinder
 {
 	t_coord		point;
