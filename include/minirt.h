@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/15 14:11:30 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/15 17:42:07 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ int		key_print_hook(int keycode, t_global *data);
 	 function for check interscetion with objects */
 float	check_intersection_plane(t_plane *plane, t_ray *ray, t_coord *d);
 float	check_intersection_sphere(t_sphere *sphere, t_ray *ray);
+
+/*	./raytracer/rayracer.c */
+void	raytracer(t_global *global);
 
 /*	 ./raytracing/solver.c
 	 solver of equations*/

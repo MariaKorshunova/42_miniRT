@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:22:39 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/15 14:35:44 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/15 14:43:51 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
     Vector d = ray.point[0] -  ray.point[1] (вектор луча)
 */
 
-/*  Формула пересечения t=\frac{r-(a,n)}{(d,n)}
-    r = plane->point (расстояние от начала координата до плоскости)
+/*  Формула пересечения t=\frac{((r - a), n)}{(d,n)}}
+    r = plane->point (точка на плоскости)
     n = plane->orientation (вектор нормали к плоскости)
 */
 float	check_intersection_plane(t_plane *plane, t_ray *ray, t_coord *d)
