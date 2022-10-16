@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/16 04:11:58 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/16 11:01:53 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include "parser.h"
 # include "../libmlx/mlx.h"
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1920
+# define HEIGHT 1080
 
 /* set mlx events */
 # define ON_DESTROY 17
