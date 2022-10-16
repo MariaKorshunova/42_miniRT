@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 08:03:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/11 19:15:11 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/16 06:39:32 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ t_scene	*parser_createscene(t_parser *p)
 	scene->obj = (t_objects *) malloc (sizeof(t_objects));
 	if (!(scene->obj))
 		parser_error (12, p);
+	new_vector(&scene->camera_point, 0, 0, 0);
+	new_vector(&scene->camera_orientation, 0, 0, 1);
+	scene->camera_fov = 90;
+	scene->ambient_light_intensity = 1;
+	scene->ambient_light_rgb = 0xffffff;
 	scene->obj->cylinders = 0;
 	scene->obj->lights = 0;
 	scene->obj->planes = 0;
@@ -107,5 +112,6 @@ t_scene	*parser(int argc, char **argv)
 	close(parser_env.file_fd);
 	printf("\nreading is done, file_fd closed\n");
 	get_fov_angles(parser_env.scene);
+	parser_fill_color_ambient(&parser_env);
 	return (parser_env.scene);
 }

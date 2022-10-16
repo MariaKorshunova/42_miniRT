@@ -33,17 +33,6 @@ Useful source: https://harm-smits.github.io/42docs/libs/minilibx/getting_started
 man /usr/share/man/man3/mlx.1
 ```
 
-## Tasks
-- [X] Makefile
-- [ ] Mlx management (window, etc)
-- [X] Validation arguments
-- [X] Parser from file *.rt
-- [ ] math functions (matrices, vectors etc)
-- [ ] object structure
-- [ ] scene structure
-- [ ] camera
-
-
 ## Vector and matrices functions
 
 Header: "vector.h" <br />
@@ -87,7 +76,31 @@ $\cos{\phi}=\frac{\overrightarrow{a}\overrightarrow{b}}{|\overrightarrow{a}||\ov
 - [X] Вывод на stdout вектора vector, опционально с именем вектора name <br />
 `void	print_vector(char *name, t_coord *vector);`
 
+## Формулы пересечения луча с объектами
 
+### Пересечение луча и плоскости
+$\begin{equation*}
+ \begin{cases}
+   x=a+td \quad \text{луч}
+   \\
+   (x,n)=r \quad \text{плоскость}
+ \end{cases}
+\end{equation*}$
+
+где
+* $a$ - точка нахождения камеры
+* $d$ - вектор луча
+* $n$ - вектор нормали к плоскости
+* $r$ - точка плоскости
+
+Отсюда, решение уравнения:
+$t=\frac{((r - a), n)}{(d,n)}$
+
+Условия:
+* если $(d,n)=0$ луча параллелен плоскости,то есть не пересекает ее
+* если $(t>0)$ луч пересекает плоскость в сторону проецирования
+
+Нормаль, которая будет использоваться при дальнейшем вычислении отраженного луча, должна составлять тупой угол с направляющим вектором d.
 
 ## Useful source
 * https://www.youtube.com/playlist?list=PLUJCSGGiox1Tm3X9ayvMi09K_-RALHJM5 - tutorial from lessie

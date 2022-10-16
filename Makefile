@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
+#    By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/12 21:19:21 by jmabel           ###   ########.fr        #
+#    Updated: 2022/10/16 06:23:41 by bpoetess         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,9 @@ FILE_C		+=	$(addprefix image/,\
 				hook.c\
 				image.c)
 
-FILE_C		+=	$(addprefix raytracing/,\
-				raytracing.c\
+FILE_C		+=	$(addprefix raytracer/,\
+				intersection.c\
+				raytracer.c\
 				solver.c)
 
 FILE_C		+=	$(addprefix vector/,\
@@ -63,7 +64,8 @@ FILE_C		+=	$(addprefix parser/,\
 				parser_readfloat.c\
 				parser_readplane.c\
 				parser_readsphere.c\
-				parser_readcylinder.c)
+				parser_readcylinder.c\
+				parser_set_ambinet_light.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))
 

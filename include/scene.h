@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 03:57:30 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/11 19:26:10 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/16 05:28:41 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ struct s_sphere
 	t_coord		point;
 	float		diameter;
 	int			color;
+	int			color_ambient;
 	t_sphere	*next;
 };
 
@@ -55,8 +56,10 @@ struct s_plane
 	t_coord	point;
 	t_coord	orientation;
 	int		color;
+	int		color_ambient;
 	t_plane	*next;
 };
+
 struct s_cylinder
 {
 	t_coord		point;
@@ -64,6 +67,7 @@ struct s_cylinder
 	float		diameter;
 	float		height;
 	int			color;
+	int			color_ambient;
 	t_cylinder	*next;
 };
 

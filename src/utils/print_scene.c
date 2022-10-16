@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:14:57 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/14 04:20:57 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/16 06:56:04 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	print_spheres(t_sphere	*sp)
 		printf("        \t\e[0;34mDiameter: \e[0m%f\n",
 			sp->diameter);
 		print_color(sp->color);
+		print_color(sp->color_ambient);
 		sp = sp->next;
 	}
 }
@@ -62,6 +63,7 @@ void	print_cylinders(t_cylinder	*cy)
 		printf("        \t\e[0;34mOrientation: \e[0m");
 		print_coordinate(&cy->orientation, "\n");
 		print_color(cy->color);
+		print_color(cy->color_ambient);
 		printf("        \t\e[0;34mDiameter: \e[0m%f\n",
 			cy->diameter);
 		printf("        \t\e[0;34mHeight: \e[0m%f\n",
@@ -83,6 +85,7 @@ void	print_planes(t_plane	*pl)
 		printf("        \t\e[0;34mOrientation: \e[0m");
 		print_coordinate(&pl->orientation, "\n");
 		print_color(pl->color);
+		print_color(pl->color_ambient);
 		pl = pl->next;
 	}
 }
@@ -112,9 +115,9 @@ static void	print_scene_characteristics(t_scene *scene)
 	printf("\e[0;32mAmbient_light_intensity: \e[0m%f\n",
 		scene->ambient_light_intensity);
 	printf("\e[0;32mAmbient_light_rgb:\e[0m\t%d, %d, %d\n",
-		scene->ambient_light_rgb >> 24 & 255,
 		scene->ambient_light_rgb >> 16 & 255,
-		scene->ambient_light_rgb >> 8 & 255);
+		scene->ambient_light_rgb >> 8 & 255,
+		scene->ambient_light_rgb & 255);
 	printf("\e[0;32mObjects:\e[0m\n");
 }
 

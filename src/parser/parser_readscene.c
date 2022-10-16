@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 07:14:54 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/11 19:46:45 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/16 01:34:44 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	parser_readcamera(t_parser *p)
 	parser_skipspacesifnotspaceerror(p);
 	p->scene->camera_fov = parser_readfloat(p);
 	parser_skipspaces(p->s, &(p->i));
-	if (p->s[p->i])
+	if (p->s[p->i] || p->scene->camera_fov > 180 || p->scene->camera_fov < 0)
 		parser_error(1, p);
 }
 
