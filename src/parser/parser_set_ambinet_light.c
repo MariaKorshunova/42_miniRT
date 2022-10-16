@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 06:16:58 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/16 08:33:45 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/16 08:49:36 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@ static int	parser_return_color_ambient(int color1, int color2, float intensity)
 {
 	int	res;
 
-	res = (int)(intensity
-			* (((color1 >> 16 & 255) * (color2 >> 16 & 255)) / 255));
-	res = (res & 255) << 16;
+	res = ((int)(intensity
+				* (((color1 >> 16 & 255) * (color2 >> 16 & 255)) / 255))) << 16;
 	res |= (int)(intensity
-			* (((color1 >> 8 & 255) * (color2 >> 8 & 255) / 255)))
-		<< 8;
+			* (((color1 >> 8 & 255) * (color2 >> 8 & 255) / 255))) << 8;
 	res |= (int)(intensity
 			* (((color1 & 255) * (color2 & 255) / 255)));
 	return (res);
