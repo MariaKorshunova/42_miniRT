@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 18:46:08 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/16 06:26:06 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/16 09:19:12 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct s_pixel
 	int			x;
 	int			y;
 	t_ray		ray;
+	t_coord		d;
 	float		length;
 	t_coord		intersection;
 	t_plane		*plane;
@@ -92,18 +93,18 @@ void	raytracer(t_global *global)
 
 static void	check_intersection(t_global *global, t_pixel *pixel)
 {
-	t_coord		d;
 	float		dist;
 
 	pixel->plane = 0;
 	pixel->sphere = 0;
 	pixel->cylinder = 0;
 	pixel->length = -1;
-	vector_subtraction(&d, &(pixel->ray.point[0]), &(pixel->ray.point[1]));
-	pixel->plane = check_for_planes(global, &pixel->ray, &d, &dist);
+	vector_subtraction(&(pixel->d),
+		&(pixel->ray.point[0]), &(pixel->ray.point[1]));
+	pixel->plane = check_for_planes(global, &pixel->ray, &(pixel->d), &dist);
 	if (dist != -1)
 		pixel->length = dist;
-	pixel->sphere = check_for_spheres(global, &pixel->ray, &d, &dist);
+	pixel->sphere = check_for_spheres(global, &pixel->ray, &pixel->d, &dist);
 	if (dist != -1 && dist < pixel->length)
 	{
 		pixel->length = dist;
