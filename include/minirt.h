@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/16 11:01:53 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:28:16 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,19 @@ typedef struct s_global
 	t_img	img;
 }	t_global;
 
+typedef struct s_pixel
+{
+	int			x;
+	int			y;
+	t_ray		ray;
+	t_coord		d;
+	float		length;
+	t_coord		intersection;
+	t_plane		*plane;
+	t_sphere	*sphere;
+	t_cylinder	*cylinder;
+}	t_pixel;
+
 t_scene	*parser(int argc, char **argv);
 void	free_scene(t_scene *scene);
 int		minirt_close(t_global *data);
@@ -66,10 +79,16 @@ void	init_image(t_global *data);
 void	hook(t_global *data);
 int		key_print_hook(int keycode, t_global *data);
 
+/*	./raytracing/check_intersection.c
+	functions check intersection with objects */
+void	check_intersection(t_global *global, t_pixel *pixel);
+
 /*	 ./raytracing/intersection.c
-	 function for check interscetion with objects */
+	 function returns distance to some object */
 float	check_intersection_plane(t_plane *plane, t_ray *ray, t_coord *d);
 float	check_intersection_sphere(t_sphere *sphere, t_ray *ray, t_coord *d);
+float	check_intersection_cylinder(t_cylinder	*cylinder,
+			t_ray *ray, t_coord *d);
 
 /*	./raytracer/rayracer.c */
 void	raytracer(t_global *global);

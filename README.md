@@ -107,5 +107,6 @@ $t=\frac{((r - a), n)}{(d,n)}$
 * https://www.youtube.com/watch?v=e1xrz9wNpB8&feature=youtu.be - edu_events_mow miniRT by dcelsa
 * https://habr.com/ru/post/342510/ - Трёхмерная графика с нуля. Часть 1: трассировка лучей
 * https://habr.com/ru/post/436790/ - 256 строчек голого C++: пишем трассировщик лучей с нуля за несколько часов
+* https://www.youtube.com/watch?v=UTz7ytMJ2yk - Пересечение луча и цилиндра
 
 https://docs.google.com/document/d/1UwsGC-uncR2P_btMNHE64VN8pahZCZhuCGPQeTWCqBg/edit?usp=sharing

@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 18:46:08 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/16 10:38:23 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:32:34 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-typedef struct s_pixel
-{
-	int			x;
-	int			y;
-	t_ray		ray;
-	t_coord		d;
-	float		length;
-	t_coord		intersection;
-	t_plane		*plane;
-	t_sphere	*sphere;
-	t_cylinder	*cylinder;
-}	t_pixel;
-
-static void			check_intersection(t_global *global, t_pixel *pixel);
-static t_sphere		*check_for_spheres(t_global *global, t_ray *ray,
-						t_coord *d, float *dist);
-static t_plane		*check_for_planes(t_global *global, t_ray *ray,
-						t_coord *d, float *dist);
 
 void	pixel_cleaning(t_pixel *pixel)
 {
@@ -122,6 +103,9 @@ void	pixel_computing(t_global *global, t_pixel *pixel)
 			pixel->x, pixel->y, pixel->plane->color_ambient);
 	else if (pixel->sphere)
 		pixel_computing_sphere(global, pixel);
+	else if (pixel->cylinder)
+		mlx_pixel_put(global->mlx, global->window,
+			pixel->x, pixel->y, pixel->cylinder->color_ambient);
 }
 
 void	raytracer(t_global *global)
@@ -156,74 +140,4 @@ void	raytracer(t_global *global)
 		}
 		pixel.y++;
 	}
-}
-
-static void	check_intersection(t_global *global, t_pixel *pixel)
-{
-	float		dist;
-
-	pixel->plane = 0;
-	pixel->sphere = 0;
-	pixel->cylinder = 0;
-	pixel->length = -1;
-	vector_subtraction(&(pixel->d),
-		&(pixel->ray.point[0]), &(pixel->ray.point[1]));
-	pixel->plane = check_for_planes(global, &pixel->ray, &(pixel->d), &dist);
-	if (dist != -1)
-		pixel->length = dist;
-	pixel->sphere = check_for_spheres(global, &pixel->ray, &pixel->d, &dist);
-	if (dist != -1 && dist < pixel->length)
-	{
-		pixel->length = dist;
-		pixel->plane = 0;
-	}
-}
-
-static t_sphere	*check_for_spheres(t_global *global, t_ray *ray,
-					t_coord *d, float *dist)
-{
-	t_sphere	*sphere;
-	t_sphere	*closest_sphere;
-	float		tmp;
-	float		length;
-
-	sphere = global->scene->obj->spheres;
-	closest_sphere = 0;
-	length = -1;
-	while (sphere)
-	{
-		tmp = check_intersection_sphere(sphere, ray, d);
-		if (tmp != -1 && (length == -1 || tmp < length))
-		{
-			length = tmp;
-			closest_sphere = sphere;
-		}
-		sphere = sphere->next;
-	}
-	*dist = length;
-	return (closest_sphere);
-}
-
-static t_plane	*check_for_planes(t_global *global, t_ray *ray,
-					t_coord *d, float *dist)
-{
-	t_plane	*plane;
-	t_plane	*nearest_plane;
-	float	nearest_dist;
-
-	plane = global->scene->obj->planes;
-	nearest_dist = -1;
-	nearest_plane = 0;
-	while (plane)
-	{
-		*dist = check_intersection_plane(plane, ray, d);
-		if (*dist != -1 && (nearest_dist == -1 || *dist < nearest_dist))
-		{
-			nearest_dist = *dist;
-			nearest_plane = plane;
-		}
-		plane = plane->next;
-	}
-	*dist = nearest_dist;
-	return (nearest_plane);
 }
