@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:22:39 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/17 17:38:09 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/17 20:02:41 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,20 @@ float	check_intersection_cylinder(t_cylinder	*cylinder,
 			t_ray *ray, t_coord *d)
 {
 	float	points[2];
-	float	a;
-	float	b;
-	float	c;
+	float	dot_dv;
+	float	dot_ocv;
+	t_coord	oc;
+	t_coord	coef;
 
-	a = d->x * d->x + d->y * d->y;
-	b = 2 * (ray->point[0].x * d->x + ray->point[0].y * d->y);
-	c = ray->point[0].x * ray->point[0].x + ray->point[0].y * ray->point[0].y
+	vector_subtraction(&oc, &(ray->point[0]), &(cylinder->point));
+	dot_dv = scalar_product_2_vectors(d, &(cylinder->orientation));
+	dot_ocv = scalar_product_2_vectors(&oc, &(cylinder->orientation));
+	coef.x = scalar_product_2_vectors(d, d) - dot_dv * dot_dv;
+	coef.y = -2 * (scalar_product_2_vectors(d, &oc)
+			- dot_dv * scalar_product_2_vectors(&oc, &(cylinder->orientation)));
+	coef.z = scalar_product_2_vectors(&oc, &oc) - dot_ocv * dot_ocv
 		- (cylinder->diameter / 2) * (cylinder->diameter / 2);
-	if (!solve_quadratic_equation(a, b, c, points)
+	if (!solve_quadratic_equation(coef.x, coef.y, coef.z, points)
 		|| (points[0] < 0 && points[1] < 0))
 		return (-1);
 	if (points[0] < 0)

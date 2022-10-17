@@ -109,4 +109,7 @@ $t=\frac{((r - a), n)}{(d,n)}$
 * https://habr.com/ru/post/436790/ - 256 строчек голого C++: пишем трассировщик лучей с нуля за несколько часов
 * https://www.youtube.com/watch?v=UTz7ytMJ2yk - Пересечение луча и цилиндра
 
+https://stackoverflow.com/questions/73866852/ray-cylinder-intersection-formula
+https://hugi.scene.org/online/hugi24/coding%20graphics%20chris%20dragan%20raytracing%20shapes.htm
+
 https://docs.google.com/document/d/1UwsGC-uncR2P_btMNHE64VN8pahZCZhuCGPQeTWCqBg/edit?usp=sharing
