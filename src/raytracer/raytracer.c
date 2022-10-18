@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 18:46:08 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/17 17:32:34 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/18 15:04:18 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ float	pixel_computing_sphere_diffusal_reclect_ratio(t_global *global,
 	float	light_intensity;
 
 	intersection = pixel->d;
-	scalar_multiplication(&intersection, pixel->length);
+	scalar_multiplication(&intersection, -pixel->length);
 	vector_addition(&intersection, &pixel->ray.point[0], &intersection);
 	vector_subtraction(&normal, &intersection, &pixel->sphere->point);
 	normalizing_vector(&normal, &normal);
@@ -49,28 +49,32 @@ float	pixel_computing_sphere_diffusal_reclect_ratio(t_global *global,
 	return (0);
 }
 
-int	color_add(int color_sum, int color1, int color2, float intensity)
+int	color_diffusal(int color_sum, int color1, int color2, float intensity)
 {
 	int	res;
+	int	tmp;
 
-	res = ((color_sum >> 16 & 255) + ((int)(intensity
-					* (((color1 >> 16 & 255)
-							* (color2 >> 16 & 255)) / 255)))) << 16;
-	if ((res >> 16) > 255)
+	intensity /= (float) 255;
+	tmp = (color_sum >> 16 & 0xff)
+		+ (int)(intensity * ((float)(color1 >> 16 & 255)
+				*((float)(color2 >> 16 & 255))));
+	if (tmp > 255)
 		res = 0xff0000;
-	if ((color_sum >> 8 & 255) + ((int)(intensity
-			* (((color1 >> 8 & 255) * (color2 >> 8 & 255) / 255)))) <= 255)
-		res |= (color_sum >> 8 & 255) + ((int)(intensity
-					* (((color1 >> 8 & 255)
-							* (color2 >> 8 & 255) / 255))) << 8);
 	else
-		res |= 255 << 8;
-	if ((color_sum & 255) + (int)(intensity
-		* (((color1 & 255) * (color2 & 255) / 255))) <= 255)
-		res |= (color_sum & 255) + (int)(intensity
-				* (((color1 & 255) * (color2 & 255) / 255)));
+		res = tmp << 16;
+	tmp = (color_sum >> 8 & 0xff)
+		+ (int)(intensity * ((float)(color1 >> 8 & 255)
+				*((float)(color2 >> 8 & 255))));
+	if (tmp > 255)
+		res |= 0xff00;
 	else
-		res |= 255;
+		res |= tmp << 8;
+	tmp = (color_sum & 0xff)
+		+ (int)(intensity * (((float)(color1 & 255) *((float)(color2 & 255)))));
+	if (tmp > 255)
+		res |= 0xff;
+	else
+		res |= tmp;
 	return (res);
 }
 
@@ -87,7 +91,7 @@ void	pixel_computing_sphere(t_global *global, t_pixel *pixel)
 		(global, pixel);
 	if (lightning_ratio <= 0)
 		return ;
-	light = color_add(pixel->sphere->color_ambient, pixel->sphere->color,
+	light = color_diffusal(pixel->sphere->color_ambient, pixel->sphere->color,
 			global->scene->obj->lights->color, lightning_ratio);
 	mlx_pixel_put(global->mlx, global->window,
 		pixel->x, pixel->y, light);
@@ -96,8 +100,9 @@ void	pixel_computing_sphere(t_global *global, t_pixel *pixel)
 
 void	pixel_computing(t_global *global, t_pixel *pixel)
 {
-	if (!pixel->plane && !pixel->sphere && !pixel->cylinder)
-		mlx_pixel_put(global->mlx, global->window, pixel->x, pixel->y, 0);
+	if (!pixel->length || (!pixel->plane && !pixel->sphere && !pixel->cylinder))
+		mlx_pixel_put(global->mlx, global->window,
+			pixel->x, pixel->y, BACKGROUND_COLOR);
 	else if (pixel->plane)
 		mlx_pixel_put(global->mlx, global->window,
 			pixel->x, pixel->y, pixel->plane->color_ambient);

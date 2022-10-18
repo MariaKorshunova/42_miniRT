@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:14:57 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/16 06:56:04 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/18 11:25:25 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,5 @@ void	print_coordinate(t_coord *coord, char *endchar)
 void	print_color(int color)
 {
 	printf("        \t\e[0;34mColor, RGB:\t \e[0m%d, %d, %d\t[0x%x]\n",
-		color >> 24 & 255, color >> 16 & 255, color >> 8 & 255, color >> 8 & 0xffffff);
+		color >> 16 & 255, color >> 8 & 255, color & 255, color & 0xffffff);
 }

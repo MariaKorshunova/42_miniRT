@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_intersection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:58:09 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/17 17:19:12 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/18 12:30:18 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	check_intersection(t_global *global, t_pixel *pixel)
 	pixel->plane = 0;
 	pixel->sphere = 0;
 	pixel->cylinder = 0;
+	dist = -1;
 	pixel->length = -1;
 	vector_subtraction(&(pixel->d),
 		&(pixel->ray.point[0]), &(pixel->ray.point[1]));
@@ -38,7 +39,7 @@ void	check_intersection(t_global *global, t_pixel *pixel)
 	if (dist != -1)
 		pixel->length = dist;
 	pixel->sphere = check_for_spheres(global, &pixel->ray, &pixel->d, &dist);
-	if (dist != -1 && dist < pixel->length)
+	if (dist > 0 && (pixel->length == -1 || dist < pixel->length))
 	{
 		pixel->length = dist;
 		pixel->plane = 0;
@@ -66,7 +67,7 @@ static t_sphere	*check_for_spheres(t_global *global, t_ray *ray,
 	while (sphere)
 	{
 		tmp = check_intersection_sphere(sphere, ray, d);
-		if (tmp != -1 && (length == -1 || tmp < length))
+		if (tmp > 0 && (length == -1 || tmp < length))
 		{
 			length = tmp;
 			closest_sphere = sphere;
