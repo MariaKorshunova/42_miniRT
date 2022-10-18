@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/18 15:22:49 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/18 18:00:03 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,19 @@ float	check_intersection_cylinder(t_cylinder	*cylinder,
 
 /*	./raytracer/rayracer.c */
 void	raytracer(t_global *global);
+
+/*	./raytracer/compute_pixel_sphere.c */
+void	pixel_computing(t_global *global, t_pixel *pixel);
+void	pixel_cleaning(t_pixel *pixel);
+int		color_diffusal(int color_sum, int color1, int color2, float intensity);
+void	pixel_computing_sphere(t_global *global, t_pixel *pixel);
+float	pixel_computing_sphere_diffusal_recflect_ratio(t_global *global,
+			t_pixel *pixel);
+
+/*	./raytracer/compute_pixel_plane.c */
+void	pixel_computing_plane(t_global *global, t_pixel *pixel);
+float	pixel_computing_plane_diffusal_recflect_ratio(t_global *global,
+			t_pixel *pixel);
 
 /*	 ./raytracing/solver.c
 	 solver of equations*/
