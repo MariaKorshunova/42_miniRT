@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:22:39 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/17 20:02:41 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/19 18:13:29 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
     r = plane->point (точка на плоскости)
     n = plane->orientation (вектор нормали к плоскости)
 */
+
 float	check_intersection_plane(t_plane *plane, t_ray *ray, t_coord *d)
 {
 	float	t;

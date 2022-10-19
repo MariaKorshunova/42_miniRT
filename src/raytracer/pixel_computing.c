@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:17 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/19 17:57:47 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/19 18:16:44 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	check_for_shadow(t_global *global, t_pixel *pixel_initial)
 
 void	pixel_computing(t_global *global, t_pixel *pixel)
 {
-	if (!pixel->length || pixel->length == -1
+	if (pixel->length <= 0
 		|| (!pixel->plane && !pixel->sphere && !pixel->cylinder))
 	{
 		mlx_pixel_put(global->mlx, global->window,
