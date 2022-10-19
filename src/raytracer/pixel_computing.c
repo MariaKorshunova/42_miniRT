@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:17 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/19 17:51:32 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:57:47 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,55 @@
 
 #define MINIMAL_THRESHOLD 0.0001
 #define MAXIMAL_THRESHOLD 0.9998
+
+int	check_for_shadow_spheres(t_global *global, t_ray *ray, t_coord *d)
+{
+	t_sphere	*sphere;
+	float		length;
+
+	sphere = global->scene->obj->spheres;
+	length = -1;
+	while (sphere)
+	{
+		length = check_intersection_sphere(sphere, ray, d);
+		if (length > MINIMAL_THRESHOLD && length < MAXIMAL_THRESHOLD)
+			return (1);
+		sphere = sphere->next;
+	}
+	return (0);
+}
+
+int	check_for_shadow_planes(t_global *global, t_ray *ray, t_coord *d)
+{
+	t_plane	*plane;
+	float	dist;
+
+	plane = global->scene->obj->planes;
+	while (plane)
+	{
+		dist = check_intersection_plane(plane, ray, d);
+		if (dist > MINIMAL_THRESHOLD && dist < MAXIMAL_THRESHOLD)
+			return (1);
+		plane = plane->next;
+	}
+	return (0);
+}
+
+int	check_for_shadow_cylinder(t_global *global, t_ray *ray, t_coord *d)
+{
+	t_cylinder	*cylinder;
+	float		dist;
+
+	cylinder = global->scene->obj->cylinders;
+	while (cylinder)
+	{
+		dist = check_intersection_cylinder(cylinder, ray, d);
+		if (dist > MINIMAL_THRESHOLD && dist < MAXIMAL_THRESHOLD)
+			return (1);
+		cylinder = cylinder->next;
+	}
+	return (0);
+}
 
 int	check_for_shadow(t_global *global, t_pixel *pixel_initial)
 {
@@ -28,14 +77,11 @@ int	check_for_shadow(t_global *global, t_pixel *pixel_initial)
 		&ray.point[0]);
 	ray.point[1] = global->scene->obj->lights->point;
 	vector_subtraction(&d, &(ray.point[0]), &(ray.point[1]));
-	check_for_planes(global, &ray, &d, &dist);
-	if (dist > MINIMAL_THRESHOLD && dist < MAXIMAL_THRESHOLD)
+	if (check_for_shadow_spheres(global, &ray, &d))
 		return (1);
-	check_for_spheres(global, &ray, &d, &dist);
-	if (dist > MINIMAL_THRESHOLD && dist < MAXIMAL_THRESHOLD)
+	if (check_for_shadow_planes(global, &ray, &d))
 		return (1);
-	check_for_cylinder(global, &ray, &d, &dist);
-	if (dist > MINIMAL_THRESHOLD && dist < MAXIMAL_THRESHOLD)
+	if (check_for_shadow_cylinder(global, &ray, &d))
 		return (1);
 	return (0);
 }
