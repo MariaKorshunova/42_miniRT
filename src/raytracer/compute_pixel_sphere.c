@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 16:57:47 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/18 18:08:37 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:45:18 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,14 @@ void	pixel_cleaning(t_pixel *pixel)
 float	pixel_computing_sphere_diffusal_recflect_ratio(t_global *global,
 	t_pixel *pixel)
 {
-	t_coord	intersection;
 	t_coord	light_direction;
 	t_coord	normal;
 	float	light_intensity;
 
-	intersection = pixel->d;
-	scalar_multiplication(&intersection, -pixel->length);
-	vector_addition(&intersection, &pixel->ray.point[0], &intersection);
-	vector_subtraction(&normal, &intersection, &pixel->sphere->point);
+	vector_subtraction(&normal, &pixel->intersection, &pixel->sphere->point);
 	normalizing_vector(&normal, &normal);
 	vector_subtraction(&light_direction, &global->scene->obj->lights->point,
-		&intersection);
+		&pixel->intersection);
 	normalizing_vector(&light_direction, &light_direction);
 	light_intensity = scalar_product_2_vectors(&light_direction, &normal)
 		* global->scene->obj->lights->lighting_ratio;
@@ -85,7 +81,7 @@ void	pixel_computing_sphere(t_global *global, t_pixel *pixel)
 
 	mlx_pixel_put(global->mlx, global->window,
 		pixel->x, pixel->y, pixel->sphere->color_ambient);
-	if (!global->scene->obj->lights)
+	if (!global->scene->obj->lights || check_for_shadow(global, pixel))
 		return ;
 	lightning_ratio = pixel_computing_sphere_diffusal_recflect_ratio
 		(global, pixel);
@@ -96,18 +92,4 @@ void	pixel_computing_sphere(t_global *global, t_pixel *pixel)
 	mlx_pixel_put(global->mlx, global->window,
 		pixel->x, pixel->y, light);
 	return ;
-}
-
-void	pixel_computing(t_global *global, t_pixel *pixel)
-{
-	if (!pixel->length || (!pixel->plane && !pixel->sphere && !pixel->cylinder))
-		mlx_pixel_put(global->mlx, global->window,
-			pixel->x, pixel->y, BACKGROUND_COLOR);
-	else if (pixel->plane)
-		pixel_computing_plane(global, pixel);
-	else if (pixel->sphere)
-		pixel_computing_sphere(global, pixel);
-	else if (pixel->cylinder)
-		mlx_pixel_put(global->mlx, global->window,
-			pixel->x, pixel->y, pixel->cylinder->color_ambient);
 }

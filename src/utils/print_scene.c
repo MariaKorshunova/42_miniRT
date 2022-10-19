@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:14:57 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/18 11:25:25 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/19 16:30:30 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,17 @@ void	print_planes(t_plane	*pl)
 
 void	print_scene(t_scene	*scene)
 {
+	printf("\n\tOne pixel struct is %lu bits,\n\
+	One global struct is %lu bits,\n\
+	One scene struct is %lu bits,\n\
+	One obj struct is %lu bits,\n\
+	One sphere struct is %lu bits,\n\
+	One plane struct is %lu bits,\n\
+	One cylinder struct is %lu bits,\n\
+	One light struct is %lu bits,\n",
+		sizeof(t_pixel), sizeof(t_global), sizeof(t_scene),
+		sizeof(t_objects), sizeof(t_sphere), sizeof(t_plane),
+		sizeof(t_cylinder), sizeof(t_light));
 	print_scene_characteristics(scene);
 	if (scene->obj && scene->obj->spheres)
 		print_spheres(scene->obj->spheres);

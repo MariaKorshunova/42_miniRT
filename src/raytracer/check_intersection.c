@@ -6,18 +6,11 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:58:09 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/18 12:30:18 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:19:26 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-static t_sphere		*check_for_spheres(t_global *global, t_ray *ray,
-						t_coord *d, float *dist);
-static t_plane		*check_for_planes(t_global *global, t_ray *ray,
-						t_coord *d, float *dist);
-static	t_cylinder	*check_for_cylinder(t_global *global, t_ray *ray,
-						t_coord *d, float *dist);
 
 /*  ray.point[0] = global->scene->camera_point; Точка камеры (точка a)
     = координата луча на проецирумой плоскости
@@ -53,7 +46,7 @@ void	check_intersection(t_global *global, t_pixel *pixel)
 	}
 }
 
-static t_sphere	*check_for_spheres(t_global *global, t_ray *ray,
+t_sphere	*check_for_spheres(t_global *global, t_ray *ray,
 					t_coord *d, float *dist)
 {
 	t_sphere	*sphere;
@@ -78,7 +71,7 @@ static t_sphere	*check_for_spheres(t_global *global, t_ray *ray,
 	return (closest_sphere);
 }
 
-static t_plane	*check_for_planes(t_global *global, t_ray *ray,
+t_plane	*check_for_planes(t_global *global, t_ray *ray,
 					t_coord *d, float *dist)
 {
 	t_plane	*plane;
@@ -102,7 +95,7 @@ static t_plane	*check_for_planes(t_global *global, t_ray *ray,
 	return (nearest_plane);
 }
 
-static	t_cylinder	*check_for_cylinder(t_global *global, t_ray *ray,
+t_cylinder	*check_for_cylinder(t_global *global, t_ray *ray,
 						t_coord *d, float *dist)
 {
 	t_cylinder	*cylinder;
