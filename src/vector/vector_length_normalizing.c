@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_length_normalizing.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 16:04:26 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/06 19:37:34 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/19 22:47:02 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
