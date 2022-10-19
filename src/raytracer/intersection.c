@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:22:39 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/19 19:27:20 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/19 21:07:33 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static float	intersection_cylinder_pipe(t_cylinder	*cylinder,
 					t_coord *d, t_coord *oc);
-static int		check_cylinder_height_size(float *dot_dv, float	*dot_ocv,
+static int		check_cylinder_height(float *dot_dv, float	*dot_ocv,
 					float *t, float *height);
 
 /*  ray.point[0] = global->scene->camera_point; Точка камеры (точка a)
@@ -77,7 +77,7 @@ float	check_intersection_cylinder(t_cylinder	*cylinder,
 	return (dist);
 }
 
-static float	intersection_cylinder_pipe(t_cylinder	*cylinder,
+static float	intersection_cylinder_pipe(t_cylinder	*cyl,
 					t_coord *d, t_coord *oc)
 {
 	float	points[2];
@@ -85,16 +85,16 @@ static float	intersection_cylinder_pipe(t_cylinder	*cylinder,
 	float	dot_ocv;
 	t_coord	coef;
 
-	dot_dv = scalar_product_2_vectors(d, &(cylinder->orientation));
-	dot_ocv = scalar_product_2_vectors(oc, &(cylinder->orientation));
-		coef.x = scalar_product_2_vectors(d, d) - dot_dv * dot_dv;
+	dot_dv = scalar_product_2_vectors(d, &(cyl->orientation));
+	dot_ocv = scalar_product_2_vectors(oc, &(cyl->orientation));
+	coef.x = scalar_product_2_vectors(d, d) - dot_dv * dot_dv;
 	coef.y = -2 * (scalar_product_2_vectors(d, oc)
-			- dot_dv * scalar_product_2_vectors(oc, &(cylinder->orientation)));
+			- dot_dv * scalar_product_2_vectors(oc, &(cyl->orientation)));
 	coef.z = scalar_product_2_vectors(oc, oc) - dot_ocv * dot_ocv
-		- (cylinder->diameter / 2) * (cylinder->diameter / 2);
+		- (cyl->diameter / 2) * (cyl->diameter / 2);
 	if (!solve_quadratic_equation(coef.x, coef.y, coef.z, points)
 		|| (points[0] < 0 && points[1] < 0)
-		|| check_cylinder_height_size(&dot_dv, &dot_ocv, &(points[1]), &(cylinder->height)))
+		|| check_cylinder_height(&dot_dv, &dot_ocv, &points[1], &cyl->height))
 		return (-1);
 	if (points[0] < 0)
 		points[0] = points[1];
@@ -107,7 +107,7 @@ static float	intersection_cylinder_pipe(t_cylinder	*cylinder,
 	return (-1);
 }
 
-static int	check_cylinder_height_size(float *dot_dv, float	*dot_ocv, float *t,
+static int	check_cylinder_height(float *dot_dv, float	*dot_ocv, float *t,
 				float *height)
 {
 	float	m;
