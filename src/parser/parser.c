@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 08:03:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/20 19:54:27 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:02:25 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,25 +101,25 @@ void	translate_objects(t_scene *scene)
 	obj = *scene->obj;
 	while (obj.spheres)
 	{
-		vector_addition(&obj.spheres->point, &obj.spheres->point,
+		vector_subtraction(&obj.spheres->point, &obj.spheres->point,
 			&scene->camera_point);
 		obj.spheres = obj.spheres->next;
 	}
 	while (obj.planes)
 	{
-		vector_addition(&obj.planes->point, &obj.planes->point,
+		vector_subtraction(&obj.planes->point, &obj.planes->point,
 			&scene->camera_point);
 		obj.planes = obj.planes->next;
 	}
 	while (obj.cylinders)
 	{
-		vector_addition(&obj.cylinders->point, &obj.cylinders->point,
+		vector_subtraction(&obj.cylinders->point, &obj.cylinders->point,
 			&scene->camera_point);
 		obj.cylinders = obj.cylinders->next;
 	}
 	while (obj.lights)
 	{
-		vector_addition(&obj.lights->point, &obj.lights->point,
+		vector_subtraction(&obj.lights->point, &obj.lights->point,
 			&scene->camera_point);
 		obj.lights = obj.lights->next;
 	}
