@@ -6,7 +6,7 @@
 #    By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/18 18:01:07 by bpoetess         ###   ########.fr        #
+#    Updated: 2022/10/19 14:44:47 by bpoetess         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ FILE_C		+=	$(addprefix raytracer/,\
 				raytracer.c\
 				compute_pixel_sphere.c\
 				compute_pixel_plane.c\
+				pixel_computing.c\
 				solver.c)
 
 FILE_C		+=	$(addprefix vector/,\

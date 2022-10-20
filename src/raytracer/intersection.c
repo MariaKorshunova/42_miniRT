@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:22:39 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/19 22:59:26 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/20 19:57:31 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static float	intersection_cylinder_pipe(t_cylinder	*cylinder,
     r = plane->point (точка на плоскости)
     n = plane->orientation (вектор нормали к плоскости)
 */
+
 float	check_intersection_plane(t_plane *plane, t_ray *ray, t_coord *d)
 {
 	float	t;

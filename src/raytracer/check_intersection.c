@@ -6,18 +6,11 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:58:09 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/18 12:30:18 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/20 17:16:21 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-static t_sphere		*check_for_spheres(t_global *global, t_ray *ray,
-						t_coord *d, float *dist);
-static t_plane		*check_for_planes(t_global *global, t_ray *ray,
-						t_coord *d, float *dist);
-static	t_cylinder	*check_for_cylinder(t_global *global, t_ray *ray,
-						t_coord *d, float *dist);
 
 /*  ray.point[0] = global->scene->camera_point; Точка камеры (точка a)
     = координата луча на проецирумой плоскости
@@ -45,15 +38,17 @@ void	check_intersection(t_global *global, t_pixel *pixel)
 		pixel->plane = 0;
 	}
 	pixel->cylinder = check_for_cylinder(global, &pixel->ray, &pixel->d, &dist);
-	if (dist != -1 && dist < pixel->length)
+	if (dist != -1 && (pixel->length == -1 || dist < pixel->length))
 	{
 		pixel->length = dist;
 		pixel->plane = 0;
 		pixel->sphere = 0;
 	}
+	else
+		pixel->cylinder = 0;
 }
 
-static t_sphere	*check_for_spheres(t_global *global, t_ray *ray,
+t_sphere	*check_for_spheres(t_global *global, t_ray *ray,
 					t_coord *d, float *dist)
 {
 	t_sphere	*sphere;
@@ -78,7 +73,7 @@ static t_sphere	*check_for_spheres(t_global *global, t_ray *ray,
 	return (closest_sphere);
 }
 
-static t_plane	*check_for_planes(t_global *global, t_ray *ray,
+t_plane	*check_for_planes(t_global *global, t_ray *ray,
 					t_coord *d, float *dist)
 {
 	t_plane	*plane;
@@ -91,7 +86,7 @@ static t_plane	*check_for_planes(t_global *global, t_ray *ray,
 	while (plane)
 	{
 		*dist = check_intersection_plane(plane, ray, d);
-		if (*dist != -1 && (nearest_dist == -1 || *dist < nearest_dist))
+		if (*dist > -1 && (nearest_dist == -1 || *dist < nearest_dist))
 		{
 			nearest_dist = *dist;
 			nearest_plane = plane;
@@ -102,7 +97,7 @@ static t_plane	*check_for_planes(t_global *global, t_ray *ray,
 	return (nearest_plane);
 }
 
-static	t_cylinder	*check_for_cylinder(t_global *global, t_ray *ray,
+t_cylinder	*check_for_cylinder(t_global *global, t_ray *ray,
 						t_coord *d, float *dist)
 {
 	t_cylinder	*cylinder;
@@ -115,7 +110,7 @@ static	t_cylinder	*check_for_cylinder(t_global *global, t_ray *ray,
 	while (cylinder)
 	{
 		*dist = check_intersection_cylinder(cylinder, ray, d);
-		if (*dist != -1 && (nearest_dist == -1 || *dist < nearest_dist))
+		if (*dist > 0 && (nearest_dist == -1 || *dist < nearest_dist))
 		{
 			nearest_dist = *dist;
 			nearest_cylinder = cylinder;

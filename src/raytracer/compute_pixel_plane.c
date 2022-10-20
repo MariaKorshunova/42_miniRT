@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 17:06:25 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/18 18:06:39 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:17:41 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,13 @@
 float	pixel_computing_plane_diffusal_recflect_ratio(t_global *global,
 	t_pixel *pixel)
 {
-	t_coord	intersection;
 	t_coord	light_direction;
 	t_coord	normal;
 	float	light_intensity;
 
-	intersection = pixel->d;
-	scalar_multiplication(&intersection, -pixel->length);
-	vector_addition(&intersection, &pixel->ray.point[0], &intersection);
 	normal = pixel->plane->orientation;
 	vector_subtraction(&light_direction, &global->scene->obj->lights->point,
-		&intersection);
+		&pixel->intersection);
 	normalizing_vector(&light_direction, &light_direction);
 	light_intensity = scalar_product_2_vectors(&light_direction, &normal)
 		* global->scene->obj->lights->lighting_ratio;
@@ -41,7 +37,7 @@ void	pixel_computing_plane(t_global *global, t_pixel *pixel)
 
 	mlx_pixel_put(global->mlx, global->window,
 		pixel->x, pixel->y, pixel->plane->color_ambient);
-	if (!global->scene->obj->lights)
+	if (!global->scene->obj->lights || check_for_shadow(global, pixel))
 		return ;
 	lightning_ratio = pixel_computing_plane_diffusal_recflect_ratio
 		(global, pixel);
