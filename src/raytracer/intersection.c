@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:22:39 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/21 16:39:16 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/21 19:59:44 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,11 @@
 
 static float	intersection_cylinder_pipe(t_cylinder	*cylinder,
 					t_coord *d, t_coord *oc);
-static int		check_cylinder_height(float *dot_dv, float	*dot_ocv,
-					float *t, float *height);
+static float	nearest_distance(float	*points);
 
 /*  ray.point[0] = global->scene->camera_point; Точка камеры (точка a)
     = координата луча на проецирумой плоскости
     Vector d = ray.point[0] -  ray.point[1] (вектор луча)
-*/
-
-/*  Формула пересечения t=\frac{((r - a), n)}{(d,n)}}
-    r = plane->point (точка на плоскости)
-    n = plane->orientation (вектор нормали к плоскости)
 */
 
 float	check_intersection_plane(t_plane *plane, t_ray *ray, t_coord *d)
@@ -86,6 +80,7 @@ static float	intersection_cylinder_pipe(t_cylinder	*cyl,
 	float	points[2];
 	float	dot_dv;
 	float	dot_ocv;
+	float	m;
 	t_coord	coef;
 
 	dot_dv = scalar_product_2_vectors(d, &(cyl->orientation));
@@ -95,9 +90,20 @@ static float	intersection_cylinder_pipe(t_cylinder	*cyl,
 			- dot_dv * scalar_product_2_vectors(oc, &(cyl->orientation)));
 	coef.z = scalar_product_2_vectors(oc, oc) - dot_ocv * dot_ocv
 		- (cyl->diameter / 2) * (cyl->diameter / 2);
-	if (!solve_quadratic_equation(coef.x, coef.y, coef.z, points)
-		|| (points[0] < 0 && points[1] < 0)
-		|| check_cylinder_height(&dot_dv, &dot_ocv, &points[0], &cyl->height))
+	if (!solve_quadratic_equation(coef.x, coef.y, coef.z, points))
+		return (-1);
+	points[0] = nearest_distance(points);
+	if (points[0] == -1)
+		return (-1);
+	m = dot_dv * points[0] + dot_ocv;
+	if (m < 0 || m > cyl->height)
+		return (-1);
+	return (points[0]);
+}
+
+static float	nearest_distance(float	*points)
+{
+	if (points[0] < 0 && points[1] < 0)
 		return (-1);
 	if (points[0] < 0)
 		points[0] = points[1];
@@ -108,24 +114,4 @@ static float	intersection_cylinder_pipe(t_cylinder	*cyl,
 	if (points[1] <= points[0] && points[1] > 0)
 		return (points[1]);
 	return (-1);
-}
-
-static	float	dist_to_cylinder_pipe(t_cylinder	*cyl,
-					t_coord *d, t_coord *oc)
-{
-	float	points[2];
-	float	dot_dv;
-	float	dot_ocv;
-	t_coord	coef;	
-}
-
-static int	check_cylinder_height(float *dot_dv, float	*dot_ocv, float *t,
-				float *height)
-{
-	float	m;
-
-	m =  (*dot_dv) * (*t) + (*dot_ocv);
-	if (m < 0 || m > *height)
-		return (1);
-	return (0);
 }
