@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:05:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/09 18:50:00 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/20 16:39:27 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,30 @@ static float	parser_readfloat_getfractionalpart(char *s, int i)
 	return (nb);
 }
 
+static int	parser_readfloat_getsign(t_parser *p)
+{
+	int	res;
+
+	if (p->s[p->i] == '-')
+		res = -1;
+	else
+		res = 1;
+	if (p->s[p->i] == '-' || p->s[p->i] == '+')
+		(p->i)++;
+	return (res);
+}
+
 float	parser_readfloat(t_parser *p)
 {
 	float	res;
 	float	tmp1;
+	int		sign;
 
 	if (!(ft_isdigit(p->s[p->i]) || ((p->s[p->i] == '-' || p->s[p->i] == '+')
 				&& ft_isdigit(p->s[p->i + 1]))))
 		parser_error(1, p);
 	res = (float) ft_atoi(p->s + (p->i));
-	if (p->s[p->i] == '-' || p->s[p->i] == '+')
-		(p->i)++;
+	sign = parser_readfloat_getsign(p);
 	while (p->s[p->i] && ft_isdigit(p->s[p->i]))
 		(p->i)++;
 	if (p->s[p->i] != '.')
@@ -61,7 +74,7 @@ float	parser_readfloat(t_parser *p)
 	tmp1 = parser_readfloat_getfractionalpart(p->s, p->i);
 	while (p->s[p->i] && ft_isdigit(p->s[p->i]))
 		(p->i)++;
-	if (res >= 0)
+	if (sign == 1)
 		return (res + tmp1);
 	return (res - tmp1);
 }

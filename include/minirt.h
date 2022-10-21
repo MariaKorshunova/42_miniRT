@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/18 18:00:03 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:15:00 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,53 +67,64 @@ typedef struct s_pixel
 	t_cylinder	*cylinder;
 }	t_pixel;
 
-t_scene	*parser(int argc, char **argv);
-void	free_scene(t_scene *scene);
-int		minirt_close(t_global *data);
+t_scene		*parser(int argc, char **argv);
+void		free_scene(t_scene *scene);
+int			minirt_close(t_global *data);
 
 /* 	./image/image.c 
 	functions for mlx management with image*/
-void	ft_mlx_pixel_put_img(t_img	*img, int x, int y, int color);
-void	init_image(t_global *data);
+void		ft_mlx_pixel_put_img(t_img	*img, int x, int y, int color);
+void		init_image(t_global *data);
 
 /* 	./image/hook.c
 	manage events*/
-void	hook(t_global *data);
-int		key_print_hook(int keycode, t_global *data);
+void		hook(t_global *data);
+int			key_print_hook(int keycode, t_global *data);
 
 /*	./raytracing/check_intersection.c
 	functions check intersection with objects */
-void	check_intersection(t_global *global, t_pixel *pixel);
+void		check_intersection(t_global *global, t_pixel *pixel);
+
+t_sphere	*check_for_spheres(t_global *global, t_ray *ray,
+				t_coord *d, float *dist);
+t_plane		*check_for_planes(t_global *global, t_ray *ray,
+				t_coord *d, float *dist);
+t_cylinder	*check_for_cylinder(t_global *global, t_ray *ray,
+				t_coord *d, float *dist);
 
 /*	 ./raytracing/intersection.c
 	 function returns distance to some object */
-float	check_intersection_plane(t_plane *plane, t_ray *ray, t_coord *d);
-float	check_intersection_sphere(t_sphere *sphere, t_ray *ray, t_coord *d);
-float	check_intersection_cylinder(t_cylinder	*cylinder,
-			t_ray *ray, t_coord *d);
+float		check_intersection_plane(t_plane *plane, t_ray *ray, t_coord *d);
+float		check_intersection_sphere(t_sphere *sphere, t_ray *ray, t_coord *d);
+float		check_intersection_cylinder(t_cylinder	*cylinder,
+				t_ray *ray, t_coord *d);
 
 /*	./raytracer/rayracer.c */
-void	raytracer(t_global *global);
+void		raytracer(t_global *global);
+
+/*	./raytracer/pixel_computing.c */
+void		pixel_computing(t_global *global, t_pixel *pixel);
+int			check_for_shadow(t_global *global, t_pixel *pixel_initial);
 
 /*	./raytracer/compute_pixel_sphere.c */
-void	pixel_computing(t_global *global, t_pixel *pixel);
-void	pixel_cleaning(t_pixel *pixel);
-int		color_diffusal(int color_sum, int color1, int color2, float intensity);
-void	pixel_computing_sphere(t_global *global, t_pixel *pixel);
-float	pixel_computing_sphere_diffusal_recflect_ratio(t_global *global,
-			t_pixel *pixel);
+void		pixel_cleaning(t_pixel *pixel);
+int			color_diffusal(int color_sum, int color1,
+				int color2, float intensity);
+void		pixel_computing_sphere(t_global *global, t_pixel *pixel);
+float		pixel_computing_sphere_diffusal_recflect_ratio(t_global *global,
+				t_pixel *pixel);
 
 /*	./raytracer/compute_pixel_plane.c */
-void	pixel_computing_plane(t_global *global, t_pixel *pixel);
-float	pixel_computing_plane_diffusal_recflect_ratio(t_global *global,
-			t_pixel *pixel);
+void		pixel_computing_plane(t_global *global, t_pixel *pixel);
+float		pixel_computing_plane_diffusal_recflect_ratio(t_global *global,
+				t_pixel *pixel);
 
 /*	 ./raytracing/solver.c
 	 solver of equations*/
-int		solve_quadratic_equation(float a, float b, float c, float roots[2]);
+int			solve_quadratic_equation(float a, float b, float c, float roots[2]);
 
 /* utils */
-void	print_scene(t_scene	*scene);
-void	print_coordinate(t_coord *coord, char *endchar);
+void		print_scene(t_scene	*scene);
+void		print_coordinate(t_coord *coord, char *endchar);
 
 #endif
