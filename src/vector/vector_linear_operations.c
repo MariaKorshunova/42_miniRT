@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   vector_linear_operations.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 16:48:44 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/03 19:09:49 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/21 16:18:45 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
-void	scalar_multiplication(t_coord *vector, float lambda)
+void	scalar_multiplication(t_coord *result, t_coord *vector, float lambda)
 {
-	vector->x = vector->x * lambda;
-	vector->y = vector->y * lambda;
-	vector->z = vector->z * lambda;
+	result->x = vector->x * lambda;
+	result->y = vector->y * lambda;
+	result->z = vector->z * lambda;
 }
 
 void	vector_addition(t_coord *result, t_coord *a, t_coord *b)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:10:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/05 15:43:13 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/21 16:19:33 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	print_vector(char *name, t_coord *vector);
 
 /*  vector_linear_operations.c 
 	Scalar multiplication*/
-void	scalar_multiplication(t_coord *vector, float alpha);
+void	scalar_multiplication(t_coord *result, t_coord *vector, float lambda);
 void	vector_addition(t_coord *result, t_coord *a, t_coord *b);
 void	vector_subtraction(t_coord *result, t_coord *a, t_coord *b);
 

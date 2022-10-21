@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_intersection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:58:09 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/20 17:16:21 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:35:02 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	check_intersection(t_global *global, t_pixel *pixel)
 	pixel->length = -1;
 	vector_subtraction(&(pixel->d),
 		&(pixel->ray.point[0]), &(pixel->ray.point[1]));
+	normalizing_vector(&(pixel->d), &(pixel->d));
 	pixel->plane = check_for_planes(global, &pixel->ray, &(pixel->d), &dist);
 	if (dist != -1)
 		pixel->length = dist;

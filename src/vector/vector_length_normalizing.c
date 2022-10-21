@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 16:04:26 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/19 22:47:02 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/21 16:21:34 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ void	normalizing_vector(t_coord *result, t_coord *vector)
 	float	length;
 
 	length = vector_length(vector);
-	scalar_multiplication(result, 1 / length);
+	scalar_multiplication(result, result, 1 / length);
 }
