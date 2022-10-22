@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/22 20:13:22 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/22 21:03:16 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_pixel
 	t_sphere	*sphere;
 	t_cylinder	*cylinder;
 	int			cylinder_type;
+	float		cylinder_m;
 }	t_pixel;
 
 t_scene		*parser(int argc, char **argv);
@@ -118,6 +119,9 @@ void		raytracer(t_global *global);
 void		pixel_computing(t_global *global, t_pixel *pixel);
 int			check_for_shadow(t_global *global, t_pixel *pixel_initial);
 
+/*	./raytracer/compute_pixel_cyliner.c */
+
+void		pixel_computing_cylinder(t_global *global, t_pixel *pixel);
 /*	./raytracer/compute_pixel_sphere.c */
 void		pixel_cleaning(t_pixel *pixel);
 int			color_diffusal(int color_sum, int color1,

@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:17 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/22 18:52:16 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/22 21:13:18 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,16 @@ int	check_for_shadow_planes(t_global *global, t_ray *ray, t_coord *d)
 
 int	check_for_shadow_cylinder(t_global *global, t_ray *ray, t_coord *d)
 {
+	t_pixel		pixel;
 	t_cylinder	*cylinder;
 	float		dist;
 
 	cylinder = global->scene->obj->cylinders;
+	pixel.ray = *ray;
+	pixel.d = *d;
 	while (cylinder)
 	{
-		dist = check_intersection_cylinder(cylinder, ray, d);
+		dist = check_intersection_cylinder(cylinder, &pixel);
 		if (dist > MINIMAL_THRESHOLD && dist < MAXIMAL_THRESHOLD)
 			return (1);
 		cylinder = cylinder->next;
@@ -106,6 +109,5 @@ void	pixel_computing(t_global *global, t_pixel *pixel)
 	else if (pixel->sphere)
 		pixel_computing_sphere(global, pixel);
 	else if (pixel->cylinder)
-		mlx_pixel_put(global->mlx, global->window,
-			pixel->x, pixel->y, pixel->cylinder->color_ambient);
+		pixel_computing_cylinder(global, pixel);
 }

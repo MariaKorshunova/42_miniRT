@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+         #
+#    By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/22 14:59:55 by jmabel           ###   ########.fr        #
+#    Updated: 2022/10/22 21:03:37 by bpoetess         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ FILE_C		+=	$(addprefix raytracer/,\
 				compute_pixel_sphere.c\
 				compute_pixel_plane.c\
 				pixel_computing.c\
+				compute_pixel_cylinder.c\
 				solver.c)
 
 FILE_C		+=	$(addprefix vector/,\

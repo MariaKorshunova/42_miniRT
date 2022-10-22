@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_cylinder.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 14:59:15 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/22 20:13:51 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/22 21:02:01 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static float	intersection_cylinder_pipe(t_cylinder	*cylinder,
-					t_coord *d, t_coord *oc);
+					t_coord *d, t_coord *oc, t_pixel *pixel);
 static float	intersection_cylinder_plane(t_cylinder	*cylinder,
 					t_plane *plane, t_ray *ray, t_coord *d_ray);
 static void		define_cylinder_plane(t_cylinder *cyl, t_plane *plane,
@@ -32,7 +32,7 @@ float	check_intersection_cylinder(t_cylinder	*cylinder, t_pixel *pixel)
 	pixel->cylinder_type = NO_INTERSECT;
 	vector_subtraction(&oc, &(pixel->ray.point[0]), &(cylinder->point));
 	scalar_multiplication(&d, &(pixel->d), -1);
-	dist = intersection_cylinder_pipe(cylinder, &d, &oc);
+	dist = intersection_cylinder_pipe(cylinder, &d, &oc, pixel);
 	if (dist != -1)
 		pixel->cylinder_type = PIPE;
 	define_cylinder_plane(cylinder, &cylinder->plane_begin, &cylinder->point);
@@ -61,12 +61,11 @@ static float	define_dist_type_intersection(t_pixel *pixel, float dist_plane,
 }
 
 static float	intersection_cylinder_pipe(t_cylinder	*cyl,
-					t_coord *d, t_coord *oc)
+					t_coord *d, t_coord *oc, t_pixel *pixel)
 {
 	float	points[2];
 	float	dot_dv;
 	float	dot_ocv;
-	float	m;
 	t_coord	coef;
 
 	dot_dv = scalar_product_2_vectors(d, &(cyl->orientation));
@@ -81,8 +80,8 @@ static float	intersection_cylinder_pipe(t_cylinder	*cyl,
 	points[0] = nearest_distance(points);
 	if (points[0] == -1)
 		return (-1);
-	m = dot_dv * points[0] + dot_ocv;
-	if (m < 0 || m > cyl->height)
+	pixel->cylinder_m = dot_dv * points[0] + dot_ocv;
+	if (pixel->cylinder_m < 0 || pixel->cylinder_m > cyl->height)
 		return (-1);
 	return (points[0]);
 }
