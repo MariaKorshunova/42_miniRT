@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:58:09 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/21 16:35:02 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/22 20:07:53 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	check_intersection(t_global *global, t_pixel *pixel)
 		pixel->length = dist;
 		pixel->plane = 0;
 	}
-	pixel->cylinder = check_for_cylinder(global, &pixel->ray, &pixel->d, &dist);
+	pixel->cylinder = check_for_cylinder(global, pixel, &dist);
 	if (dist != -1 && (pixel->length == -1 || dist < pixel->length))
 	{
 		pixel->length = dist;
@@ -98,8 +98,7 @@ t_plane	*check_for_planes(t_global *global, t_ray *ray,
 	return (nearest_plane);
 }
 
-t_cylinder	*check_for_cylinder(t_global *global, t_ray *ray,
-						t_coord *d, float *dist)
+t_cylinder	*check_for_cylinder(t_global *global, t_pixel *pixel, float *dist)
 {
 	t_cylinder	*cylinder;
 	t_cylinder	*nearest_cylinder;
@@ -110,7 +109,7 @@ t_cylinder	*check_for_cylinder(t_global *global, t_ray *ray,
 	nearest_cylinder = 0;
 	while (cylinder)
 	{
-		*dist = check_intersection_cylinder(cylinder, ray, d);
+		*dist = check_intersection_cylinder(cylinder, pixel);
 		if (*dist > 0 && (nearest_dist == -1 || *dist < nearest_dist))
 		{
 			nearest_dist = *dist;
