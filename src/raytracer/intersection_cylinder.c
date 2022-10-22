@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 14:59:15 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/22 17:04:57 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/22 18:43:11 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,56 @@
 
 static float	intersection_cylinder_pipe(t_cylinder	*cylinder,
 					t_coord *d, t_coord *oc);
+static float	intersection_cylinder_plane(t_cylinder	*cylinder,
+					t_plane *plane, t_ray *ray, t_coord *d_ray);
 static float	nearest_distance(float	*points);
-static void		define_cylinder_plane(t_cylinder *cyl, t_plane *plane);
+static void		define_cylinder_plane(t_cylinder *cyl, t_plane *plane,
+					t_coord	*point);
 
 float	check_intersection_cylinder(t_cylinder	*cylinder,
 			t_ray *ray, t_coord *d_ray)
 {
-	float	dist_pipe;
-	float	dist_plane[2];
+	float	dist;
+	float	dist_plane;
 	t_coord	oc;
 	t_coord	d;
+	t_coord	point_end;
 
 	vector_subtraction(&oc, &(ray->point[0]), &(cylinder->point));
 	scalar_multiplication(&d, d_ray, -1);
-	dist_pipe = intersection_cylinder_pipe(cylinder, &d, &oc);
-	define_cylinder_plane(cylinder, &cylinder->plane_begin);
-	dist_plane[0] = intersection_cylinder_plane(cylinder,
+	dist = intersection_cylinder_pipe(cylinder, &d, &oc);
+	define_cylinder_plane(cylinder, &cylinder->plane_begin, &cylinder->point);
+	dist_plane = intersection_cylinder_plane(cylinder,
 			&cylinder->plane_begin, ray, d_ray);
-	return (dist_pipe);
+	if ((dist_plane != -1 && dist_plane < dist) || (dist == -1))
+		dist = dist_plane;
+	scalar_multiplication(&point_end, &cylinder->orientation, cylinder->height);
+	vector_addition(&point_end, &cylinder->point, &point_end);
+	define_cylinder_plane(cylinder, &cylinder->plane_end, &point_end);
+	dist_plane = intersection_cylinder_plane(cylinder,
+			&cylinder->plane_end, ray, d_ray);
+	if ((dist_plane != -1 && dist_plane < dist) || (dist == -1))
+		dist = dist_plane;
+	return (dist);
 }
 
 static float	intersection_cylinder_plane(t_cylinder	*cylinder,
 			t_plane *plane, t_ray *ray, t_coord *d_ray)
 {
 	float	dist_plane;
-	t_coord	ray;
+	t_coord	r;
+	t_coord	p;
+	t_coord	p_center;
 
 	dist_plane = check_intersection_plane(plane, ray, d_ray);
-	if (dist_plane == 0)
+	if (dist_plane == -1)
 		return (-1);
-	return (dist_plane);
+	scalar_multiplication(&r, d_ray, -1 * dist_plane);
+	vector_addition(&p, &(ray->point[0]), &r);
+	vector_subtraction(&p_center, &p, &plane->point);
+	if (vector_length(&p_center) <= cylinder->diameter / 2.0f)
+		return (dist_plane);
+	return (-1);
 }
 
 static float	intersection_cylinder_pipe(t_cylinder	*cyl,
@@ -88,9 +108,10 @@ static float	nearest_distance(float	*points)
 	return (-1);
 }
 
-static void	define_cylinder_plane(t_cylinder *cyl, t_plane *plane)
+static void	define_cylinder_plane(t_cylinder *cyl, t_plane *plane,
+				t_coord	*point)
 {
-	plane->point = cyl->point;
+	plane->point = *point;
 	plane->orientation = cyl->orientation;
 	plane->color = cyl->color;
 	plane->color_ambient = cyl->color_ambient;
