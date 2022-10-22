@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 14:59:15 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/22 18:43:11 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/22 19:23:11 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ static float	intersection_cylinder_pipe(t_cylinder	*cylinder,
 					t_coord *d, t_coord *oc);
 static float	intersection_cylinder_plane(t_cylinder	*cylinder,
 					t_plane *plane, t_ray *ray, t_coord *d_ray);
-static float	nearest_distance(float	*points);
 static void		define_cylinder_plane(t_cylinder *cyl, t_plane *plane,
 					t_coord	*point);
+static float	define_dist_type_intersection(t_cylinder *cyl, float dist_plane,
+					int type);
 
 float	check_intersection_cylinder(t_cylinder	*cylinder,
 			t_ray *ray, t_coord *d_ray)
@@ -29,41 +30,35 @@ float	check_intersection_cylinder(t_cylinder	*cylinder,
 	t_coord	d;
 	t_coord	point_end;
 
+	cylinder->flag_type = NO_INTERSECT;
 	vector_subtraction(&oc, &(ray->point[0]), &(cylinder->point));
 	scalar_multiplication(&d, d_ray, -1);
 	dist = intersection_cylinder_pipe(cylinder, &d, &oc);
+	if (dist != -1)
+		cylinder->flag_type = PIPE;
 	define_cylinder_plane(cylinder, &cylinder->plane_begin, &cylinder->point);
 	dist_plane = intersection_cylinder_plane(cylinder,
 			&cylinder->plane_begin, ray, d_ray);
-	if ((dist_plane != -1 && dist_plane < dist) || (dist == -1))
-		dist = dist_plane;
+	if (dist_plane != -1 && (dist_plane < dist || dist == -1))
+		dist = define_dist_type_intersection(cylinder, dist_plane, PLANE_BEGIN);
 	scalar_multiplication(&point_end, &cylinder->orientation, cylinder->height);
 	vector_addition(&point_end, &cylinder->point, &point_end);
 	define_cylinder_plane(cylinder, &cylinder->plane_end, &point_end);
 	dist_plane = intersection_cylinder_plane(cylinder,
 			&cylinder->plane_end, ray, d_ray);
-	if ((dist_plane != -1 && dist_plane < dist) || (dist == -1))
-		dist = dist_plane;
+	if (dist_plane != -1 && (dist_plane < dist || dist == -1))
+		dist = define_dist_type_intersection(cylinder, dist_plane, PLANE_END);
 	return (dist);
 }
 
-static float	intersection_cylinder_plane(t_cylinder	*cylinder,
-			t_plane *plane, t_ray *ray, t_coord *d_ray)
+static float	define_dist_type_intersection(t_cylinder *cyl, float dist_plane,
+					int type)
 {
-	float	dist_plane;
-	t_coord	r;
-	t_coord	p;
-	t_coord	p_center;
+	float	dist;
 
-	dist_plane = check_intersection_plane(plane, ray, d_ray);
-	if (dist_plane == -1)
-		return (-1);
-	scalar_multiplication(&r, d_ray, -1 * dist_plane);
-	vector_addition(&p, &(ray->point[0]), &r);
-	vector_subtraction(&p_center, &p, &plane->point);
-	if (vector_length(&p_center) <= cylinder->diameter / 2.0f)
-		return (dist_plane);
-	return (-1);
+	dist = dist_plane;
+	cyl->flag_type = type;
+	return (dist);
 }
 
 static float	intersection_cylinder_pipe(t_cylinder	*cyl,
@@ -93,18 +88,22 @@ static float	intersection_cylinder_pipe(t_cylinder	*cyl,
 	return (points[0]);
 }
 
-static float	nearest_distance(float	*points)
+static float	intersection_cylinder_plane(t_cylinder	*cylinder,
+			t_plane *plane, t_ray *ray, t_coord *d_ray)
 {
-	if (points[0] < 0 && points[1] < 0)
+	float	dist_plane;
+	t_coord	r;
+	t_coord	p;
+	t_coord	p_center;
+
+	dist_plane = check_intersection_plane(plane, ray, d_ray);
+	if (dist_plane == -1)
 		return (-1);
-	if (points[0] < 0)
-		points[0] = points[1];
-	else if (points[1] < 0)
-		points[1] = points[0];
-	if (points[0] <= points[1] && points[0] > 0)
-		return (points[0]);
-	if (points[1] <= points[0] && points[1] > 0)
-		return (points[1]);
+	scalar_multiplication(&r, d_ray, -1 * dist_plane);
+	vector_addition(&p, &(ray->point[0]), &r);
+	vector_subtraction(&p_center, &p, &plane->point);
+	if (vector_length(&p_center) <= cylinder->diameter / 2.0f)
+		return (dist_plane);
 	return (-1);
 }
 

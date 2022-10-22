@@ -6,14 +6,14 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:17 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/22 18:49:05 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/22 18:52:16 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-#define MINIMAL_THRESHOLD 0.001
-#define MAXIMAL_THRESHOLD 0.998
+#define MINIMAL_THRESHOLD 0.0001
+#define MAXIMAL_THRESHOLD 0.9985
 
 int	check_for_shadow_spheres(t_global *global, t_ray *ray, t_coord *d)
 {
