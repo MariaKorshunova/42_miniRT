@@ -6,15 +6,11 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:22:39 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/21 19:59:44 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/22 15:00:43 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-static float	intersection_cylinder_pipe(t_cylinder	*cylinder,
-					t_coord *d, t_coord *oc);
-static float	nearest_distance(float	*points);
 
 /*  ray.point[0] = global->scene->camera_point; Точка камеры (точка a)
     = координата луча на проецирумой плоскости
@@ -49,61 +45,6 @@ float	check_intersection_sphere(t_sphere *sphere, t_ray *ray, t_coord *d)
 			scalar_product_2_vectors(&oc, &oc)
 			- ((sphere->diameter / 2) * (sphere->diameter / 2)),
 			points) || (points[0] < 0 && points[1] < 0))
-		return (-1);
-	if (points[0] < 0)
-		points[0] = points[1];
-	else if (points[1] < 0)
-		points[1] = points[0];
-	if (points[0] <= points[1] && points[0] > 0)
-		return (points[0]);
-	if (points[1] <= points[0] && points[1] > 0)
-		return (points[1]);
-	return (-1);
-}
-
-float	check_intersection_cylinder(t_cylinder	*cylinder,
-			t_ray *ray, t_coord *d_ray)
-{
-	float	dist;
-	t_coord	oc;
-	t_coord	d;
-
-	vector_subtraction(&oc, &(ray->point[0]), &(cylinder->point));
-	scalar_multiplication(&d, d_ray, -1);
-	dist = intersection_cylinder_pipe(cylinder, &d, &oc);
-	return (dist);
-}
-
-static float	intersection_cylinder_pipe(t_cylinder	*cyl,
-					t_coord *d, t_coord *oc)
-{
-	float	points[2];
-	float	dot_dv;
-	float	dot_ocv;
-	float	m;
-	t_coord	coef;
-
-	dot_dv = scalar_product_2_vectors(d, &(cyl->orientation));
-	dot_ocv = scalar_product_2_vectors(oc, &(cyl->orientation));
-	coef.x = 1 - dot_dv * dot_dv;
-	coef.y = 2.0f * (scalar_product_2_vectors(d, oc)
-			- dot_dv * scalar_product_2_vectors(oc, &(cyl->orientation)));
-	coef.z = scalar_product_2_vectors(oc, oc) - dot_ocv * dot_ocv
-		- (cyl->diameter / 2) * (cyl->diameter / 2);
-	if (!solve_quadratic_equation(coef.x, coef.y, coef.z, points))
-		return (-1);
-	points[0] = nearest_distance(points);
-	if (points[0] == -1)
-		return (-1);
-	m = dot_dv * points[0] + dot_ocv;
-	if (m < 0 || m > cyl->height)
-		return (-1);
-	return (points[0]);
-}
-
-static float	nearest_distance(float	*points)
-{
-	if (points[0] < 0 && points[1] < 0)
 		return (-1);
 	if (points[0] < 0)
 		points[0] = points[1];

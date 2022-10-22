@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+         #
+#    By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/19 14:44:47 by bpoetess         ###   ########.fr        #
+#    Updated: 2022/10/22 14:59:55 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ FILE_C		+=	$(addprefix image/,\
 FILE_C		+=	$(addprefix raytracer/,\
 				check_intersection.c\
 				intersection.c\
+				intersection_cylinder.c\
 				raytracer.c\
 				compute_pixel_sphere.c\
 				compute_pixel_plane.c\
