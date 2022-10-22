@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/21 16:15:00 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/22 15:00:29 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,11 @@ t_cylinder	*check_for_cylinder(t_global *global, t_ray *ray,
 				t_coord *d, float *dist);
 
 /*	 ./raytracing/intersection.c
-	 function returns distance to some object */
+	 function returns distance to plane and sphere */
 float		check_intersection_plane(t_plane *plane, t_ray *ray, t_coord *d);
 float		check_intersection_sphere(t_sphere *sphere, t_ray *ray, t_coord *d);
+
+/* ./raytracing/intersection_cylinder.c */
 float		check_intersection_cylinder(t_cylinder	*cylinder,
 				t_ray *ray, t_coord *d);
 

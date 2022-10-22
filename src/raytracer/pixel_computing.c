@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:17 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/21 17:00:08 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/22 18:49:05 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int	check_for_shadow(t_global *global, t_pixel *pixel_initial)
 
 	dist = -1;
 	ray.point[0] = pixel_initial->d;
-	scalar_multiplication(&ray.point[0], &ray.point[0], -pixel_initial->length * 0.995);
+	scalar_multiplication(&ray.point[0], &ray.point[0],
+		-pixel_initial->length * 0.995);
 	vector_addition(&ray.point[0], &pixel_initial->ray.point[0],
 		&ray.point[0]);
 	ray.point[1] = global->scene->obj->lights->point;
@@ -96,7 +97,8 @@ void	pixel_computing(t_global *global, t_pixel *pixel)
 		return ;
 	}
 	pixel->intersection = pixel->d;
-	scalar_multiplication(&pixel->intersection, &pixel->intersection, -pixel->length);
+	scalar_multiplication(&pixel->intersection, &pixel->intersection,
+		-pixel->length);
 	vector_addition(&pixel->intersection, &pixel->ray.point[0],
 		&pixel->intersection);
 	if (pixel->plane)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 03:57:30 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/16 05:28:41 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/21 21:06:53 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ struct s_cylinder
 	float		height;
 	int			color;
 	int			color_ambient;
+	t_plane		plane_begin;
+	t_plane		plane_end;
 	t_cylinder	*next;
 };
 

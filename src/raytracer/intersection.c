@@ -6,25 +6,15 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:22:39 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/22 18:23:24 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/22 18:48:55 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static float	intersection_cylinder_pipe(t_cylinder	*cylinder,
-					t_coord *d, t_coord *oc);
-static int		check_cylinder_height(float *dot_dv, float	*dot_ocv,
-					float *t, float *height);
-
 /*  ray.point[0] = global->scene->camera_point; Точка камеры (точка a)
     = координата луча на проецирумой плоскости
     Vector d = ray.point[0] -  ray.point[1] (вектор луча)
-*/
-
-/*  Формула пересечения t=\frac{((r - a), n)}{(d,n)}}
-    r = plane->point (точка на плоскости)
-    n = plane->orientation (вектор нормали к плоскости)
 */
 
 float	check_intersection_plane(t_plane *plane, t_ray *ray, t_coord *d)
@@ -65,67 +55,4 @@ float	check_intersection_sphere(t_sphere *sphere, t_ray *ray, t_coord *d)
 	if (points[1] <= points[0] && points[1] > 0)
 		return (points[1]);
 	return (-1);
-}
-
-float	check_intersection_cylinder(t_cylinder	*cylinder,
-			t_ray *ray, t_coord *d_ray)
-{
-	float	dist;
-	t_coord	oc;
-	t_coord	d;
-
-	vector_subtraction(&oc, &(ray->point[0]), &(cylinder->point));
-	scalar_multiplication(&d, d_ray, -1);
-	dist = intersection_cylinder_pipe(cylinder, &d, &oc);
-	return (dist);
-}
-
-static float	intersection_cylinder_pipe(t_cylinder	*cyl,
-					t_coord *d, t_coord *oc)
-{
-	float	points[2];
-	float	dot_dv;
-	float	dot_ocv;
-	t_coord	coef;
-
-	dot_dv = scalar_product_2_vectors(d, &(cyl->orientation));
-	dot_ocv = scalar_product_2_vectors(oc, &(cyl->orientation));
-	coef.x = 1 - dot_dv * dot_dv;
-	coef.y = 2.0f * (scalar_product_2_vectors(d, oc)
-			- dot_dv * scalar_product_2_vectors(oc, &(cyl->orientation)));
-	coef.z = scalar_product_2_vectors(oc, oc) - dot_ocv * dot_ocv
-		- (cyl->diameter / 2) * (cyl->diameter / 2);
-	if (!solve_quadratic_equation(coef.x, coef.y, coef.z, points)
-		|| (points[0] < 0 && points[1] < 0)
-		|| check_cylinder_height(&dot_dv, &dot_ocv, &points[0], &cyl->height))
-		return (-1);
-	if (points[0] < 0)
-		points[0] = points[1];
-	else if (points[1] < 0)
-		points[1] = points[0];
-	if (points[0] <= points[1] && points[0] > 0)
-		return (points[0]);
-	if (points[1] <= points[0] && points[1] > 0)
-		return (points[1]);
-	return (-1);
-}
-
-static	float	dist_to_cylinder_pipe(t_cylinder	*cyl,
-					t_coord *d, t_coord *oc)
-{
-	float	points[2];
-	float	dot_dv;
-	float	dot_ocv;
-	t_coord	coef;	
-}
-
-static int	check_cylinder_height(float *dot_dv, float	*dot_ocv, float *t,
-				float *height)
-{
-	float	m;
-
-	m =  (*dot_dv) * (*t) + (*dot_ocv);
-	if (m < 0 || m > *height)
-		return (1);
-	return (0);
 }
