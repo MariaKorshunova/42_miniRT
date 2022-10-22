@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/22 19:16:51 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/22 20:13:22 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,16 @@ typedef struct s_global
 	t_img	img;
 }	t_global;
 
+typedef enum e_cyl_intersect
+{
+	NO_INTERSECT,
+	PIPE,
+	PLANE_BEGIN,
+	PLANE_END,
+	PLANE,
+	SPHERE,
+}	t_cyl_intersect;
+
 typedef struct s_pixel
 {
 	int			x;
@@ -65,6 +75,7 @@ typedef struct s_pixel
 	t_plane		*plane;
 	t_sphere	*sphere;
 	t_cylinder	*cylinder;
+	int			cylinder_type;
 }	t_pixel;
 
 t_scene		*parser(int argc, char **argv);
@@ -89,8 +100,7 @@ t_sphere	*check_for_spheres(t_global *global, t_ray *ray,
 				t_coord *d, float *dist);
 t_plane		*check_for_planes(t_global *global, t_ray *ray,
 				t_coord *d, float *dist);
-t_cylinder	*check_for_cylinder(t_global *global, t_ray *ray,
-				t_coord *d, float *dist);
+t_cylinder	*check_for_cylinder(t_global *global, t_pixel *pixel, float *dist);
 
 /*	 ./raytracing/intersection.c
 	 function returns distance to plane and sphere */
@@ -99,8 +109,7 @@ float		check_intersection_sphere(t_sphere *sphere, t_ray *ray, t_coord *d);
 float		nearest_distance(float	*points);
 
 /* ./raytracing/intersection_cylinder.c */
-float		check_intersection_cylinder(t_cylinder	*cylinder,
-				t_ray *ray, t_coord *d);
+float		check_intersection_cylinder(t_cylinder	*cylinder, t_pixel *pixel);
 
 /*	./raytracer/rayracer.c */
 void		raytracer(t_global *global);

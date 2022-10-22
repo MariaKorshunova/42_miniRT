@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 03:57:30 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/22 19:20:07 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/22 20:04:16 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,6 @@ struct s_plane
 	t_plane	*next;
 };
 
-typedef enum e_cyl_intersect
-{
-	NO_INTERSECT,
-	PIPE,
-	PLANE_BEGIN,
-	PLANE_END,
-}	t_cyl_intersect;
-
 struct s_cylinder
 {
 	t_coord		point;
@@ -76,7 +68,6 @@ struct s_cylinder
 	float		height;
 	int			color;
 	int			color_ambient;
-	int			flag_type;
 	t_plane		plane_begin;
 	t_plane		plane_end;
 	t_cylinder	*next;

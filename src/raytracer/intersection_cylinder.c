@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 14:59:15 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/22 19:23:11 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/22 20:13:51 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ static float	intersection_cylinder_plane(t_cylinder	*cylinder,
 					t_plane *plane, t_ray *ray, t_coord *d_ray);
 static void		define_cylinder_plane(t_cylinder *cyl, t_plane *plane,
 					t_coord	*point);
-static float	define_dist_type_intersection(t_cylinder *cyl, float dist_plane,
+static float	define_dist_type_intersection(t_pixel *pixel, float dist_plane,
 					int type);
 
-float	check_intersection_cylinder(t_cylinder	*cylinder,
-			t_ray *ray, t_coord *d_ray)
+float	check_intersection_cylinder(t_cylinder	*cylinder, t_pixel *pixel)
 {
 	float	dist;
 	float	dist_plane;
@@ -30,34 +29,34 @@ float	check_intersection_cylinder(t_cylinder	*cylinder,
 	t_coord	d;
 	t_coord	point_end;
 
-	cylinder->flag_type = NO_INTERSECT;
-	vector_subtraction(&oc, &(ray->point[0]), &(cylinder->point));
-	scalar_multiplication(&d, d_ray, -1);
+	pixel->cylinder_type = NO_INTERSECT;
+	vector_subtraction(&oc, &(pixel->ray.point[0]), &(cylinder->point));
+	scalar_multiplication(&d, &(pixel->d), -1);
 	dist = intersection_cylinder_pipe(cylinder, &d, &oc);
 	if (dist != -1)
-		cylinder->flag_type = PIPE;
+		pixel->cylinder_type = PIPE;
 	define_cylinder_plane(cylinder, &cylinder->plane_begin, &cylinder->point);
 	dist_plane = intersection_cylinder_plane(cylinder,
-			&cylinder->plane_begin, ray, d_ray);
+			&cylinder->plane_begin, &(pixel->ray), &(pixel->d));
 	if (dist_plane != -1 && (dist_plane < dist || dist == -1))
-		dist = define_dist_type_intersection(cylinder, dist_plane, PLANE_BEGIN);
+		dist = define_dist_type_intersection(pixel, dist_plane, PLANE_BEGIN);
 	scalar_multiplication(&point_end, &cylinder->orientation, cylinder->height);
 	vector_addition(&point_end, &cylinder->point, &point_end);
 	define_cylinder_plane(cylinder, &cylinder->plane_end, &point_end);
 	dist_plane = intersection_cylinder_plane(cylinder,
-			&cylinder->plane_end, ray, d_ray);
+			&cylinder->plane_end, &(pixel->ray), &(pixel->d));
 	if (dist_plane != -1 && (dist_plane < dist || dist == -1))
-		dist = define_dist_type_intersection(cylinder, dist_plane, PLANE_END);
+		dist = define_dist_type_intersection(pixel, dist_plane, PLANE_END);
 	return (dist);
 }
 
-static float	define_dist_type_intersection(t_cylinder *cyl, float dist_plane,
+static float	define_dist_type_intersection(t_pixel *pixel, float dist_plane,
 					int type)
 {
 	float	dist;
 
 	dist = dist_plane;
-	cyl->flag_type = type;
+	pixel->cylinder_type = type;
 	return (dist);
 }
 
