@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   pixel_computing.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:17 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/21 16:20:32 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/21 17:00:08 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-#define MINIMAL_THRESHOLD 0.0001
-#define MAXIMAL_THRESHOLD 0.9998
+#define MINIMAL_THRESHOLD 0.001
+#define MAXIMAL_THRESHOLD 0.998
 
 int	check_for_shadow_spheres(t_global *global, t_ray *ray, t_coord *d)
 {
