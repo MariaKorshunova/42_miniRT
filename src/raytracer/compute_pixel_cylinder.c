@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 18:52:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/22 21:13:58 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/23 21:01:24 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static t_coord	normal_cylinder(t_pixel *pixel)
 	return (res);
 }
 
-static float	pixel_computing_cyliner_diffusal_recflect_ratio(t_global *global,
-	t_pixel *pixel)
+static float	pixel_computing_cyliner_diffusal_recflect_ratio(
+	t_global *global, t_pixel *pixel)
 {
 	t_coord	light_direction;
 	t_coord	normal;
@@ -42,6 +42,7 @@ static float	pixel_computing_cyliner_diffusal_recflect_ratio(t_global *global,
 	normal = normal_cylinder(pixel);
 	vector_subtraction(&light_direction, &global->scene->obj->lights->point,
 		&pixel->intersection);
+	normalizing_vector(&light_direction, &light_direction);
 	light_intensity = scalar_product_2_vectors(&light_direction, &normal)
 		* global->scene->obj->lights->lighting_ratio;
 		// /pow(2, vector_length_by_two_points

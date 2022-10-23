@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_intersection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:58:09 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/22 20:07:53 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/23 20:52:11 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,21 @@
     Vector d = ray.point[0] -  ray.point[1] (вектор луча)
 */
 
+static void	set_objects_in_pixel(t_pixel *pixel, t_plane *plane,
+	t_sphere *sphere, t_cylinder *cylinder)
+{
+	if (!pixel)
+		return ;
+	pixel->plane = plane;
+	pixel->sphere = sphere;
+	pixel->cylinder = cylinder;
+}
+
 void	check_intersection(t_global *global, t_pixel *pixel)
 {
 	float		dist;
 
-	pixel->plane = 0;
-	pixel->sphere = 0;
-	pixel->cylinder = 0;
+	set_objects_in_pixel(pixel, 0, 0, 0);
 	dist = -1;
 	pixel->length = -1;
 	vector_subtraction(&(pixel->d),
@@ -36,14 +44,13 @@ void	check_intersection(t_global *global, t_pixel *pixel)
 	if (dist > 0 && (pixel->length == -1 || dist < pixel->length))
 	{
 		pixel->length = dist;
-		pixel->plane = 0;
+		set_objects_in_pixel(pixel, 0, pixel->sphere, 0);
 	}
 	pixel->cylinder = check_for_cylinder(global, pixel, &dist);
 	if (dist != -1 && (pixel->length == -1 || dist < pixel->length))
 	{
 		pixel->length = dist;
-		pixel->plane = 0;
-		pixel->sphere = 0;
+		set_objects_in_pixel(pixel, 0, 0, pixel->cylinder);
 	}
 	else
 		pixel->cylinder = 0;

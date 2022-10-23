@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 14:59:15 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/22 21:02:01 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/23 21:20:53 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ float	check_intersection_cylinder(t_cylinder	*cylinder, t_pixel *pixel)
 	vector_subtraction(&oc, &(pixel->ray.point[0]), &(cylinder->point));
 	scalar_multiplication(&d, &(pixel->d), -1);
 	dist = intersection_cylinder_pipe(cylinder, &d, &oc, pixel);
-	if (dist != -1)
+	if (dist > 0)
 		pixel->cylinder_type = PIPE;
 	define_cylinder_plane(cylinder, &cylinder->plane_begin, &cylinder->point);
 	dist_plane = intersection_cylinder_plane(cylinder,
 			&cylinder->plane_begin, &(pixel->ray), &(pixel->d));
+	scalar_multiplication(&cylinder->plane_begin.orientation,
+		&cylinder->plane_begin.orientation, -1);
 	if (dist_plane != -1 && (dist_plane < dist || dist == -1))
 		dist = define_dist_type_intersection(pixel, dist_plane, PLANE_BEGIN);
 	scalar_multiplication(&point_end, &cylinder->orientation, cylinder->height);

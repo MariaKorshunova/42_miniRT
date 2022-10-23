@@ -6,7 +6,7 @@
 			"type": "lldb",
 			"request": "launch",
 			"program": "${workspaceFolder}/minirt",
-			"args": ["./scenes_examples/cylinder.rt"],
+			"args": ["./scenes_examples/four_spheres.rt"],
 			"stopAtEntry": true,
 			"cwd": "${workspaceFolder}",
 			// "cwd": "${fileDirname}",

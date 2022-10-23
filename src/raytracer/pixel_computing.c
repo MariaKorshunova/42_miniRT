@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:33:17 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/22 21:13:18 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/23 20:26:27 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	check_for_shadow_cylinder(t_global *global, t_ray *ray, t_coord *d)
 		dist = check_intersection_cylinder(cylinder, &pixel);
 		if (dist > MINIMAL_THRESHOLD && dist < MAXIMAL_THRESHOLD)
 			return (1);
+		pixel.ray = *ray;
+		pixel.d = *d;
 		cylinder = cylinder->next;
 	}
 	return (0);
