@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/24 16:41:21 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:40:19 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_scene		*parser(int argc, char **argv);
 void		free_scene(t_scene *scene);
 int			minirt_close(t_global *data);
 
+void		rotate_objects(t_scene *scene, t_coord *coord);
 void		translate_objects(t_scene *scene, t_coord *coord);
 
 /* 	./image/image.c 
