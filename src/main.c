@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/24 16:54:08 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/24 17:14:08 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 	clean_image(&data.img);
 	raytracer(&data);
 	mlx_put_image_to_window(data.mlx, data.window, data.img.img, 0, 0);
+	clean_image(&data.img);
 	hook(&data);
 	mlx_loop(data.mlx);
 	minirt_close(&data);
