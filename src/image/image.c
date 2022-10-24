@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 14:24:32 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/09 16:34:32 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/24 16:42:52 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,26 @@
 
 static void	error_mlx(t_global *data);
 
+void	clean_image(void *img)
+{
+	int	i;
+	int	j;
+
+	if (!img)
+		return ;
+	i = 0;
+	while (i < WIDTH)
+	{
+		j = 0;
+		while (j < HEIGHT)
+			ft_mlx_pixel_put_img(img, i, j++, 0);
+		i++;
+	}	
+}
+
 void	ft_mlx_pixel_put_img(t_img	*img, int x, int y, int color)
 {
-	char	*dst;
+	char			*dst;
 
 	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;

@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 14:59:15 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/23 21:20:53 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/24 17:04:51 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static float	intersection_cylinder_pipe(t_cylinder	*cyl,
 
 	dot_dv = scalar_product_2_vectors(d, &(cyl->orientation));
 	dot_ocv = scalar_product_2_vectors(oc, &(cyl->orientation));
-	coef.x = 1 - dot_dv * dot_dv;
+	coef.x = scalar_product_2_vectors(d, d) - dot_dv * dot_dv;
 	coef.y = 2.0f * (scalar_product_2_vectors(d, oc)
 			- dot_dv * scalar_product_2_vectors(oc, &(cyl->orientation)));
 	coef.z = scalar_product_2_vectors(oc, oc) - dot_ocv * dot_ocv

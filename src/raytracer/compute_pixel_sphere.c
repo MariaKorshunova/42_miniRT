@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 16:57:47 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/22 21:36:46 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/24 16:20:46 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	pixel_computing_sphere(t_global *global, t_pixel *pixel)
 	int		light;
 	float	lightning_ratio;
 
-	mlx_pixel_put(global->mlx, global->window,
-		pixel->x, pixel->y, pixel->sphere->color_ambient);
+	ft_mlx_pixel_put_img(&global->img, pixel->x, pixel->y,
+		pixel->sphere->color_ambient);
 	if (!global->scene->obj->lights || check_for_shadow(global, pixel))
 		return ;
 	lightning_ratio = pixel_computing_sphere_diffusal_recflect_ratio
@@ -91,7 +91,6 @@ void	pixel_computing_sphere(t_global *global, t_pixel *pixel)
 		return ;
 	light = color_diffusal(pixel->sphere->color_ambient, pixel->sphere->color,
 			global->scene->obj->lights->color, lightning_ratio);
-	mlx_pixel_put(global->mlx, global->window,
-		pixel->x, pixel->y, light);
+	ft_mlx_pixel_put_img(&global->img, pixel->x, pixel->y, light);
 	return ;
 }

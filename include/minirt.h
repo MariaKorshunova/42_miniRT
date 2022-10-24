@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/24 15:23:51 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/24 16:41:21 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void		translate_objects(t_scene *scene, t_coord *coord);
 	functions for mlx management with image*/
 void		ft_mlx_pixel_put_img(t_img	*img, int x, int y, int color);
 void		init_image(t_global *data);
+void		clean_image(void *img);
 
 /* 	./image/hook.c
 	manage events*/
