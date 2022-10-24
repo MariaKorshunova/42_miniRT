@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/24 16:41:21 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:29:16 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # define ON_DESTROY 17
 # define ON_KEYDOWN 2
 
+# define ESC 53
+
 typedef struct s_img
 {
 	void	*img;
@@ -48,10 +50,11 @@ typedef struct s_img
 
 typedef struct s_global
 {
-	t_scene	*scene;
-	void	*mlx;
-	void	*window;
-	t_img	img;
+	t_scene		*scene;
+	void		*mlx;
+	void		*window;
+	void		*nearest_obj;
+	t_img		img;
 }	t_global;
 
 typedef enum e_cyl_intersect
