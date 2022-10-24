@@ -6,7 +6,7 @@
 #    By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/22 21:03:37 by bpoetess         ###   ########.fr        #
+#    Updated: 2022/10/24 15:24:33 by bpoetess         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ FILE_C		+=	$(addprefix parser/,\
 				parser_readplane.c\
 				parser_readsphere.c\
 				parser_readcylinder.c\
+				translate_and_rotate.c\
 				parser_set_ambinet_light.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))

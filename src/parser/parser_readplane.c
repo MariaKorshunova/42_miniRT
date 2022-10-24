@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:29:05 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/09 18:49:53 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/24 15:26:38 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	parser_readplane(t_parser *p)
 	parser_skipspacesifnotspaceerror(p);
 	plane->orientation = parser_readcoord(p);
 	parser_check_isnotnormailzed(p, plane->orientation);
+	normalizing_vector(&plane->orientation, &plane->orientation);
 	parser_skipspacesifnotspaceerror(p);
 	if (!ft_isdigit(p->s[p->i]))
 		parser_error(1, p);

@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:48:25 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/20 16:29:02 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/24 15:27:11 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	parser_readcylinder(t_parser *p)
 	parser_skipspacesifnotspaceerror(p);
 	cylinder->orientation = parser_readcoord(p);
 	parser_check_isnotnormailzed(p, cylinder->orientation);
+	normalizing_vector(&cylinder->orientation, &cylinder->orientation);
 	parser_skipspacesifnotspaceerror(p);
 	cylinder->diameter = parser_readfloat(p);
 	parser_skipspacesifnotspaceerror(p);

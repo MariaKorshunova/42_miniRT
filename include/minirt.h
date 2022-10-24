@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/22 21:03:16 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/24 15:23:51 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct s_pixel
 t_scene		*parser(int argc, char **argv);
 void		free_scene(t_scene *scene);
 int			minirt_close(t_global *data);
+
+void		translate_objects(t_scene *scene, t_coord *coord);
 
 /* 	./image/image.c 
 	functions for mlx management with image*/
