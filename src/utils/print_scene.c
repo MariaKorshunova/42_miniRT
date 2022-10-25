@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:14:57 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/24 22:13:50 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/25 13:54:46 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 static void	print_scene_characteristics(t_scene *scene);
 void		print_color(int color);
 
-void	print_spheres(t_sphere	*sp)
+void	print_spheres(t_sphere	*sp, char type)
 {
 	int	i;
 
 	i = 0;
 	while (sp)
 	{
-		printf("\e[0;33mSphere %d: \e[0m", i++);
+		if (type == 'a')
+			printf("\e[0;33mSphere %d: \e[0m", i++);
+		else
+			printf("\e[0;33mSphere: \e[0m");
 		printf("\t\e[0;34mPoint: \e[0m");
 		print_coordinate(&sp->point, "\n");
 		printf("        \t\e[0;34mDiameter: \e[0m%f\n",
@@ -30,10 +33,12 @@ void	print_spheres(t_sphere	*sp)
 		print_color(sp->color);
 		print_color(sp->color_ambient);
 		sp = sp->next;
+		if (type != 'a')
+			break ;
 	}
 }
 
-void	print_lights(t_light	*l)
+void	print_lights(t_light *l)
 {
 	int	i;
 
@@ -50,14 +55,17 @@ void	print_lights(t_light	*l)
 	}
 }
 
-void	print_cylinders(t_cylinder	*cy)
+void	print_cylinders(t_cylinder	*cy, char type)
 {
 	int	i;
 
 	i = 0;
 	while (cy)
 	{
-		printf("\e[0;33mCylinder %d: \e[0m", i++);
+		if (type == 'a')
+			printf("\e[0;33mCylinder %d: \e[0m", i++);
+		else
+			printf("\e[0;33mCylinder: \e[0m");
 		printf("\t\e[0;34mPoint: \e[0m");
 		print_coordinate(&cy->point, "\n");
 		printf("        \t\e[0;34mOrientation: \e[0m");
@@ -69,17 +77,22 @@ void	print_cylinders(t_cylinder	*cy)
 		printf("        \t\e[0;34mHeight: \e[0m%f\n",
 			cy->height);
 		cy = cy->next;
+		if (type != 'a')
+			break ;
 	}
 }
 
-void	print_planes(t_plane	*pl)
+void	print_planes(t_plane *pl, char type)
 {
 	int	i;
 
 	i = 0;
 	while (pl)
 	{
-		printf("\e[0;33mPlane %d: \e[0m", i++);
+		if (type == 'a')
+			printf("\e[0;33mPlane %d: \e[0m", i++);
+		else
+			printf("\e[0;33mPlane: \e[0m");
 		printf("\t\e[0;34mPoint: \e[0m");
 		print_coordinate(&pl->point, "\n");
 		printf("        \t\e[0;34mOrientation: \e[0m");
@@ -87,6 +100,8 @@ void	print_planes(t_plane	*pl)
 		print_color(pl->color);
 		print_color(pl->color_ambient);
 		pl = pl->next;
+		if (type != 'a')
+			break ;
 	}
 }
 
@@ -105,13 +120,13 @@ void	print_scene(t_scene	*scene)
 		sizeof(t_cylinder), sizeof(t_light));
 	print_scene_characteristics(scene);
 	if (scene->obj && scene->obj->spheres)
-		print_spheres(scene->obj->spheres);
+		print_spheres(scene->obj->spheres, 'a');
 	if (scene->obj && scene->obj->lights)
 		print_lights(scene->obj->lights);
 	if (scene->obj && scene->obj->cylinders)
-		print_cylinders(scene->obj->cylinders);
+		print_cylinders(scene->obj->cylinders, 'a');
 	if (scene->obj && scene->obj->planes)
-		print_planes(scene->obj->planes);
+		print_planes(scene->obj->planes, 'a');
 }
 
 static void	print_scene_characteristics(t_scene *scene)

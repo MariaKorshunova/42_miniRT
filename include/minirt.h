@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/24 22:16:01 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/25 13:36:32 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 /* set mlx events */
 # define ON_DESTROY 17
 # define ON_KEYDOWN 2
+# define ON_BUTTONPRESS 4
 
 # define ESC 53
 
@@ -96,7 +97,7 @@ void		clean_image(void *img);
 
 /* 	./image/hook.c
 	manage events*/
-void		hook(t_global *data);
+int			hook(t_global *data);
 int			key_print_hook(int keycode, t_global *data);
 
 /*	./raytracing/check_intersection.c
@@ -147,9 +148,9 @@ int			solve_quadratic_equation(float a, float b, float c, float roots[2]);
 
 /* utils */
 void		print_scene(t_scene	*scene);
-void		print_spheres(t_sphere	*sp);
-void		print_cylinders(t_cylinder	*cy);
-void		print_planes(t_plane	*pl);
+void		print_spheres(t_sphere	*sp, char type);
+void		print_cylinders(t_cylinder	*cy, char type);
+void		print_planes(t_plane	*pl, char type);
 void		print_coordinate(t_coord *coord, char *endchar);
 
 #endif
