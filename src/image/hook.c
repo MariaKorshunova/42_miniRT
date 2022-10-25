@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 16:50:13 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 21:16:54 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/25 21:54:32 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,17 @@ static int	key_hook(int keycode, t_global *global)
 		minirt_close(global);
 	if (global->nearest_obj != NULL)
 	{
-		printf("keycode = %d, previos_keyhook = %d\n", keycode, global->prev_keyhook);
 		if (keycode == X_KEYHOOK)
 			global->prev_keyhook = X_KEYHOOK;
 		else if (keycode == Y_KEYHOOK)
 			global->prev_keyhook = Y_KEYHOOK;
-		else
+		else if (keycode == Z_KEYHOOK)
 			global->prev_keyhook = Z_KEYHOOK;
-		// if ((keycode == GREATER || keycode == LESS)
-		// 	&& (global->prev_keyhook == X_KEYHOOK
-		// 		|| global->prev_keyhook == Y_KEYHOOK
-		// 		|| global->prev_keyhook == Z_KEYHOOK))
-			// translate_objects_keyhook(keycode, global);
+		if ((keycode == GREATER || keycode == LESS)
+			&& (global->prev_keyhook == X_KEYHOOK
+				|| global->prev_keyhook == Y_KEYHOOK
+				|| global->prev_keyhook == Z_KEYHOOK))
+			translate_objects_keyhook(keycode, global);
 	}
 	return (0);
 }

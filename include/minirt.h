@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 20:58:52 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/25 21:34:56 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 # define DOWN  125
 # define LEFT 123
 # define RIGHT 124
+
+# define STEP_TRANSLATE 0.5
 
 typedef struct s_img
 {
