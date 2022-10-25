@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 13:27:59 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/25 14:52:15 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ int	main(int argc, char **argv)
 	print_scene(data.scene);
 	init_image(&data);
 	clean_image(&data.img);
+	data.nearest_obj = NULL;
+	data.nearest_type = NO_INTERSECT;
 	raytracer(&data);
-	mlx_put_image_to_window(data.mlx, data.window, data.img.img, 0, 0);
 	hook(&data);
 	mlx_loop(data.mlx);
 	minirt_close(&data);

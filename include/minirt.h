@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 13:36:32 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/25 15:01:53 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ typedef struct s_global
 	void		*mlx;
 	void		*window;
 	void		*nearest_obj;
+	int			nearest_type;
 	t_img		img;
 }	t_global;
 
-typedef enum e_cyl_intersect
+typedef enum e_type_ibject
 {
 	NO_INTERSECT,
 	PIPE,
@@ -66,7 +67,8 @@ typedef enum e_cyl_intersect
 	PLANE_END,
 	PLANE,
 	SPHERE,
-}	t_cyl_intersect;
+	CYLINDER,
+}	t_type_object;
 
 typedef struct s_pixel
 {
@@ -99,6 +101,14 @@ void		clean_image(void *img);
 	manage events*/
 int			hook(t_global *data);
 int			key_print_hook(int keycode, t_global *data);
+
+/* ./image/search_objects.c.c
+	search objects for hook */
+void		ft_search_objects(int x, int y, t_global *global);
+
+/* ./image/resize_objects.c
+	resize objects for hook */
+void		ft_resize_object(int mousecode, t_global	*global);
 
 /*	./raytracing/check_intersection.c
 	functions check intersection with objects */

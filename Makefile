@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+         #
+#    By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/24 15:24:33 by bpoetess         ###   ########.fr        #
+#    Updated: 2022/10/25 15:06:21 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ FILE_C		=	main.c
 
 FILE_C		+=	$(addprefix image/,\
 				hook.c\
+				search_objects.c\
+				resize_objects.c\
 				image.c)
 
 FILE_C		+=	$(addprefix raytracer/,\
