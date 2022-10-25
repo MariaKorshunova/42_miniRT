@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 19:43:12 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/25 21:34:56 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,17 @@
 # define ON_BUTTONPRESS 4
 
 # define ESC 53
+# define X_KEYHOOK 7
+# define Y_KEYHOOK 16
+# define Z_KEYHOOK 6
+# define GREATER 47
+# define LESS 43
+# define UP 126
+# define DOWN  125
+# define LEFT 123
+# define RIGHT 124
+
+# define STEP_TRANSLATE 0.5
 
 typedef struct s_img
 {
@@ -55,10 +66,12 @@ typedef struct s_global
 	void		*mlx;
 	void		*window;
 	void		*nearest_obj;
+	int			nearest_type;
+	int			prev_keyhook;
 	t_img		img;
 }	t_global;
 
-typedef enum e_cyl_intersect
+typedef enum e_type_object
 {
 	NO_INTERSECT,
 	PIPE,
@@ -66,7 +79,8 @@ typedef enum e_cyl_intersect
 	PLANE_END,
 	PLANE,
 	SPHERE,
-}	t_cyl_intersect;
+	CYLINDER,
+}	t_type_object;
 
 typedef struct s_pixel
 {
@@ -100,6 +114,17 @@ void		clean_image(void *img);
 	manage events*/
 int			hook(t_global *data);
 int			key_print_hook(int keycode, t_global *data);
+
+/* ./image/search_objects.c.c
+	search objects for hook */
+void		ft_search_objects(int x, int y, t_global *global);
+
+/* ./image/resize_objects.c
+	resize objects for hook */
+void		ft_resize_object(int mousecode, t_global	*global);
+
+/* ./image/traslate_objects.c */
+void		translate_objects_keyhook(int keycode, t_global *global);
 
 /*	./raytracing/check_intersection.c
 	functions check intersection with objects */

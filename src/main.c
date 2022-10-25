@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 19:42:55 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/25 21:19:50 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ int	main(int argc, char **argv)
 	print_scene(data.scene);
 	init_image(&data);
 	clean_image(&data.img);
+	data.nearest_obj = NULL;
+	data.nearest_type = NO_INTERSECT;
+	data.prev_keyhook = 0;
 	raytracer(&data);
-	mlx_put_image_to_window(data.mlx, data.window, data.img.img, 0, 0);
-	clean_image(&data.img);
 	hook(&data);
 	mlx_loop(data.mlx);
 	minirt_close(&data);

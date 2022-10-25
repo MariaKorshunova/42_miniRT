@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 16:50:13 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 13:50:56 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/25 21:54:32 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static int	key_hook(int keycode, t_global *data);
 static int	ft_mouse(int mouse, int x, int y, t_global *data);
-static void	ft_search_objects(int x, int y, t_global *global);
-static void	change_objects(t_global *global, t_pixel *pixel);
 
 int	hook(t_global *data)
 {
@@ -25,55 +23,32 @@ int	hook(t_global *data)
 	return (0);
 }
 
-static int	key_hook(int keycode, t_global *data)
+static int	key_hook(int keycode, t_global *global)
 {
 	if (keycode == ESC)
-		minirt_close(data);
+		minirt_close(global);
+	if (global->nearest_obj != NULL)
+	{
+		if (keycode == X_KEYHOOK)
+			global->prev_keyhook = X_KEYHOOK;
+		else if (keycode == Y_KEYHOOK)
+			global->prev_keyhook = Y_KEYHOOK;
+		else if (keycode == Z_KEYHOOK)
+			global->prev_keyhook = Z_KEYHOOK;
+		if ((keycode == GREATER || keycode == LESS)
+			&& (global->prev_keyhook == X_KEYHOOK
+				|| global->prev_keyhook == Y_KEYHOOK
+				|| global->prev_keyhook == Z_KEYHOOK))
+			translate_objects_keyhook(keycode, global);
+	}
 	return (0);
 }
 
 int	ft_mouse(int mousecode, int x, int y, t_global *global)
 {
-	printf("You pressed %d\n", mousecode);
 	if (mousecode == 1)
 		ft_search_objects(x, y, global);
+	if (mousecode == 4 || mousecode == 5)
+		ft_resize_object(mousecode, global);
 	return (0);
-}
-
-static void	ft_search_objects(int x, int y, t_global *global)
-{
-	t_pixel	pixel;
-	float	lambda;
-
-	global->nearest_obj = NULL;
-	lambda = 2 * global->scene->camera_angles[0] / WIDTH;
-	pixel_cleaning(&pixel);
-	new_vector(&pixel.ray.point[0], 0, 0, 0);
-	new_vector(&(pixel.ray.point[1]),
-		+global->scene->camera_orientation.x
-		-global->scene->camera_angles[0] + lambda * x,
-		global->scene->camera_orientation.y
-		+ global->scene->camera_angles[1] - lambda * y,
-		global->scene->camera_orientation.z);
-	check_intersection(global, &pixel);
-	change_objects(global, &pixel);
-}
-
-static void	change_objects(t_global *global, t_pixel *pixel)
-{
-	if (pixel->sphere != NULL)
-	{
-		global->nearest_obj = pixel->sphere;
-		print_spheres((t_sphere *)global->nearest_obj, 'o');
-	}
-	else if (pixel->plane != NULL)
-	{
-		global->nearest_obj = pixel->plane;
-		print_planes((t_plane *)global->nearest_obj, 'o');
-	}
-	else if (pixel->cylinder != NULL)
-	{
-		global->nearest_obj = pixel->cylinder;
-		print_cylinders((t_cylinder *)global->nearest_obj, 'o');
-	}
 }

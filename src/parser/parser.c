@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 08:03:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/25 19:24:19 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/25 20:09:07 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ t_scene	*parser(int argc, char **argv)
 	get_fov_angles(parser_env.scene);
 	parser_env.scene->camera_point.z --;
 	translate_objects(parser_env.scene, &parser_env.scene->camera_point);
-	parser_env.scene->camera_orientation.x = -0.1;
-	parser_env.scene->camera_orientation.y = 0.2;
+	parser_env.scene->camera_orientation.x = 0;
+	parser_env.scene->camera_orientation.y = 0;
 	parser_env.scene->camera_orientation.z = 0;
 	rotate_objects(parser_env.scene, &parser_env.scene->camera_orientation);
 	parser_fill_color_ambient(&parser_env);
