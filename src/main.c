@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 14:52:15 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/25 21:19:50 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 	clean_image(&data.img);
 	data.nearest_obj = NULL;
 	data.nearest_type = NO_INTERSECT;
+	data.prev_keyhook = 0;
 	raytracer(&data);
 	hook(&data);
 	mlx_loop(data.mlx);

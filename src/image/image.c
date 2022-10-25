@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 14:24:32 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/24 16:42:52 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/24 17:38:48 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	clean_image(void *img)
 	{
 		j = 0;
 		while (j < HEIGHT)
-			ft_mlx_pixel_put_img(img, i, j++, 0);
+			ft_mlx_pixel_put_img(img, i, j++, BACKGROUND_COLOR);
 		i++;
 	}	
 }

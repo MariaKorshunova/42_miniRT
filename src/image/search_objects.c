@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:23:32 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 15:06:41 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/25 20:39:11 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,14 @@ void	ft_search_objects(int x, int y, t_global *global)
 	t_pixel	pixel;
 	float	lambda;
 
+	global->prev_keyhook = 0;
 	global->nearest_obj = NULL;
 	lambda = 2 * global->scene->camera_angles[0] / WIDTH;
 	pixel_cleaning(&pixel);
-	new_vector(&pixel.ray.point[0], 0, 0, 0);
+	new_vector(&pixel.ray.point[0], 0, 0, -1);
 	new_vector(&(pixel.ray.point[1]),
-		+global->scene->camera_orientation.x
 		-global->scene->camera_angles[0] + lambda * x,
-		global->scene->camera_orientation.y
-		+ global->scene->camera_angles[1] - lambda * y,
-		global->scene->camera_orientation.z);
+		+ global->scene->camera_angles[1] - lambda * y, 0);
 	check_intersection(global, &pixel);
 	define_nearest_objects(global, &pixel);
 }

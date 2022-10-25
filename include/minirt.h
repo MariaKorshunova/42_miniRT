@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 15:01:53 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/25 20:58:52 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@
 # define ON_BUTTONPRESS 4
 
 # define ESC 53
+# define X_KEYHOOK 7
+# define Y_KEYHOOK 16
+# define Z_KEYHOOK 6
+# define GREATER 47
+# define LESS 43
+# define UP 126
+# define DOWN  125
+# define LEFT 123
+# define RIGHT 124
 
 typedef struct s_img
 {
@@ -56,10 +65,11 @@ typedef struct s_global
 	void		*window;
 	void		*nearest_obj;
 	int			nearest_type;
+	int			prev_keyhook;
 	t_img		img;
 }	t_global;
 
-typedef enum e_type_ibject
+typedef enum e_type_object
 {
 	NO_INTERSECT,
 	PIPE,
@@ -89,6 +99,7 @@ t_scene		*parser(int argc, char **argv);
 void		free_scene(t_scene *scene);
 int			minirt_close(t_global *data);
 
+void		rotate_objects(t_scene *scene, t_coord *coord);
 void		translate_objects(t_scene *scene, t_coord *coord);
 
 /* 	./image/image.c 
@@ -109,6 +120,9 @@ void		ft_search_objects(int x, int y, t_global *global);
 /* ./image/resize_objects.c
 	resize objects for hook */
 void		ft_resize_object(int mousecode, t_global	*global);
+
+/* ./image/traslate_objects.c */
+void		translate_objects_keyhook(int keycode, t_global *global);
 
 /*	./raytracing/check_intersection.c
 	functions check intersection with objects */
