@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/24 16:41:21 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/25 13:36:32 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 /* set mlx events */
 # define ON_DESTROY 17
 # define ON_KEYDOWN 2
+# define ON_BUTTONPRESS 4
+
+# define ESC 53
 
 typedef struct s_img
 {
@@ -48,10 +51,11 @@ typedef struct s_img
 
 typedef struct s_global
 {
-	t_scene	*scene;
-	void	*mlx;
-	void	*window;
-	t_img	img;
+	t_scene		*scene;
+	void		*mlx;
+	void		*window;
+	void		*nearest_obj;
+	t_img		img;
 }	t_global;
 
 typedef enum e_cyl_intersect
@@ -93,7 +97,7 @@ void		clean_image(void *img);
 
 /* 	./image/hook.c
 	manage events*/
-void		hook(t_global *data);
+int			hook(t_global *data);
 int			key_print_hook(int keycode, t_global *data);
 
 /*	./raytracing/check_intersection.c
@@ -144,6 +148,9 @@ int			solve_quadratic_equation(float a, float b, float c, float roots[2]);
 
 /* utils */
 void		print_scene(t_scene	*scene);
+void		print_spheres(t_sphere	*sp, char type);
+void		print_cylinders(t_cylinder	*cy, char type);
+void		print_planes(t_plane	*pl, char type);
 void		print_coordinate(t_coord *coord, char *endchar);
 
 #endif

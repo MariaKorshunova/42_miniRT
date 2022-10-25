@@ -1,0 +1,17 @@
+#ambient	intensity			rgb
+A			0.1					255,255,255
+
+#camera		point		orientation		FOV
+C			0,0,-5 		0,0,1			50
+
+#light		point		lighting_ratio		color
+L			3,1,0		0.6					255,255,255
+
+#plane		point		orintation		color
+pl 			0,-1,5		0,0,1			0,255,255
+
+#sphere		point		diameter		color
+sp			3,0.5,3		2				255,0,0
+
+# #cylinder	x,y,z		orient vector		diameter	hight		RGB
+cy			0.3,0.5,4	-1,0,0   		2			2			0,255,0
