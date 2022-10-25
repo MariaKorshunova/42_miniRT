@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/24 18:29:16 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/24 22:16:01 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,9 @@ int			solve_quadratic_equation(float a, float b, float c, float roots[2]);
 
 /* utils */
 void		print_scene(t_scene	*scene);
+void		print_spheres(t_sphere	*sp);
+void		print_cylinders(t_cylinder	*cy);
+void		print_planes(t_plane	*pl);
 void		print_coordinate(t_coord *coord, char *endchar);
 
 #endif
