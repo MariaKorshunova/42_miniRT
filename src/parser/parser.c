@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 08:03:06 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/25 19:24:19 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/26 15:12:11 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,28 +50,6 @@ static	int	open_file(int argc, char **argv)
 	return (i);
 }
 
-t_scene	*parser_createscene(t_parser *p)
-{
-	t_scene	*scene;
-
-	scene = (t_scene *) malloc (sizeof(t_scene));
-	if (!scene)
-		parser_error (12, 0);
-	scene->obj = (t_objects *) malloc (sizeof(t_objects));
-	if (!(scene->obj))
-		parser_error (12, p);
-	new_vector(&scene->camera_point, 0, 0, 0);
-	new_vector(&scene->camera_orientation, 0, 0, 1);
-	scene->camera_fov = 90;
-	scene->ambient_light_intensity = 1;
-	scene->ambient_light_rgb = 0xffffff;
-	scene->obj->cylinders = 0;
-	scene->obj->lights = 0;
-	scene->obj->planes = 0;
-	scene->obj->spheres = 0;
-	return (scene);
-}
-
 static void	parser_linehandler(t_parser	*p)
 {
 	p->i = 0;
@@ -94,6 +72,18 @@ static void	parser_linehandler(t_parser	*p)
 		parser_error(1, p);
 }
 
+/*void	parser_set_camera_angles(t_coord *camera)
+{
+	t_coord	res;
+	t_coord	temp;
+
+	if (!camera)
+		return ;
+	new_vector(&temp, 0, 0, 1);
+	vector_multiplication(&res, &temp, camera);
+	*camera = res;
+}*/
+
 t_scene	*parser(int argc, char **argv)
 {
 	t_parser	parser_env;
@@ -114,9 +104,7 @@ t_scene	*parser(int argc, char **argv)
 	get_fov_angles(parser_env.scene);
 	parser_env.scene->camera_point.z --;
 	translate_objects(parser_env.scene, &parser_env.scene->camera_point);
-	parser_env.scene->camera_orientation.x = -0.1;
-	parser_env.scene->camera_orientation.y = 0.2;
-	parser_env.scene->camera_orientation.z = 0;
+	// parser_set_camera_angles(&parser_env.scene->camera_orientation);
 	rotate_objects(parser_env.scene, &parser_env.scene->camera_orientation);
 	parser_fill_color_ambient(&parser_env);
 	return (parser_env.scene);

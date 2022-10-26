@@ -6,12 +6,34 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 19:48:25 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/24 15:27:11 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/26 13:46:21 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 #include "../../include/parser.h"
+
+t_scene	*parser_createscene(t_parser *p)
+{
+	t_scene	*scene;
+
+	scene = (t_scene *) malloc (sizeof(t_scene));
+	if (!scene)
+		parser_error (12, 0);
+	scene->obj = (t_objects *) malloc (sizeof(t_objects));
+	if (!(scene->obj))
+		parser_error (12, p);
+	new_vector(&scene->camera_point, 0, 0, 0);
+	new_vector(&scene->camera_orientation, 0, 0, 1);
+	scene->camera_fov = 90;
+	scene->ambient_light_intensity = 1;
+	scene->ambient_light_rgb = 0xffffff;
+	scene->obj->cylinders = 0;
+	scene->obj->lights = 0;
+	scene->obj->planes = 0;
+	scene->obj->spheres = 0;
+	return (scene);
+}
 
 static t_cylinder	*parser_addcylinder(t_parser *p)
 {

@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   vector_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 15:19:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/03 19:16:57 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/26 15:06:41 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
+
+void	vector_multiplication(t_coord *res, t_coord *vec1, t_coord *vec2)
+{
+	t_coord	res2;
+
+	if (!res || !vec1 || !vec2)
+		return ;
+	res2.x = vec1->y * vec2->z - vec1->z * vec2->y;
+	res2.y = vec1->z * vec2->x - vec1->x * vec2->z;
+	res2.z = vec1->x * vec2->y - vec1->y * vec2->x;
+	*res = res2;
+}
 
 /* 	fill value x, y, z in vector */
 void	new_vector(t_coord *result, float x, float y, float z)

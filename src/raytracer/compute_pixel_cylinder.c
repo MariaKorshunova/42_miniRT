@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 18:52:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/24 18:44:45 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/26 14:54:18 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static float	pixel_computing_cyliner_diffusal_recflect_ratio(
 	vector_subtraction(&light_direction, &global->scene->obj->lights->point,
 		&pixel->intersection);
 	normalizing_vector(&light_direction, &light_direction);
-	light_intensity = scalar_product_2_vectors(&light_direction, &normal)
+	light_intensity = angle_between_2_vectors(&light_direction, &normal)
 		* global->scene->obj->lights->lighting_ratio;
 	if (light_intensity > 0)
 		return (light_intensity);

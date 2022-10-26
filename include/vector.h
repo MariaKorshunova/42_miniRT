@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:10:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/21 16:19:33 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/26 14:35:44 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ float	angle_between_2_vectors(t_coord *a, t_coord *b);
 
 /*  vector_create.c
 	Create a new vector, matrices */
+void	vector_multiplication(t_coord *res, t_coord *vec1, t_coord *vec2);
 void	new_vector(t_coord *result, float x, float y, float z);
 void	new_vector_by_two_points(t_coord *result, t_coord *a, t_coord *b);
 

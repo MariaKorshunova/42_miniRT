@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 17:06:25 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/24 16:20:50 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/26 14:54:27 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ float	pixel_computing_plane_diffusal_recflect_ratio(t_global *global,
 	vector_subtraction(&light_direction, &global->scene->obj->lights->point,
 		&pixel->intersection);
 	normalizing_vector(&light_direction, &light_direction);
-	light_intensity = scalar_product_2_vectors(&light_direction, &normal)
+	light_intensity = angle_between_2_vectors(&light_direction, &normal)
 		* global->scene->obj->lights->lighting_ratio;
 	if (light_intensity > 0)
 		return (light_intensity);

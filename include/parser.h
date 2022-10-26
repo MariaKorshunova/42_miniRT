@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 04:14:34 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/16 06:23:25 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/26 14:50:53 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,8 @@ void	parser_readplane(t_parser *parser);
 void	parser_readcylinder(t_parser *parser);
 
 void	parser_fill_color_ambient(t_parser *parser);
+
+void	rotate_objects(t_scene *scene, t_coord *coord);
+void	translate_objects(t_scene *scene, t_coord *coord);
 
 #endif

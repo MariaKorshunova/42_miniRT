@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 18:46:08 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/24 19:59:28 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/25 20:13:39 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,6 @@ void	raytracer(t_global *global)
 		}
 		pixel.y++;
 	}
+	mlx_put_image_to_window(global->mlx, global->window, global->img.img, 0, 0);
+	clean_image(&(global->img));
 }

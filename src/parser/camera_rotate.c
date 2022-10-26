@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   translate_and_rotate.c                             :+:      :+:    :+:   */
+/*   camera_rotate.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 15:22:41 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/25 19:18:02 by bpoetess         ###   ########.fr       */
+/*   Created: 2022/10/26 14:44:53 by bpoetess          #+#    #+#             */
+/*   Updated: 2022/10/26 15:10:15 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "parser.h"
 
-/**	rotation matrix*/
+static void	set_cos_to_mtx(t_coord *r_cos, t_coord *cam)
+{
+	t_coord	tmp;
+
+	if (!r_cos || !cam)
+		return ;
+	new_vector(&tmp, 1, 0, 0);
+	r_cos->x = angle_between_2_vectors(&tmp, cam);
+	new_vector(&tmp, 0, 1, 0);
+	r_cos->y = angle_between_2_vectors(&tmp, cam);
+	new_vector(&tmp, 0, 0, 1);
+	r_cos->z = angle_between_2_vectors(&tmp, cam);
+}
 
 static void	fill_rotation_matrix(float rotation_matrix[3][3], t_coord *coord)
 {
@@ -22,6 +35,9 @@ static void	fill_rotation_matrix(float rotation_matrix[3][3], t_coord *coord)
 	r_sin = *coord;
 	r_sin.x = coord->y;
 	r_sin.y = coord->x;
+	new_vector(&r_cos, 0, 0, 1);
+	vector_multiplication(&r_sin, &r_sin, &r_cos);
+	set_cos_to_mtx(&r_cos, coord);
 	r_cos.x = cos(asin(r_sin.x));
 	r_cos.y = cos(asin(r_sin.y));
 	r_cos.z = cos(asin(r_sin.z));
@@ -36,7 +52,7 @@ static void	fill_rotation_matrix(float rotation_matrix[3][3], t_coord *coord)
 	rotation_matrix[2][2] = r_cos.x * r_cos.y;
 }
 
-void	rotate_vector_with_mtx(t_coord *res,
+static void	rotate_vector_with_mtx(t_coord *res,
 	t_coord *vec, float rotation_mtx[3][3])
 {
 	t_coord	vec_copy;
@@ -52,6 +68,27 @@ void	rotate_vector_with_mtx(t_coord *res,
 		+ vec_copy.z * rotation_mtx[2][2];
 }
 
+static void	rotate_objects_speres_planes(t_objects *obj,
+	float rotation_matrix[3][3])
+{
+	while (obj->spheres)
+	{
+		rotate_vector_with_mtx(&obj->spheres->point,
+			&obj->spheres->point, rotation_matrix);
+		obj->spheres = obj->spheres->next;
+	}
+	while (obj->planes)
+	{
+		rotate_vector_with_mtx(&obj->planes->point,
+			&obj->planes->point, rotation_matrix);
+		rotate_vector_with_mtx(&obj->planes->orientation,
+			&obj->planes->orientation, rotation_matrix);
+		normalizing_vector(&obj->planes->orientation,
+			&obj->planes->orientation);
+		obj->planes = obj->planes->next;
+	}
+}
+
 void	rotate_objects(t_scene *scene, t_coord *coord)
 {
 	t_objects	obj;
@@ -59,22 +96,7 @@ void	rotate_objects(t_scene *scene, t_coord *coord)
 
 	fill_rotation_matrix(rotation_matrix, coord);
 	obj = *scene->obj;
-	while (obj.spheres)
-	{
-		rotate_vector_with_mtx(&obj.spheres->point,
-			&obj.spheres->point, rotation_matrix);
-		obj.spheres = obj.spheres->next;
-	}
-	while (obj.planes)
-	{
-		rotate_vector_with_mtx(&obj.planes->point,
-			&obj.planes->point, rotation_matrix);
-		rotate_vector_with_mtx(&obj.planes->orientation,
-			&obj.planes->orientation, rotation_matrix);
-		normalizing_vector(&obj.planes->orientation,
-			&obj.planes->orientation);
-		obj.planes = obj.planes->next;
-	}
+	rotate_objects_speres_planes(&obj, rotation_matrix);
 	while (obj.cylinders)
 	{
 		rotate_vector_with_mtx(&obj.cylinders->point,
@@ -89,33 +111,6 @@ void	rotate_objects(t_scene *scene, t_coord *coord)
 	{
 		rotate_vector_with_mtx(&obj.lights->point,
 			&obj.lights->point, rotation_matrix);
-		obj.lights = obj.lights->next;
-	}
-}
-
-void	translate_objects(t_scene *scene, t_coord *coord)
-{
-	t_objects	obj;
-
-	obj = *scene->obj;
-	while (obj.spheres)
-	{
-		vector_addition(&obj.spheres->point, &obj.spheres->point, coord);
-		obj.spheres = obj.spheres->next;
-	}
-	while (obj.planes)
-	{
-		vector_addition(&obj.planes->point, &obj.planes->point, coord);
-		obj.planes = obj.planes->next;
-	}
-	while (obj.cylinders)
-	{
-		vector_addition(&obj.cylinders->point, &obj.cylinders->point, coord);
-		obj.cylinders = obj.cylinders->next;
-	}
-	while (obj.lights)
-	{
-		vector_addition(&obj.lights->point, &obj.lights->point, coord);
 		obj.lights = obj.lights->next;
 	}
 }
