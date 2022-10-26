@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 14:24:03 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/26 21:09:48 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/26 22:00:17 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	print_tips(void)
 {
 	printf("\e[0;33mYou can change the scene in this ways:\n\e[0m");
 	printf("\e[0;32mWASD: walking\n\e[0m");
+	printf("\e[0;32mUP, DOWN, LEFT, RIGHT: rotating\n\e[0m");
 	printf("\e[0;32mSelect object: \e[0mleft mose click\n");
 	printf("\e[0;32mUnhook object: \e[0mright mose click\n");
 	printf("\e[0;32mZoom object: \e[0mmouse wheel\n");
