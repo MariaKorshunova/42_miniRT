@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/26 14:10:47 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/26 14:32:57 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,5 +185,6 @@ void		print_spheres(t_sphere	*sp, char type);
 void		print_cylinders(t_cylinder	*cy, char type);
 void		print_planes(t_plane	*pl, char type);
 void		print_coordinate(t_coord *coord, char *endchar);
+void		print_tips(void);
 
 #endif

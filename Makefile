@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/26 12:27:35 by jmabel           ###   ########.fr        #
+#    Updated: 2022/10/26 14:33:35 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,8 @@ FILE_C		+=	$(addprefix vector/,\
 
 FILE_C		+=	$(addprefix utils/,\
 				get_next_line.c\
-				print_scene.c)
+				print_scene.c\
+				print_tips.c)
 				
 FILE_C		+=	$(addprefix parser/,\
 				parser.c\

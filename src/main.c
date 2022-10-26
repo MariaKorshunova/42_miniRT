@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 21:19:50 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/26 14:33:13 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int argc, char **argv)
 
 	data.scene = parser(argc, argv);
 	print_scene(data.scene);
+	print_tips();
 	init_image(&data);
 	clean_image(&data.img);
 	data.nearest_obj = NULL;
