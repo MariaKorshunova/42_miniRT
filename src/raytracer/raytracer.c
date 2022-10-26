@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 18:46:08 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/26 15:15:31 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:56:55 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	raytracer(t_global *global)
 	float	lambda;
 	t_pixel	pixel;
 
-	pixel.ray.point[0] = global->scene->camera_point;
 	new_vector(&pixel.ray.point[0], 0, 0, -1);
 	lambda = 2 * global->scene->camera_angles[0] / WIDTH;
 	pixel.y = 0;

@@ -3,6 +3,8 @@
         "__locale": "c",
         "random": "c",
         "minirt.h": "c",
-        "parser.h": "c"
+        "parser.h": "c",
+        "complex": "c",
+        "cmath": "c"
     }
 }

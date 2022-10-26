@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 16:50:13 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/26 14:06:59 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/26 21:53:16 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,52 @@ int	hook(t_global *data)
 	return (0);
 }
 
+void	go_by_key(int keycode, t_global *global)
+{
+	t_coord	coord;
+
+	if (keycode == W_KEYHOOK)
+		new_vector(&coord, 0, 0, 1);
+	if (keycode == S_KEYHOOK)
+		new_vector(&coord, 0, 0, -1);
+	if (keycode == A_KEYHOOK)
+		new_vector(&coord, -1, 0, 0);
+	if (keycode == D_KEYHOOK)
+		new_vector(&coord, 1, 0, 0);
+	translate_objects(global->scene, &coord);
+	raytracer(global);
+}
+
+void	rotate_by_key(int keycode, t_global *global)
+{
+	t_coord	coord;
+
+	if (keycode == LEFT)
+		new_vector(&coord, -0.2, 0, 0.97979);
+	if (keycode == RIGHT)
+		new_vector(&coord, 0.2, 0, 0.97979);
+	if (keycode == UP)
+		new_vector(&coord, 0, -0.2, 0.97979);
+	if (keycode == DOWN)
+		new_vector(&coord, 0, 0.2, 0.97979);
+	rotate_objects(global->scene, &coord);
+	raytracer(global);
+}
+
 static int	key_hook(int keycode, t_global *global)
 {
 	if (keycode == ESC)
 		minirt_close(global);
+	else if (keycode == X_KEYHOOK)
+		global->prev_keyhook = X_KEYHOOK;
+	else if (keycode == Y_KEYHOOK)
+		global->prev_keyhook = Y_KEYHOOK;
+	else if (keycode == Z_KEYHOOK)
+		global->prev_keyhook = Z_KEYHOOK;
+	else if (keycode == H_KEYHOOK)
+		global->prev_keyhook = H_KEYHOOK;
 	if (global->nearest_obj != NULL)
 	{
-		if (keycode == X_KEYHOOK)
-			global->prev_keyhook = X_KEYHOOK;
-		else if (keycode == Y_KEYHOOK)
-			global->prev_keyhook = Y_KEYHOOK;
-		else if (keycode == Z_KEYHOOK)
-			global->prev_keyhook = Z_KEYHOOK;
-		else if (keycode == H_KEYHOOK)
-			global->prev_keyhook = H_KEYHOOK;
 		if ((keycode == GREATER || keycode == LESS
 				|| keycode == UP || keycode == DOWN)
 			&& (global->prev_keyhook == X_KEYHOOK
@@ -48,6 +80,15 @@ static int	key_hook(int keycode, t_global *global)
 			&& global->nearest_type == CYLINDER
 			&& (keycode == GREATER || keycode == LESS))
 			change_height_cylinder(keycode, global);
+	}
+	else
+	{
+		if (keycode == W_KEYHOOK || keycode == S_KEYHOOK
+			|| keycode == A_KEYHOOK || keycode == D_KEYHOOK)
+			go_by_key(keycode, global);
+		if (keycode == LEFT || keycode == RIGHT
+			|| keycode == UP || keycode == DOWN)
+			rotate_by_key(keycode, global);
 	}
 	return (0);
 }

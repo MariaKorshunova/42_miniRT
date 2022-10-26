@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 07:14:54 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/24 15:33:40 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/26 20:04:12 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	parser_readcamera(t_parser *p)
 	parser_skipspacesifnotspaceerror(p);
 	p->scene->camera_point = parser_readcoord(p);
 	parser_skipspacesifnotspaceerror(p);
-	scalar_multiplication(&p->scene->camera_point,
-		&p->scene->camera_point, -1);
 	p->scene->camera_orientation = parser_readcoord(p);
 	parser_check_isnotnormailzed(p, p->scene->camera_orientation);
 	normalizing_vector(&p->scene->camera_orientation,

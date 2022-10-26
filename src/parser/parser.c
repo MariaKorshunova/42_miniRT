@@ -6,11 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 08:03:06 by bpoetess          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/10/26 15:12:11 by bpoetess         ###   ########.fr       */
-=======
-/*   Updated: 2022/10/25 20:09:07 by jmabel           ###   ########.fr       */
->>>>>>> c248fc2fdb0e868875d5e61911730ccfa7509feb
+/*   Updated: 2022/10/26 18:13:55 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +102,7 @@ t_scene	*parser(int argc, char **argv)
 	close(parser_env.file_fd);
 	printf("\nreading is done, file_fd closed\n");
 	get_fov_angles(parser_env.scene);
-	parser_env.scene->camera_point.z --;
+	parser_env.scene->camera_point.z ++;
 	translate_objects(parser_env.scene, &parser_env.scene->camera_point);
 	// parser_set_camera_angles(&parser_env.scene->camera_orientation);
 	rotate_objects(parser_env.scene, &parser_env.scene->camera_orientation);

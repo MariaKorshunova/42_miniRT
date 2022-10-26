@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 15:19:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/26 15:06:41 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:23:39 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	vector_multiplication(t_coord *res, t_coord *vec1, t_coord *vec2)
 	if (!res || !vec1 || !vec2)
 		return ;
 	res2.x = vec1->y * vec2->z - vec1->z * vec2->y;
-	res2.y = vec1->z * vec2->x - vec1->x * vec2->z;
+	res2.y = vec1->x * vec2->z - vec1->z * vec2->x;
 	res2.z = vec1->x * vec2->y - vec1->y * vec2->x;
 	*res = res2;
 }

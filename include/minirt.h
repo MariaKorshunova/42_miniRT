@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/26 15:14:49 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/26 21:05:33 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include "parser.h"
 # include "../libmlx/mlx.h"
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 320
+# define HEIGHT 240
 
 # define BACKGROUND_COLOR 0
 
@@ -39,6 +39,10 @@
 # define ON_BUTTONPRESS 4
 
 # define ESC 53
+# define W_KEYHOOK 13
+# define A_KEYHOOK 0
+# define S_KEYHOOK 1
+# define D_KEYHOOK 2
 # define X_KEYHOOK 7
 # define Y_KEYHOOK 16
 # define Z_KEYHOOK 6

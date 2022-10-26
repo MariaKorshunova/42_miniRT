@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 14:44:53 by bpoetess          #+#    #+#             */
-/*   Updated: 2022/10/26 15:10:15 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/26 21:53:06 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ static void	set_cos_to_mtx(t_coord *r_cos, t_coord *cam)
 	r_cos->y = angle_between_2_vectors(&tmp, cam);
 	new_vector(&tmp, 0, 0, 1);
 	r_cos->z = angle_between_2_vectors(&tmp, cam);
+	// if (cam->x < 0)
+	// 	r_cos->x *= -1;
+	// if (cam->y < 0)
+	// 	r_cos->y *= -1;
+	// if (cam->z < 0)
+	// 	r_cos->z *= -1;
 }
 
 static void	fill_rotation_matrix(float rotation_matrix[3][3], t_coord *coord)
@@ -33,10 +39,8 @@ static void	fill_rotation_matrix(float rotation_matrix[3][3], t_coord *coord)
 	t_coord	r_sin;
 
 	r_sin = *coord;
-	r_sin.x = coord->y;
-	r_sin.y = coord->x;
 	new_vector(&r_cos, 0, 0, 1);
-	vector_multiplication(&r_sin, &r_sin, &r_cos);
+	vector_multiplication(&r_sin, &r_cos, &r_sin);
 	set_cos_to_mtx(&r_cos, coord);
 	r_cos.x = cos(asin(r_sin.x));
 	r_cos.y = cos(asin(r_sin.y));
@@ -97,6 +101,8 @@ void	rotate_objects(t_scene *scene, t_coord *coord)
 	fill_rotation_matrix(rotation_matrix, coord);
 	obj = *scene->obj;
 	rotate_objects_speres_planes(&obj, rotation_matrix);
+	rotate_vector_with_mtx(&scene->camera_orientation,
+		&scene->camera_orientation, rotation_matrix);
 	while (obj.cylinders)
 	{
 		rotate_vector_with_mtx(&obj.cylinders->point,
@@ -114,3 +120,13 @@ void	rotate_objects(t_scene *scene, t_coord *coord)
 		obj.lights = obj.lights->next;
 	}
 }
+
+/*	rotation_matrix[0][0] = r_cos.x * r_cos.z - r_cos.y * r_sin.x * r_sin.z;
+	rotation_matrix[0][1] = -r_cos.z * r_sin.x - r_cos.x * r_cos.y * r_sin.z;
+	rotation_matrix[0][2] = r_sin.y * r_sin.z;
+	rotation_matrix[1][0] = r_cos.y * r_cos.z * r_sin.x + r_cos.x * r_sin.z;
+	rotation_matrix[1][1] = r_cos.x * r_cos.y * r_cos.z - r_sin.x * r_sin.z;
+	rotation_matrix[1][2] = -r_cos.z * r_sin.y;
+	rotation_matrix[2][0] = r_sin.x * r_sin.y;
+	rotation_matrix[2][1] = r_cos.x * r_sin.y;
+	rotation_matrix[2][2] = r_cos.y;*/
