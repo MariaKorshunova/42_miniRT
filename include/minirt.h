@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/26 13:46:50 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/26 15:14:49 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,20 @@
 # define ON_BUTTONPRESS 4
 
 # define ESC 53
+# define X_KEYHOOK 7
+# define Y_KEYHOOK 16
+# define Z_KEYHOOK 6
+# define H_KEYHOOK 4
+# define GREATER 47
+# define LESS 43
+# define UP 126
+# define DOWN  125
+# define LEFT 123
+# define RIGHT 124
+
+# define STEP_TRANSLATE 0.5
+# define STEP_ROTATE 0.1
+# define STEP_RESIZE 0.1
 
 typedef struct s_img
 {
@@ -56,10 +70,11 @@ typedef struct s_global
 	void		*window;
 	void		*nearest_obj;
 	int			nearest_type;
+	int			prev_keyhook;
 	t_img		img;
 }	t_global;
 
-typedef enum e_type_ibject
+typedef enum e_type_object
 {
 	NO_INTERSECT,
 	PIPE,
@@ -110,6 +125,12 @@ void		ft_search_objects(int x, int y, t_global *global);
 /* ./image/resize_objects.c
 	resize objects for hook */
 void		ft_resize_object(int mousecode, t_global	*global);
+void		change_height_cylinder(int keycode, t_global *global);
+
+/* ./image/change_objects.c */
+void		change_sphere(int keycode, t_global *global);
+void		change_cylinder(int keycode, t_global *global);
+void		change_plane(int keycode, t_global *global);
 
 /*	./raytracing/check_intersection.c
 	functions check intersection with objects */
@@ -141,6 +162,7 @@ int			check_for_shadow(t_global *global, t_pixel *pixel_initial);
 /*	./raytracer/compute_pixel_cyliner.c */
 
 void		pixel_computing_cylinder(t_global *global, t_pixel *pixel);
+
 /*	./raytracer/compute_pixel_sphere.c */
 void		pixel_cleaning(t_pixel *pixel);
 int			color_diffusal(int color_sum, int color1,
@@ -164,5 +186,6 @@ void		print_spheres(t_sphere	*sp, char type);
 void		print_cylinders(t_cylinder	*cy, char type);
 void		print_planes(t_plane	*pl, char type);
 void		print_coordinate(t_coord *coord, char *endchar);
+void		print_tips(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:23:32 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 20:16:39 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/26 15:15:18 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_search_objects(int x, int y, t_global *global)
 	t_pixel	pixel;
 	float	lambda;
 
+	global->prev_keyhook = 0;
 	global->nearest_obj = NULL;
 	lambda = 2 * global->scene->camera_angles[0] / WIDTH;
 	pixel_cleaning(&pixel);

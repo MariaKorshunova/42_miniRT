@@ -6,7 +6,7 @@
 #    By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/26 14:51:36 by bpoetess         ###   ########.fr        #
+#    Updated: 2022/10/26 15:14:42 by bpoetess         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ FILE_C		+=	$(addprefix image/,\
 				hook.c\
 				search_objects.c\
 				resize_objects.c\
+				change_objects.c\
 				image.c)
 
 FILE_C		+=	$(addprefix raytracer/,\
@@ -62,7 +63,8 @@ FILE_C		+=	$(addprefix vector/,\
 
 FILE_C		+=	$(addprefix utils/,\
 				get_next_line.c\
-				print_scene.c)
+				print_scene.c\
+				print_tips.c)
 				
 FILE_C		+=	$(addprefix parser/,\
 				parser.c\

@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:58:47 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 15:05:24 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/26 14:13:34 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,27 @@ static void	ft_resize_cylinder(int mousecode, t_global	*global)
 {
 	if (mousecode == 5)
 	{
-		((t_cylinder *)(global->nearest_obj))->diameter += 0.1;
+		((t_cylinder *)(global->nearest_obj))->diameter += STEP_RESIZE;
 		raytracer(global);
 	}
 	else if (mousecode == 4)
 	{
-		if (((t_cylinder *)(global->nearest_obj))->diameter <= 0.1)
+		if (((t_cylinder *)(global->nearest_obj))->diameter <= STEP_RESIZE)
 			return ;
-		((t_cylinder *)(global->nearest_obj))->diameter -= 0.1;
+		((t_cylinder *)(global->nearest_obj))->diameter -= STEP_RESIZE;
 		raytracer(global);
 	}
+}
+
+void	change_height_cylinder(int keycode, t_global *global)
+{
+	if (keycode == GREATER)
+		((t_cylinder *)(global->nearest_obj))->height += STEP_RESIZE;
+	else if (keycode == LESS)
+	{
+		if (((t_cylinder *)(global->nearest_obj))->height <= STEP_RESIZE)
+			return ;
+		((t_cylinder *)(global->nearest_obj))->height -= STEP_RESIZE;
+	}
+	raytracer(global);
 }

@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:41:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 20:14:20 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/26 15:14:53 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ int	main(int argc, char **argv)
 
 	data.scene = parser(argc, argv);
 	print_scene(data.scene);
+	print_tips();
 	init_image(&data);
 	clean_image(&data.img);
 	data.nearest_obj = NULL;
 	data.nearest_type = NO_INTERSECT;
+	data.prev_keyhook = 0;
 	raytracer(&data);
 	hook(&data);
 	mlx_loop(data.mlx);
