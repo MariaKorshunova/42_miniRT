@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/25 20:49:48 by jmabel           ###   ########.fr        #
+#    Updated: 2022/10/26 12:27:35 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ FILE_C		+=	$(addprefix image/,\
 				hook.c\
 				search_objects.c\
 				resize_objects.c\
-				traslate_objects.c\
+				change_objects.c\
 				image.c)
 
 FILE_C		+=	$(addprefix raytracer/,\

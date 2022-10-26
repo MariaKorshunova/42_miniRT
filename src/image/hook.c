@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 16:50:13 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 21:54:32 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/26 12:24:47 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	key_hook(int keycode, t_global *data);
 static int	ft_mouse(int mouse, int x, int y, t_global *data);
+static void	translate_rotate_objects(int keycode, t_global *global);
 
 int	hook(t_global *data)
 {
@@ -35,16 +36,28 @@ static int	key_hook(int keycode, t_global *global)
 			global->prev_keyhook = Y_KEYHOOK;
 		else if (keycode == Z_KEYHOOK)
 			global->prev_keyhook = Z_KEYHOOK;
-		if ((keycode == GREATER || keycode == LESS)
+		if ((keycode == GREATER || keycode == LESS
+				|| keycode == UP || keycode == DOWN)
 			&& (global->prev_keyhook == X_KEYHOOK
 				|| global->prev_keyhook == Y_KEYHOOK
 				|| global->prev_keyhook == Z_KEYHOOK))
-			translate_objects_keyhook(keycode, global);
+			translate_rotate_objects(keycode, global);
 	}
 	return (0);
 }
 
-int	ft_mouse(int mousecode, int x, int y, t_global *global)
+static void	translate_rotate_objects(int keycode, t_global *global)
+{
+	if (global->nearest_type == SPHERE)
+		change_sphere(keycode, global);
+	else if (global->nearest_type == CYLINDER)
+		change_cylinder(keycode, global);
+	else if (global->nearest_type == PLANE)
+		change_plane(keycode, global);
+	raytracer(global);
+}
+
+static int	ft_mouse(int mousecode, int x, int y, t_global *global)
 {
 	if (mousecode == 1)
 		ft_search_objects(x, y, global);

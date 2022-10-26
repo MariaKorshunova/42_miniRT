@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/25 21:34:56 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/26 12:39:29 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define RIGHT 124
 
 # define STEP_TRANSLATE 0.5
+# define STEP_ROTATE 0.1
 
 typedef struct s_img
 {
@@ -123,8 +124,10 @@ void		ft_search_objects(int x, int y, t_global *global);
 	resize objects for hook */
 void		ft_resize_object(int mousecode, t_global	*global);
 
-/* ./image/traslate_objects.c */
-void		translate_objects_keyhook(int keycode, t_global *global);
+/* ./image/change_objects.c */
+void		change_sphere(int keycode, t_global *global);
+void		change_cylinder(int keycode, t_global *global);
+void		change_plane(int keycode, t_global *global);
 
 /*	./raytracing/check_intersection.c
 	functions check intersection with objects */
