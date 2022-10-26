@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/26 12:39:29 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/10/26 14:10:47 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define X_KEYHOOK 7
 # define Y_KEYHOOK 16
 # define Z_KEYHOOK 6
+# define H_KEYHOOK 4
 # define GREATER 47
 # define LESS 43
 # define UP 126
@@ -51,6 +52,7 @@
 
 # define STEP_TRANSLATE 0.5
 # define STEP_ROTATE 0.1
+# define STEP_RESIZE 0.1
 
 typedef struct s_img
 {
@@ -123,6 +125,7 @@ void		ft_search_objects(int x, int y, t_global *global);
 /* ./image/resize_objects.c
 	resize objects for hook */
 void		ft_resize_object(int mousecode, t_global	*global);
+void		change_height_cylinder(int keycode, t_global *global);
 
 /* ./image/change_objects.c */
 void		change_sphere(int keycode, t_global *global);
@@ -158,6 +161,7 @@ int			check_for_shadow(t_global *global, t_pixel *pixel_initial);
 /*	./raytracer/compute_pixel_cyliner.c */
 
 void		pixel_computing_cylinder(t_global *global, t_pixel *pixel);
+
 /*	./raytracer/compute_pixel_sphere.c */
 void		pixel_cleaning(t_pixel *pixel);
 int			color_diffusal(int color_sum, int color1,
