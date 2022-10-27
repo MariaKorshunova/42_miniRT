@@ -6,7 +6,7 @@
 /*   By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 17:00:49 by jmabel            #+#    #+#             */
-/*   Updated: 2022/10/26 21:05:33 by bpoetess         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:58:11 by bpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include "scene.h"
 # include "parser.h"
 # include "../libmlx/mlx.h"
+# include "transformation.h"
 
 # define WIDTH 320
 # define HEIGHT 240

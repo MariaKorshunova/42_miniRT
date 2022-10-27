@@ -6,7 +6,7 @@
 #    By: bpoetess <bpoetess@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 16:43:25 by jmabel            #+#    #+#              #
-#    Updated: 2022/10/26 15:14:42 by bpoetess         ###   ########.fr        #
+#    Updated: 2022/10/27 17:18:14 by bpoetess         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,8 +69,6 @@ FILE_C		+=	$(addprefix utils/,\
 FILE_C		+=	$(addprefix parser/,\
 				parser.c\
 				free_scene.c\
-				camera_rotate.c\
-				camera_translate.c\
 				parser_readscene.c\
 				parser_utils.c\
 				parser_readfloat.c\
@@ -78,6 +76,11 @@ FILE_C		+=	$(addprefix parser/,\
 				parser_readsphere.c\
 				parser_readcylinder.c\
 				parser_set_ambinet_light.c)
+
+FILE_C		+=	$(addprefix transformation/,\
+				camera_rotate.c\
+				camera_rotation_utils.c\
+				camera_translate.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))
 

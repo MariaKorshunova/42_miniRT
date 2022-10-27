@@ -5,6 +5,7 @@
         "minirt.h": "c",
         "parser.h": "c",
         "complex": "c",
-        "cmath": "c"
+        "cmath": "c",
+        "transformation.h": "c"
     }
 }
